@@ -15,7 +15,7 @@
       			<h3><span>{{temp}}</span></h3>
     		</div>
   		</md-toolbar>
-  		<md-content >
+  		<!-- <md-content >
     <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
       <md-nav-item md-nav-click="goto('page1')" name="page1">Page One</md-nav-item>
       <md-nav-item md-nav-click="goto('page2')" name="page2">Page Two</md-nav-item>
@@ -23,10 +23,18 @@
       <!-- these require actual routing with ui-router or ng-route, so they won't work in the demo
       <md-nav-item md-nav-sref="app.page4" name="page4">Page Four</md-nav-item>
       <md-nav-item md-nav-href="#page5" name="page5">Page Five</md-nav-item>
-      -->
+  
     </md-nav-bar>
-    <span>{{currentNavItem}}</span>
- 
+    <span>{{currentNavItem}}</span> -->
+ 		<md-fab-speed-dial md-direction="left" style="position:fixed"
+                       class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': true }"
+                       ng-mouseenter="true" ng-mouseleave="false" ng-click="showGridBottomSheet()">
+      <md-fab-trigger>
+       <md-button aria-label="menu" class="md-fab md-warn">
+          <md-icon class="material-icons" aria-label="menu"  >add</md-icon>
+        </md-button>
+      </md-fab-trigger>
+    </md-fab-speed-dial>
 	</div>
 	
   	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
