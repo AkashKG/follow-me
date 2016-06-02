@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<base href="/">
+		<title>Follow Me</title>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" type='text/css'>
+		<link rel="stylesheet" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc4-master-0efece2/angular-material.css">
+		</head>
+	<div ng-app="todoApp" ng-cloak ng-controller="homeController">
+		 <md-toolbar class="md-whiteframe-2dp" md-scroll-shrink ng-if="true">
+    		<div class="md-toolbar-tools">
+      			<h3><span>{{temp}}</span></h3>
+    		</div>
+  		</md-toolbar>
+  		<md-content >
+    <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-click="goto('page1')" name="page1">Page One</md-nav-item>
+      <md-nav-item md-nav-click="goto('page2')" name="page2">Page Two</md-nav-item>
+      <md-nav-item md-nav-click="goto('page3')" name="page3">Page Three</md-nav-item>
+      <!-- these require actual routing with ui-router or ng-route, so they won't work in the demo
+      <md-nav-item md-nav-sref="app.page4" name="page4">Page Four</md-nav-item>
+      <md-nav-item md-nav-href="#page5" name="page5">Page Five</md-nav-item>
+      -->
+    </md-nav-bar>
+    <span>{{currentNavItem}}</span>
+ 
+	</div>
+	
+  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+  	<!-- Angular Material Library -->
+  	<script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc4-master-0efece2/angular-material.js"></script>
+  	<script type="text/javascript" src="app.js"></script>
+  	<script type="text/javascript" src="js/appRoutes.js"></script>
+  	<script type="text/javascript" src="js/controllers/homeCtrl.js"></script>
+  
+  	
+</html>
+  

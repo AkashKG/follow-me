@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Todo = require('./todo');
 
 var userSchema={
 	profile:{
@@ -23,7 +24,7 @@ var userSchema={
 			}
 		}
 	},
-	todoList:[Todo.todoSchema];
+	todoList:[Todo.todoSchema]
 };
 
 module.exports = new mongoose.Schema(userSchema);
