@@ -15,18 +15,10 @@
       			<h3><span>{{temp}}</span></h3>
     		</div>
   		</md-toolbar>
-  		<md-content flex>
+  		
     	<div  ng-view autoscroll="true"></div>
- 		<md-fab-speed-dial md-direction="left" style="position:fixed"
-                       class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': true }"
-                       ng-mouseenter="true" ng-mouseleave="false" ng-click="showGridBottomSheet()">
-      <md-fab-trigger>
-       <md-button aria-label="menu" class="md-fab md-warn">
-          <md-icon class="material-icons" aria-label="menu"  >add</md-icon>
-        </md-button>
-      </md-fab-trigger>
-    </md-fab-speed-dial>
-    </md-content>
+ 		
+  
 	</div>
 	
   	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>

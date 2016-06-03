@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var _ = require('underscore');
 
 module.exports = function(wagner){
-	mongoose.connect('mongodb://localhost:27017/follow-me-test');
+	mongoose.connect('mongodb://localhost:27017/followmeworks');
 	var Todo = mongoose.model('Todo', require('./todo'), 'todos');
 	var User = mongoose.model('User', require('./user'), 'users');
 	var models = {
