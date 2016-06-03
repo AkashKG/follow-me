@@ -1,2 +1,2 @@
 angular.module('todoApp', [ 'ngRoute', 'ngMaterial', 'ngAria', 'ngMessages',
-		'appRoutes', 'homeCtrl' ]);
+		'appRoutes', 'homeCtrl', 'loginCtrl', 'profileCtrl' ]);

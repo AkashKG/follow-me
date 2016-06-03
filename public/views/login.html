@@ -1,0 +1,42 @@
+<div class="md-padding" ng-cloak="">
+	<md-content class="md-padding" layout-xs="column" layout="row" layout-align="center center">
+		<div flex-xs flex-gt-xs layout="row" layout-align="center center">
+		<div flex-xs flex-gt-xs="70" flex-gt-sm="40">
+			<md-card> 
+			<img ng-src="./views/paper.jpg" class="md-card-image" alt="Washed Out">
+				<md-card-title>
+					<md-card-title-text layout-align="center center"> 
+						<span class="md-headline">Sign In</span> 
+					</md-card-title-text> 
+				</md-card-title> 
+				
+				<md-card-content>
+				<form name="loginForm" ng-submit="login()" action="">
+					<md-input-container layout="column" flex class="md-block">
+						<label>Username or Email</label> 
+						<input ng-maxlength="100" required name="username" ng-model="loginData.username">
+						<div ng-messages="loginForm.username.$error" ng-show='loginForm.username.$touched'>
+							<div ng-message="required">This is required.</div>
+						</div>
+					</md-input-container>
+					<md-input-container layout="column" flex class="md-block">
+						<label>Password</label> 
+						<input required name="password" type="password" ng-model="loginData.password">
+							<div ng-messages="loginForm.password.$error" ng-show='loginForm.password.$touched'>
+								<div ng-message="required">This is required.</div>
+							</div>
+					</md-input-container>
+					 <md-card-actions layout="row" layout-align="center center">
+          <md-button class="md-primary md-raised" ng-click="login()"
+				ng-disabled="loginForm.$invalid">Login</md-button>
+        </md-card-actions>
+			</form>
+		</md-card-content>
+		</md-card-content> </md-card>
+		</div>
+	</div>
+	
+	</md-content>
+</div>
+
+
