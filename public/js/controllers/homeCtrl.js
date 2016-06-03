@@ -1,37 +1,38 @@
-angular.module('homeCtrl', []).controller(
-		'homeController',
-		function($scope, $timeout, $mdBottomSheet, $mdToast) {
-			$scope.temp = "Follow Me";
-			$scope.currentNavItem = 'page1';
-			$scope.showGridBottomSheet = function() {
-				$scope.alert = '';
-				$mdBottomSheet.show({
-					templateUrl : './views/templates/bottomSheet.html',
-					controller : 'GridBottomSheetCtrl',
-					clickOutsideToClose : false
-				}).then(
-						function(clickedItem) {
-						
-						});
-			};
-		}).controller('GridBottomSheetCtrl', function($scope, $mdBottomSheet) {
+angular.module('homeCtrl', [])
+
+.controller('homeController', function($scope, $mdBottomSheet) {
+	$scope.temp = "Follow Me";
+	$scope.currentNavItem = 'page1';
+	$scope.showGridBottomSheet = function() {
+		$scope.alert = '';
+		$mdBottomSheet.show({
+			templateUrl : './views/templates/bottomSheet.html',
+			controller : 'GridBottomSheetCtrl',
+			clickOutsideToClose : true
+		}).then(function(clickedItem) {
+
+		});
+	};
+})
+
+.controller('GridBottomSheetCtrl', function($scope, $mdBottomSheet) {
 	$scope.items = [ {
-		name : 'person',
+		name : 'Message Us',
 		icon : 'message'
 	}, {
-		name : 'phone',
+		name : 'Contact Us',
 		icon : 'phone'
 	}, {
-		name : 'Message',
+		name : 'Email Us',
 		icon : 'email'
 	}, {
-		name : 'laptop',
+		name : 'Create',
 		icon : 'book'
 	}, {
-		name : 'copy',
+		name : 'Settings',
 		icon : 'settings'
 	}, {
-		name : 'Twitter',
+		name : 'Add',
 		icon : 'add'
 	}, ];
 

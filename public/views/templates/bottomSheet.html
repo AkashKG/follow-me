@@ -1,12 +1,11 @@
 <md-bottom-sheet class="md-grid" layout="column" ng-cloak >
-
   <div>
     <md-list flex layout="row" layout-align="center center">
       <md-list-item ng-repeat="item in items">
-        <div>
+        <div >
         <md-button class="md-grid-item-content" ng-click="listItemClick($index)">
-          <md-icon class="material-icons">{{item.icon}}</md-icon>
-          <div class="md-grid-text"> {{ item.name }} </div>
+          <md-icon class="material-icons" style="font-size:48px;padding-right:33%">{{item.icon}}</md-icon>
+          <div class="md-grid-text" style="padding-top:40px"> {{ item.name }} </div>
         </md-button>
         </div>
       </md-list-item>
