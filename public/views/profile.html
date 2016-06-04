@@ -8,7 +8,7 @@
             <h3>{{ note.title }}</h3>
             <p>{{ note.date | date: yyyy/MM/dd}}</p>
           </div>
-          <md-button class="md-secondary md-icon-button" ng-click="deleteNote(note._id)" aria-label="delete">
+          <md-button class="md-secondary md-icon-button" ng-click="deleteNote(note._id, $event)" aria-label="delete">
             <md-icon>delete</md-icon>
           </md-button>
         <md-divider ></md-divider>

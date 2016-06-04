@@ -17,7 +17,6 @@ angular.module('profileCtrl', []).controller(
 				$http.post('/api/v1/notebooks/newnotebook',
 						$scope.notebookData).success(
 						function(data) {
-							dialogFactory.showToast($scope.notebookData.title + " added.");
 							$scope.notebookData.title = '',
 									$scope.notebookData.description = ''
 							$scope.hide();
@@ -29,11 +28,19 @@ angular.module('profileCtrl', []).controller(
 					console.log(data);
 				})
 			}
-			$scope.deleteNote = function(id){
-				$http.delete('/api/v1/notebook/delete/'+id).success(function(data){
-					noteService.getAllNotes().then(function(data, err) {
-						$rootScope.notebooks = data.data.todos;
-						console.log(data.data);
+			$scope.deleteNote = function(id, ev){
+				var confirm = $mdDialog.confirm()
+				.title("Delete Book")
+				.targetEvent(ev)
+				.content('Are you sure to delete this notebook?')
+				.ariaLabel('Delete')
+				.ok("Delete")
+				.cancel('Cancel');
+				$mdDialog.show(confirm).then(function(ev) {
+					$http.delete('/api/v1/notebook/delete/'+id).success(function(data){
+						noteService.getAllNotes().then(function(data, err) {
+							$rootScope.notebooks = data.data.todos;
+						});
 					});
 				});
 			}
