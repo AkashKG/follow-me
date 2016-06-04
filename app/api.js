@@ -34,6 +34,23 @@ module.exports = function(wagner) {
 		}
 	}));
 	
+	api.post('/notebooks/newTodo/:uid/:noteId', wagner.invoke(function(Todo, User) {
+		return function(req, res) {
+			var todo = req.body;
+			Todo.update({ _id: req.params.noteId, authorId:req.params.uid}, 
+				    { $push: { todos: todo } },function(err,done){
+				    
+				    }
+				);
+			User.update(
+				    { "todoList._id": req.params.noteId },
+				    { "$push": { "todoList.0.todos": todo } },
+				    function(err,data) {
+				       res.json(data);
+				    }
+				);
+		}
+	}));
 	api.get('/notebooks/all', wagner.invoke(function(Todo) {// done
 		return function(req, res) {
 			var sort = {

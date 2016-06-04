@@ -1,0 +1,54 @@
+<md-dialog ng-cloak flex-xs flex-gt-xs flex-gt-sm="50">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Add Todo for this todo</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content >
+    <div class="md-padding">
+      <form name="newTodoForm" ng-submit="newForm()" action="">
+			<md-input-container flex class="md-block">
+				<label>Title</label> 
+					<input ng-maxlength="100" required name="title" ng-model="todoData.title">
+						<div ng-messages="newTodoForm.title.$error" ng-show='newTodoForm.title.$touched'>
+							<div ng-message="required">This is required.</div>
+						</div>
+			</md-input-container>
+			<md-input-container class="md-block">
+    	    	<label>Description</label>
+          		<input ng-model="todoData.description" md-maxlength="150" ></textarea>
+        	</md-input-container>
+        	<md-datepicker ng-model="todoData.deadline" md-placeholder="Deadline"></md-datepicker>
+        	</form>
+        	<form name="inputTodoForm">
+        	<md-input-container flex class="md-block">
+				<label>Todos</label> 
+					<input ng-maxlength="100" required name="todo" ng-model="currentTodo">
+						<div ng-messages="inputTodoForm.todo.$error" ng-show='inputTodoForm.todo.$touched'>
+							<div ng-message="required">This is required.</div>
+						</div>
+			</md-input-container>
+			<md-button ng-disabled="inpuTodoForm.todo.$invalid" type="reset" class="md-primary" ng-click="addTodoToList(inputTodoForm.todo.$modelValue)">
+       Add 
+      </md-button>
+      </form>
+			
+		
+	</div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" layout-align="end center">
+      <span flex></span>
+      
+      <md-button  class="md-primary" ng-click="hide()">
+       Cancel
+      </md-button>
+      <md-button ng-disabled="newTodoForm.$invalid" class="md-accent" ng-click="addNewtodo()">
+        Done
+      </md-button>
+    </md-dialog-actions>
+ 
+</md-dialog>
