@@ -18,7 +18,7 @@ angular.module('profileCtrl', []).controller(
 			$scope.addNewnote = function() {
 				$scope.notebookData.date = new Date();
 				console.log($scope.notebookData.date);
-				$http.post('/api/v1/notebooks/newnotebook',
+				$http.post('/api/v1/notebooks/newnotebook/' + $rootScope.user._id,
 						$scope.notebookData).success(
 						function(data) {
 							$scope.notebookData.title = '',

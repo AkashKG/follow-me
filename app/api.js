@@ -7,9 +7,10 @@ module.exports = function(wagner) {
 	api.use(bodyparser.json());
 
 	/*--  Add Book --*/
-	api.post('/notebooks/newnotebook', wagner.invoke(function(Todo) {
+	api.post('/notebooks/newnotebook/:id', wagner.invoke(function(Todo, User) {
 		return function(req, res) {
 			Todo.create({
+				authorId:req.params.id,
 				title : req.body.title,
 				description: req.body.description,
 				date: req.body.date,
@@ -17,7 +18,17 @@ module.exports = function(wagner) {
 			}, function(err, todo) {
 				if (err)
 					res.send(err);
-				Todo.find(function(err, product) {
+				console.log(todo);
+				User.update({ _id: req.params.id }, 
+						    { $push: { todoList: todo } },function(err,done){
+						    	if(err){
+						    		res.send(err);
+						    	}
+						    	res.json(done);
+						    }
+						);
+				
+				Todo.find(function(err, todo) {
 					if (err)
 						res.send(err)
 					res.json(todo);
