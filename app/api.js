@@ -51,7 +51,19 @@ module.exports = function(wagner) {
 			});
 		}
 	}));
+	
+	api.get('/me', isLoggedIn, function(req, res) {// done
+		if (!req.user) {
+			return res.status(status.UNAUTHORIZED).json({
+				error : 'Not logged in'
+			});
+		}
 
+		req.user.populate({
+			path : 'data.profile',
+			model : 'Todo'
+		}, handleOne.bind(null, 'user', res));
+	});
 	return api;
 }
 
@@ -83,4 +95,13 @@ function handleMany(property, res, error, result) {
 	var json = {};
 	json[property] = result;
 	res.json(json);
+}
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
 }

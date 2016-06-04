@@ -7,11 +7,11 @@ var methodOverride = require('method-override');
 var wagner = require('wagner-core');
 
 require('./models/models.js')(wagner);
-//wagner.invoke(require('./auth'),{app:app});
+wagner.invoke(require('./app/auth.js'),{app:app});
 app.use('/api/v1', require('./app/api.js')(wagner));
 
 
-var port = process.env.PORT || 9999; // set our port
+var port = process.env.PORT || 8181; // set our port
 app.use(bodyParser.json()); // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse
 																// application/vnd.api+json
