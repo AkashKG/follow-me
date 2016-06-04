@@ -1,9 +1,13 @@
 angular.module('profileCtrl', []).controller(
 		'profileController',
-		function($scope, $mdBottomSheet, $mdDialog, $http, noteService, $rootScope, dialogFactory) {
+		function($scope, $mdBottomSheet, $mdDialog, $http, noteService, $rootScope, dialogFactory, userService) {
 			noteService.getAllNotes().then(function(data, err) {
 				$rootScope.notebooks = data.data.todos;
 				console.log(data.data);
+			})
+			userService.getUser().then(function(data,err){
+				$rootScope.user = data.data.user;
+				console.log(data.data.user);
 			})
 			$scope.notebookData = {
 					title : null,
