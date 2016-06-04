@@ -21,10 +21,7 @@ module.exports = function(wagner) {
 				console.log(todo);
 				User.update({ _id: req.params.id }, 
 						    { $push: { todoList: todo } },function(err,done){
-						    	if(err){
-						    		res.send(err);
-						    	}
-						    	res.json(done);
+						    	
 						    }
 						);
 				
@@ -46,14 +43,41 @@ module.exports = function(wagner) {
 			}).sort(sort).exec(handleMany.bind(null, 'todos', res));
 		};
 	}));
-	
-	api.delete('/notebook/delete/:id', wagner.invoke(function(Todo){// done
+	api.get('/notebooks/mybooks/:id', wagner.invoke(function(User) {
+		return function(req, res) {
+			User.findOne({
+				_id : req.params.id
+			},{profile:0}, function(error, user) {
+				if (error) {
+					return res.status(status.INTERNAL_SERVER_ERROR).json({
+						error : error.toString()
+					});
+				}
+				if (!user) {
+					return res.status(status.NOT_FOUND).json({
+						error : 'Not found'
+					});
+				}
+				res.json({
+					user : user
+				});
+			});
+		};
+	}));
+	api.delete('/notebook/delete/:id/:authorId', wagner.invoke(function(Todo, User){// done
 		return function(req, res){
 			Todo.remove({
-				_id:req.params.id
+				_id:req.params.id, authorId:req.params.authorId
 			}, function(err, todo){
 				if(err)
 					res.send(err);
+				User.update({_id:req.params.authorId},{$pull:{todoList:{_id:req.params.id}}}, function(err,data){
+					if(err){
+						console.log(err);
+						return res.status(500).json({'error' : "FUCKED UP"});
+					}
+					console.log(data);
+				});
 				Todo.find(function(err, todo) {
 					if (err)
 						res.send(err)

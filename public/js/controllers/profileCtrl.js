@@ -1,20 +1,26 @@
 angular.module('profileCtrl', []).controller(
 		'profileController',
 		function($scope, $mdBottomSheet, $mdDialog, $http, noteService, $rootScope, dialogFactory, userService) {
-			noteService.getAllNotes().then(function(data, err) {
-				$rootScope.notebooks = data.data.todos;
-				console.log(data.data);
-			})
 			userService.getUser().then(function(data,err){
 				$rootScope.user = data.data.user;
-				console.log(data.data.user);
+			//	console.log(data.data.user);
+				noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
+					$rootScope.notebooks = data.data.user.todoList;
+					console.log(data.data);
+				})
 			})
 			$scope.notebookData = {
 					title : null,
 					description : null,
 					date:null
 				}
-			
+			//$scope.notebook=$scope.notebooks[0];
+			$scope.showNotebook=function($index){
+				console.log($index);
+				
+				$scope.notebook = $scope.notebooks[$index];
+				console.log($scope.notebook);
+			}
 			$scope.addNewnote = function() {
 				$scope.notebookData.date = new Date();
 				console.log($scope.notebookData.date);
@@ -24,12 +30,12 @@ angular.module('profileCtrl', []).controller(
 							$scope.notebookData.title = '',
 									$scope.notebookData.description = ''
 							$scope.hide();
-							noteService.getAllNotes().then(function(data, err) {
-								$rootScope.notebooks = data.data.todos;
-								console.log(data.data);
+							noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
+								$rootScope.notebooks = data.data.user.todoList;
+								//console.log(data.data);
 							})
 						}).error(function(data) {
-					console.log(data);
+					//console.log(data);
 				})
 			}
 			$scope.deleteNote = function(id, ev){
@@ -41,10 +47,11 @@ angular.module('profileCtrl', []).controller(
 				.ok("Delete")
 				.cancel('Cancel');
 				$mdDialog.show(confirm).then(function(ev) {
-					$http.delete('/api/v1/notebook/delete/'+id).success(function(data){
-						noteService.getAllNotes().then(function(data, err) {
-							$rootScope.notebooks = data.data.todos;
-						});
+					$http.delete('/api/v1/notebook/delete/'+id + '/' + $rootScope.user._id).success(function(data){
+						noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
+							$rootScope.notebooks = data.data.user.todoList;
+							//console.log(data.data);
+						})
 					});
 				});
 			}
@@ -72,9 +79,9 @@ angular.module('profileCtrl', []).controller(
 					controller : 'GridBottomSheetCtrl',
 					clickOutsideToClose : true
 				}).then(function(clickedItem) {
-					console.log(clickedItem);
+					//console.log(clickedItem);
 					if (clickedItem.name == "Add") {
-						console.log(clickedItem);
+						//console.log(clickedItem);
 						$scope.newBookDialog();
 					}
 				});
@@ -102,7 +109,7 @@ angular.module('profileCtrl', []).controller(
 
 	$scope.listItemClick = function($index) {
 		var clickedItem = $scope.items[$index];
-		console.log($index);
+		//console.log($index);
 		$mdBottomSheet.hide(clickedItem);
 
 	};

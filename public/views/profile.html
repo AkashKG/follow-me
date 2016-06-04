@@ -1,14 +1,14 @@
-<div layout="row"  ng-cloak>
-  <div flex="25">
+<div layout="row"  ng-cloak layout-xs="column">
+  <div flex-gt-sm="25" flex-xs>
    <md-content>
       <md-list flex>
         <md-subheader class="md-no-sticky">My Notebooks</md-subheader>
-        <md-list-item class="md-2-line" ng-repeat="note in notebooks|reverse" ng-click="null">
+        <md-list-item class="md-2-line" ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showNotebook(notebooks.length-1-$index)">
           <div class="md-list-item-text" layout="column">
             <h3>{{ note.title }}</h3>
             <p>{{ note.date | date: yyyy/MM/dd}}</p>
           </div>
-          <md-button class="md-secondary md-icon-button" ng-click="deleteNote(note._id, $event)" aria-label="delete">
+          <md-button class="md-secondary md-icon-button" md-ink-ripple="#FF0000" ng-click="deleteNote(note._id, $event)" aria-label="delete">
             <md-icon>delete</md-icon>
           </md-button>
         <md-divider ></md-divider>
@@ -16,7 +16,25 @@
         </md-list>
         </md-content>      
   </div>
-  <div flex="75">
+  <div flex-gt-sm="75" flex-xs>
+  	<div layout="row" ng-hide="notebook" layout-align="center center">
+  		<div layout="column" style="min-height:80vh" layout-align="center center">
+  			<p layout-align="center center">Click on any one of the notebooks!</p>
+  		</div>
+  	</div>
+	<md-card ng-if="notebook">
+  		<md-card-title>
+    		<md-card-title-media>
+      		<div class="md-media-sm card-media" layout layout-align="center center" >
+        		<md-icon class="material-icons"style="color:grey">book</md-icon>
+      		</div>
+    		</md-card-title-media>
+    	<md-card-title-text>
+      <span class="md-headline">{{notebook.title}}</span>
+      <span class="md-subhead description">{{notebook.description}}</span>
+    </md-card-title-text>
+  </md-card-title>
+</md-card>
   </div>
 
  <md-fab-speed-dial md-direction="left" style="position:fixed"

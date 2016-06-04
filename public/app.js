@@ -60,6 +60,18 @@ angular
 															return null;
 														}
 													});
+								},
+
+								getMyNotes : function(id) {
+									return $http.get('api/v1/notebooks/mybooks/'+id).success(
+											function(data) {
+												return data;
+											}).error(function(data, status) {
+										if (status = status.UNAUTHORIZED) {
+											return null
+										}
+									});
+
 								}
 							}
 						} ])
@@ -83,6 +95,7 @@ angular
 								getUser : function() {
 									return $http.get('api/v1/me').success(
 											function(data) {
+
 												return data;
 											}).error(function(data, status) {
 										if (status = status.UNAUTHORIZED) {
