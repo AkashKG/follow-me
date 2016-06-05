@@ -44,7 +44,7 @@ module.exports = function(wagner) {
 				);
 			User.update(
 				    { "todoList._id": req.params.noteId },
-				    { "$push": { "todoList.0.todos": todo } },
+				    { "$push": { "todoList.$.todos": todo } },
 				    function(err,data) {
 				       res.json(data);
 				    }

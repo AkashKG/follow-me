@@ -37,7 +37,7 @@
 </md-card >
 <md-list ng-if="notebook">
 <md-subheader class="md-no-sticky">My todos</md-subheader>
-  <md-list-item ng-repeat="t in notebook.todos" ng-click="goToTodoList($index)" class="noright">
+  <md-list-item ng-repeat="t in notebook.todos" ng-click="gotoTodoList(t._id, $index)"  class="noright">
     <md-checkbox class="md-secondary" ng-model="t.done"></md-checkbox>
     <p>{{ t.title }} <code>{{t.updated | date: yyyy/MM/dd}}</code></p>
     <md-icon class="md-secondary">done_all</md-icon>

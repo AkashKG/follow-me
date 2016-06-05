@@ -1,6 +1,6 @@
 angular.module('profileCtrl', []).controller(
 		'profileController',
-		function($scope, $mdBottomSheet, $mdDialog, $http, noteService, $rootScope, dialogFactory, userService) {
+		function($scope, $mdBottomSheet, $mdDialog, $window, $http, noteService, $rootScope, dialogFactory, userService) {
 			userService.getUser().then(function(data,err){
 				$rootScope.user = data.data.user;
 			// console.log(data.data.user);
@@ -9,6 +9,13 @@ angular.module('profileCtrl', []).controller(
 					console.log(data.data);
 				})
 			})
+			$scope.gotoTodoList = function(id, $index){
+				console.log()
+				$scope.nIndex = $scope.notebookIndex;
+				$window.open('/profile/alltodos/' + $rootScope.user._id + '/' + $scope.nIndex + '/' + $index ,'_blank');
+				console.log(id);
+			}
+			
 			$scope.todoData={
 				title:'',
 				description:'',
@@ -50,10 +57,8 @@ angular.module('profileCtrl', []).controller(
 				}
 			// $scope.notebook=$scope.notebooks[0];
 			$scope.showNotebook=function($index){
-				console.log($index);
-				
+				$scope.notebookIndex = $index;
 				$scope.notebook = $scope.notebooks[$index];
-				console.log($scope.notebook);
 			}
 			$scope.addNewnote = function() {
 				$scope.notebookData.date = new Date();

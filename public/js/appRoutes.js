@@ -14,6 +14,10 @@ angular.module('appRoutes', []).config(
 						templateUrl:'views/profile.html',
 						controller: 'profileController'
 					})
+					.when('/profile/alltodos/:user/:nIndex/:index', {
+						templateUrl : 'views/notebook/todopage.html',
+						controller : 'todoController'
+					})
 					$locationProvider.html5Mode(true);
 
 				} ]);

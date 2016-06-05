@@ -2,7 +2,7 @@ angular
 		.module(
 				'todoApp',
 				[ 'ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'appRoutes',
-						'homeCtrl', 'loginCtrl', 'profileCtrl' ])
+						'homeCtrl', 'loginCtrl', 'profileCtrl', 'todoCtrl' ])
 
 		.factory(
 				'dialogFactory',
@@ -47,6 +47,7 @@ angular
 						'$rootScope',
 						'$location',
 						function($http, $rootScope, $location) {
+							
 							return {
 								getAllNotes : function() {
 									return $http
@@ -72,7 +73,8 @@ angular
 										}
 									});
 
-								}
+								},
+								
 							}
 						} ])
 
