@@ -2,7 +2,33 @@ angular
 		.module(
 				'todoApp',
 				[ 'ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'appRoutes',
-						'homeCtrl', 'loginCtrl', 'profileCtrl', 'todoCtrl' ])
+						'homeCtrl', 'loginCtrl', 'profileCtrl', 'todoCtrl', 'logoutCtrl' ])
+
+		.run(
+				[
+						'$rootScope',
+						'$location',
+						'userService',
+						'dialogFactory',
+						function($rootScope, $location, userService,
+								dialogFactory) {
+							userService.getUser().then(function(data) {
+								console.log(data);
+								if(data.data.user){
+									$rootScope.isLoggedIn = true;
+									if ($location.path() === '/'||$location.path() === '/login')
+										$location.path('/profile')
+								}	
+								else{
+									$rootScope.isLoggedin=false;
+									dialogFactory.showAlert("Please Login!", "Continue login to view your profile");
+									$location.path('/login');
+								}
+							}, function(err) {
+								
+							});
+							$rootScope.user = {};
+						} ])
 
 		.factory(
 				'dialogFactory',
@@ -39,7 +65,7 @@ angular
 						'$rootScope',
 						'$location',
 						function($http, $rootScope, $location) {
-							
+
 							return {
 								getAllNotes : function() {
 									return $http
@@ -56,17 +82,22 @@ angular
 								},
 
 								getMyNotes : function(id) {
-									return $http.get('api/v1/notebooks/mybooks/'+id).success(
-											function(data) {
+									return $http
+											.get(
+													'api/v1/notebooks/mybooks/'
+															+ id)
+											.success(function(data) {
 												return data;
-											}).error(function(data, status) {
-										if (status = status.UNAUTHORIZED) {
-											return null
-										}
-									});
+											})
+											.error(
+													function(data, status) {
+														if (status = status.UNAUTHORIZED) {
+															return null
+														}
+													});
 
 								},
-								
+
 							}
 						} ])
 
@@ -89,8 +120,7 @@ angular
 								getUser : function() {
 									return $http.get('api/v1/me').success(
 											function(data) {
-
-												return data;
+													return data;
 											}).error(function(data, status) {
 										if (status = status.UNAUTHORIZED) {
 											return null
@@ -98,4 +128,22 @@ angular
 									});
 								}
 							};
-						} ]);
+						} ])
+						
+	.factory('logoutFactory', [ '$q', '$timeout', '$http', '$rootScope',
+		function($q, $timeout, $http, $rootScope) {
+			return {
+				logout : function() {
+					var deferred = $q.defer();
+					$http.get('/auth/logout').success(function(data) {
+						$rootScope.isLoggedIn=false;
+						$rootScope.user={};
+						deferred.resolve();
+					}).error(function(data) {
+						
+						deferred.reject();
+					})
+					return deferred.promise;
+				},
+			}
+		} ]);

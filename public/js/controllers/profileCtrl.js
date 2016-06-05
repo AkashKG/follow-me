@@ -3,6 +3,8 @@ angular.module('profileCtrl', []).controller(
 		function($scope, $mdBottomSheet, $mdDialog, $window, $http, noteService, $rootScope, dialogFactory, userService) {
 			userService.getUser().then(function(data,err){
 				$rootScope.user = data.data.user;
+				console.log($rootScope.isLoggedIn);
+				if($rootScope.user)
 			// console.log(data.data.user);
 				noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
 					$rootScope.notebooks = data.data.user.todoList;

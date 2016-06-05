@@ -14,7 +14,17 @@
 		 <md-toolbar class="md-whiteframe-2dp" md-scroll-shrink ng-if="true">
     		<div class="md-toolbar-tools">
       			<h3><span>{{temp}}</span></h3>
+      			<span flex></span>
+      			<div ng-controller="logoutController">
+      			 <md-button class="md-icon-button" ng-click="logout()"aria-label="Favorite" ng-show="isLoggedIn">
+          <md-icon>vpn_key</md-icon>
+        </md-button></div>
+        <md-button class="md-icon-button" aria-label="More" ng-show="isLoggedIn">
+          <md-icon >more_vert</md-icon>
+        </md-button>
     		</div>
+    		
+       
   		</md-toolbar>
   		
     	<div  ng-view autoscroll="true"></div>
@@ -35,6 +45,7 @@
   	<script type="text/javascript" src="js/controllers/loginController.js"></script>
   	<script type="text/javascript" src="js/controllers/profileCtrl.js"></script>
   	<script type="text/javascript" src="js/controllers/todoController.js"></script>
+  	<script type="text/javascript" src="js/controllers/logoutController.js"></script>
   	
 </html>
   

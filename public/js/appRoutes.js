@@ -11,6 +11,13 @@ angular.module('appRoutes', []).config(
 						controller: 'loginController'
 					})
 					.when('/profile',{
+						/*resolve : {
+							"check" : function($location, $rootScope) {
+								if (!$rootScope.isLoggedIn) {
+									$location.path('/');
+								}
+							}
+						},*/
 						templateUrl:'views/profile.html',
 						controller: 'profileController'
 					})
