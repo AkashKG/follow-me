@@ -11,14 +11,6 @@ angular
 						'$mdToast',
 						function($mdDialog, $mdToast) {
 							return {
-								showBookDialog : function() {
-									$mdDialog
-											.show({
-												controller : 'ShowbookController',
-												templateUrl : '/views/showbook/showbook.view.html',
-												clickOutsideToClose : true,
-											});
-								},
 								showToast : function(text) {
 									var toast = $mdToast.simple().content(text)
 											.action('OK')

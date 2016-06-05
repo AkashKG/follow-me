@@ -26,7 +26,11 @@ angular.module('profileCtrl', []).controller(
 				done:false
 			}
 			$scope.addTodoToList = function(todo){
+				if((todo && !$scope.todoData.tasks.length)||(todo && $scope.todoData.tasks[$scope.todoData.tasks.length-1].task!=todo))
 				$scope.todoData.tasks.push({task:todo,done:false});
+				else
+					dialogFactory.showToast("Invalid Input : Two todos cannot be same or cannot be empty");
+					
 			}
 			$scope.addNewtodo=function(){
 				$scope.todoDate = new Date();
@@ -49,7 +53,7 @@ angular.module('profileCtrl', []).controller(
 				
 				});
 			}
-			
+			$scope.notebook = null;
 			$scope.notebookData = {
 					title : null,
 					description : null,
@@ -127,35 +131,29 @@ angular.module('profileCtrl', []).controller(
 					clickOutsideToClose : true
 				}).then(function(clickedItem) {
 					// console.log(clickedItem);
-					if (clickedItem.name == "Add") {
+					if (clickedItem.name == "Notebook") {
 						// console.log(clickedItem);
 						$scope.newBookDialog();
 					}
-					else if(clickedItem.name=="Create"){
-						$scope.newTodoDialog();
+					else if(clickedItem.name=="Create Todo"){
+						if(!$scope.notebook)
+							dialogFactory.showAlert("Select Notebook","First select or create any notebook to create todo!")
+						else
+							$scope.newTodoDialog();
 					}
 				});
 			};
 		}).controller('GridBottomSheetCtrl', function($scope, $mdBottomSheet) {
 	$scope.items = [ {
-		name : 'Message Us',
-		icon : 'message'
-	}, {
-		name : 'Contact Us',
-		icon : 'phone'
-	}, {
-		name : 'Email Us',
-		icon : 'email'
-	}, {
-		name : 'Create',
+		name : 'Notebook',
+		icon : 'add'
+	},  {
+		name : 'Create Todo',
 		icon : 'book'
 	}, {
 		name : 'Settings',
 		icon : 'settings'
-	}, {
-		name : 'Add',
-		icon : 'add'
-	}, ];
+	}];
 
 	$scope.listItemClick = function($index) {
 		var clickedItem = $scope.items[$index];
