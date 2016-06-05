@@ -33,7 +33,14 @@ module.exports = function(wagner) {
 			});
 		}
 	}));
-	
+	api.post('/notebooks/todo/update/:nid',wagner.invoke(function(Todo,User){
+		return function(req,res){
+		User.update({"todoList.todos._id":req.params.nid},{$set:{
+			'todoList.$.todos':req.body
+		}}, function(err,result){
+			
+		})
+	}));
 	api.post('/notebooks/newTodo/:uid/:noteId', wagner.invoke(function(Todo, User) {
 		return function(req, res) {
 			var todo = req.body;

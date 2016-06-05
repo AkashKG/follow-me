@@ -12,10 +12,13 @@
 </md-card >
   <md-list>
   <md-subheader class="md-no-sticky">Tasks</md-subheader>
+  
   <md-divider></md-divider>
-  <md-list-item ng-repeat="t in todo.tasks">
-    <md-checkbox ng-model="t.done"></md-checkbox>
+  <md-list-item ng-repeat="t in todo.tasks" ng-click="saveTaskToDB($index)">
+    <md-checkbox ng-model="t.done" ng-disabled="t.done==true" ></md-checkbox>
     <p>{{t.task}}</p>
+    <md-icon ng-show="t.done==true" style="color:yellow">done</md-icon>
     <md-divider></md-divider>
+    
   </md-list-item>
 </md-list>
