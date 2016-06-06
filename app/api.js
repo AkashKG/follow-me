@@ -18,9 +18,8 @@ module.exports = function(wagner) {
 			}, function(err, todo) {
 				if (err)
 					res.send(err);
-				console.log(todo);
 				User.update({ _id: req.params.id }, 
-						    { $push: { todoList: todo } },function(err,done){
+						    { $addToSet: { todoList: todo } },function(err,done){
 						    	
 						    }
 						);
@@ -33,7 +32,27 @@ module.exports = function(wagner) {
 			});
 		}
 	}));
-	
+	api.put('/notebooks/todo/update/:pid',wagner.invoke(function(Todo,User){
+		return function(req,res){
+			console.log(req.body);
+			var taskIndex=req.body.taskIndex;
+			var todoIndex=req.body.todoIndex;
+			var done = 'todos.'+todoIndex+'.tasks.'+taskIndex+'.done';
+			var updated = 'todos.'+todoIndex+'.updated';
+			var up={};
+			up[updated]=req.body.updated;
+			var obj ={};
+			obj[done]=req.body.done;
+			console.log(done);
+			Todo.update({_id:req.params.pid},{$set:up}, function(err,done){
+				console.log("1. " + err);
+				console.log( done);
+			})
+			Todo.update({_id:req.params.pid},{$set:obj}, function(err,done){
+				console.log("1. " + err);
+				console.log( done);
+			})
+	}}));
 	api.post('/notebooks/newTodo/:uid/:noteId', wagner.invoke(function(Todo, User) {
 		return function(req, res) {
 			var todo = req.body;
