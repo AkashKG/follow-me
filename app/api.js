@@ -45,13 +45,25 @@ module.exports = function(wagner) {
 			obj[done]=req.body.done;
 			console.log(done);
 			Todo.update({_id:req.params.pid},{$set:up}, function(err,done){
-				console.log("1. " + err);
-				console.log( done);
+				
 			})
 			Todo.update({_id:req.params.pid},{$set:obj}, function(err,done){
-				console.log("1. " + err);
+				
+			})
+			updated = 'todoList.$.todos.'+todoIndex+'.updated';
+			var update={};
+			update[updated]=req.body.updated;
+			done = 'todoList.$.todos.'+todoIndex+'.tasks.'+taskIndex+'.done';
+			var did ={};
+			did[done]=req.body.done;
+			User.update({'todoList._id':req.params.pid},{$set:update}, function(err,done){
 				console.log( done);
 			})
+			User.update({'todoList._id':req.params.pid},{$set:did}, function(err,done){
+				console.log( done);
+			})
+			
+			
 	}}));
 	api.post('/notebooks/newTodo/:uid/:noteId', wagner.invoke(function(Todo, User) {
 		return function(req, res) {
