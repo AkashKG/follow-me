@@ -45,6 +45,7 @@ angular.module('profileCtrl', []).controller(
 						function(data) {
 							$scope.todoData.title = '',
 									$scope.todoData.description = ''
+										$scope.todoData.tasks=[];
 							$scope.hide();		
 							noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
 								$rootScope.notebooks = data.data.user.todoList;

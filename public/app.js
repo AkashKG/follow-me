@@ -21,8 +21,10 @@ angular
 								}	
 								else{
 									$rootScope.isLoggedin=false;
+									if($location.path()!='/login'){
 									dialogFactory.showAlert("Please Login!", "Continue login to view your profile");
 									$location.path('/login');
+									}
 								}
 							}, function(err) {
 								
