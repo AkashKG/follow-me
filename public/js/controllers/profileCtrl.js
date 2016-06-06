@@ -49,7 +49,7 @@ angular.module('profileCtrl', []).controller(
 							$scope.hide();		
 							noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
 								$rootScope.notebooks = data.data.user.todoList;
-								
+								$scope.showNotebook($scope.notebookIndex)
 								// console.log(data.data);
 							})
 						}).error(function(data) {
@@ -93,6 +93,9 @@ angular.module('profileCtrl', []).controller(
 				.ok("Delete")
 				.cancel('Cancel');
 				$mdDialog.show(confirm).then(function(ev) {
+					if(id==$scope.notebook._id){
+						$scope.notebook=null;
+					}
 					$http.delete('/api/v1/notebook/delete/'+id + '/' + $rootScope.user._id).success(function(data){
 						noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
 							$rootScope.notebooks = data.data.user.todoList;

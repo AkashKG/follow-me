@@ -19,7 +19,8 @@
   <div flex-gt-sm="75" flex-xs>
   	<div layout="row" ng-hide="notebook" layout-align="center center">
   		<div layout="column" style="min-height:80vh" layout-align="center center">
-  			<p layout-align="center center" class="md-subhead description">Click on any one of the notebooks!</p>
+  			<p layout-align="center center" class="md-subhead description" ng-show="notebooks.length">Click on any one of the notebooks!</p>
+  			<p layout-align="center center" class="md-subhead description" ng-show="!notebooks.length"><md-button  class="md-primary md-hue-1"ng-click="newBookDialog()">Create your first notebook</md-button> </p>
   		</div>
   	</div>
 	<md-card ng-if="notebook">
@@ -38,7 +39,9 @@
 <md-list ng-if="notebook">
 <md-subheader class="md-no-sticky">My todos</md-subheader>
 <md-divider></md-divider>
-  <md-list-item ng-repeat="t in notebook.todos" ng-click="gotoTodoList(t._id, $index)"  class="noright">
+<p layout-align="center center" class="md-subhead description" ng-hide="notebook.todos.length"><md-button  class="md-primary md-hue-1"ng-click="newTodoDialog()">Create your first todo</md-button> </p>
+  		
+  <md-list-item ng-repeat="t in notebook.todos" ng-click="gotoTodoList(t._id, $index)"  class="noright" ng-show="notebook.todos.length">
     <md-checkbox class="md-secondary" ng-model="t.done"></md-checkbox>
     <p>{{ t.title }} <code>{{t.updated | date: yyyy/MM/dd}}</code></p>
     <md-icon class="md-secondary">done_all</md-icon>
