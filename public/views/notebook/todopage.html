@@ -1,3 +1,4 @@
+	
 	<md-card>
   		<md-card-title>
     	<md-card-title-text layout-align="center center">
@@ -10,14 +11,18 @@
     </md-card-content>
   </md-card-title>
 </md-card >
+<md-progress-linear ng-disabled="percent>=100" md-mode="buffer" class="md-warn"value="{{percent}}"
+                      md-buffer-value="{{percent}}"></md-progress-linear>
   <md-list>
-  <md-subheader class="md-no-sticky">Tasks</md-subheader>
+  <md-subheader class="md-no-sticky">Tasks <kbd ng-show="percent==100">({{percent}}% complete)</kbd></md-subheader>
   
   <md-divider></md-divider>
   <md-list-item ng-repeat="t in todo.tasks" md-ink-ripple="false">
     <md-checkbox ng-model="t.done" ng-disabled="t.done==true" ng-click="saveTaskToDB($index)"></md-checkbox>
     <p>{{t.task}} </p>
-    <md-icon ng-show="t.done==true" style="color:yellow">done</md-icon>
+    <md-button class="md-icon-button md-accent" ng-disabled="!t.done">
+    <md-icon >done</md-icon>
+    </md-button>
     <md-button class="md-icon-button md-primary" ng-disabled="!t.link.length" ng-click="openLink(t.link)">
     	<md-icon >link</md-icon>
     </md-button>

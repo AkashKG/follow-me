@@ -10,11 +10,28 @@ angular
 									function(data, err) {
 										$scope.parentId = data.data.user.todoList[$routeParams.nIndex]._id;
 										$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
+										$scope.calculatePercentage();
 									})
 					$scope.openLink = function(link) {
 						console.log(link);
 						$window.open('//' + link, '_blank');
 					}
+					
+					$scope.calculatePercentage=function(){
+						console.log("Entered");
+						var count = 0;
+						if($scope.todo.tasks.length==0){
+							$scope.percent=101;
+							return;
+						}
+						for(var i=0;i<$scope.todo.tasks.length;i++){
+							if($scope.todo.tasks[i].done==true)
+								count++;
+						}
+						$scope.percent=(count/$scope.todo.tasks.length)*100;
+						console.log($scope.percent);
+					}
+					
 					$scope.saveTaskToDB = function($index) {
 						if ($scope.todo.tasks[$index].done == true) {
 							return;
@@ -36,17 +53,19 @@ angular
 								.success(
 										function(data) {
 											console.log(data);
+											
 											noteService
 													.getMyNotes(
 															$routeParams.user)
 													.then(
 															function(data, err) {
 																$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
-
+																$scope.calculatePercentage();
 															})
 										}).error(function(data) {
 									console.log(data);
 								});
+						$scope.calculatePercentage();
 					}
 					$scope.newTaskDialog = function(ev) {
 						$mdDialog.show({
@@ -80,8 +99,8 @@ angular
 															$routeParams.user)
 													.then(
 															function(data, err) {
-																$scope.parentId = data.data.user.todoList[$routeParams.nIndex]._id;
 																$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
+																$scope.calculatePercentage();
 															})
 										}).error(function(data) {
 
