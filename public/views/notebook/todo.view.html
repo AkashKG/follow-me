@@ -32,6 +32,13 @@
 							<div ng-message="required">This is required.</div>
 						</div>
 			</md-input-container>
+			<md-input-container flex class="md-block">
+				<label>Link</label> 
+					<input ng-maxlength="100"  name="link" ng-model="link.linkUrl">
+						<div ng-messages="inputTodoForm.link.$error" ng-show='inputTodoForm.link.$touched'>
+						
+						</div>
+			</md-input-container>
 			<md-button ng-disabled="inputTodoForm.$invalid" type="reset" class="md-primary" ng-click="addTodoToList(inputTodoForm.todo.$modelValue)">
        Add 
       </md-button>

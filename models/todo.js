@@ -32,7 +32,8 @@ var todoSchema = {
 		},
 		tasks : [ {
 			done : Boolean,
-			task : String
+			task : String,
+			link : String
 		} ]
 	} ]
 }

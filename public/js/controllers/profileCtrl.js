@@ -17,7 +17,9 @@ angular.module('profileCtrl', []).controller(
 				$window.open('/profile/alltodos/' + $rootScope.user._id + '/' + $scope.nIndex + '/' + $index ,'_blank');
 				console.log(id);
 			}
-			
+			$scope.link={
+					linkUrl:''
+			}
 			$scope.todoData={
 				title:'',
 				description:'',
@@ -28,8 +30,9 @@ angular.module('profileCtrl', []).controller(
 				done:false
 			}
 			$scope.addTodoToList = function(todo){
+				console.log($scope.link.linkUrl);
 				if((todo && !$scope.todoData.tasks.length)||(todo && $scope.todoData.tasks[$scope.todoData.tasks.length-1].task!=todo))
-				$scope.todoData.tasks.push({task:todo,done:false});
+				$scope.todoData.tasks.push({task:todo,done:false,link:$scope.link.linkUrl});
 				else
 					dialogFactory.showToast("Invalid Input : Two todos cannot be same or cannot be empty");
 					

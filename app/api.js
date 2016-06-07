@@ -65,6 +65,27 @@ module.exports = function(wagner) {
 			
 			
 	}}));
+	
+	api.post('/newtodo/newtask/:tid/:todoIndex',wagner.invoke(function(Todo,User){
+		return function(req,res){
+			var task = req.body;
+			var pos='todoList.$.todos.' + req.params.todoIndex+'.tasks';
+			var obj={}
+			obj[pos]=task;
+			User.update({'todoList.todos._id':req.params.tid},{
+				"$push":obj
+			},function(err,done){
+				
+			});
+			var update={};
+			updated = 'todoList.$.todos.'+ req.params.todoIndex+'.updated';
+			update[updated]=req.body.updated;
+			User.update({'todoList.todos._id':req.params.tid},{$set:update}, function(err,done){
+				res.json(done);
+			})
+		}
+	}));
+	
 	api.post('/notebooks/newTodo/:uid/:noteId', wagner.invoke(function(Todo, User) {
 		return function(req, res) {
 			var todo = req.body;
