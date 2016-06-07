@@ -1,9 +1,14 @@
 angular
 		.module('todoCtrl', [])
+		.config(function($mdIconProvider) {
+			$mdIconProvider.iconSet("avatars", 'icons/avatar-icons.svg', 128);
+		})
 		.controller(
 				'todoController',
 				function($scope, $routeParams, $rootScope, noteService, $http,
 						$window, $mdDialog) {
+
+				
 					noteService
 							.getMyNotes($routeParams.user)
 							.then(
@@ -16,22 +21,22 @@ angular
 						console.log(link);
 						$window.open('//' + link, '_blank');
 					}
-					
-					$scope.calculatePercentage=function(){
+
+					$scope.calculatePercentage = function() {
 						console.log("Entered");
 						var count = 0;
-						if($scope.todo.tasks.length==0){
-							$scope.percent=101;
+						if ($scope.todo.tasks.length == 0) {
+							$scope.percent = 101;
 							return;
 						}
-						for(var i=0;i<$scope.todo.tasks.length;i++){
-							if($scope.todo.tasks[i].done==true)
+						for (var i = 0; i < $scope.todo.tasks.length; i++) {
+							if ($scope.todo.tasks[i].done == true)
 								count++;
 						}
-						$scope.percent=(count/$scope.todo.tasks.length)*100;
+						$scope.percent = (count / $scope.todo.tasks.length) * 100;
 						console.log($scope.percent);
 					}
-					
+
 					$scope.saveTaskToDB = function($index) {
 						if ($scope.todo.tasks[$index].done == true) {
 							return;
@@ -53,14 +58,15 @@ angular
 								.success(
 										function(data) {
 											console.log(data);
-											
+
 											noteService
 													.getMyNotes(
 															$routeParams.user)
 													.then(
 															function(data, err) {
 																$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
-																$scope.calculatePercentage();
+																$scope
+																		.calculatePercentage();
 															})
 										}).error(function(data) {
 									console.log(data);
@@ -86,21 +92,26 @@ angular
 						console.log($scope.todo._id);
 						$scope.todoIndex = $routeParams.index.toString();
 						$scope.updated = new Date();
-						$scope.taskData.updated=$scope.updated;
-						$http.post('/api/v1/newtodo/newtask/'+ $scope.todo._id + '/'+ $scope.todoIndex,
+						$scope.taskData.updated = $scope.updated;
+						$http
+								.post(
+										'/api/v1/newtodo/newtask/'
+												+ $scope.todo._id + '/'
+												+ $scope.todoIndex,
 										$scope.taskData)
 								.success(
 										function(data) {
-													console.log(data);
+											console.log(data);
 											$scope.todoData = null;
-														$scope.hide();
+											$scope.hide();
 											noteService
 													.getMyNotes(
 															$routeParams.user)
 													.then(
 															function(data, err) {
 																$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
-																$scope.calculatePercentage();
+																$scope
+																		.calculatePercentage();
 															})
 										}).error(function(data) {
 

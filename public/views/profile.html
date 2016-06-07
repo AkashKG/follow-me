@@ -1,7 +1,13 @@
 <div layout="row"  ng-cloak layout-xs="column">
   <div flex-gt-sm="25" flex-xs>
    <md-content>
+   <center>
+   <md-icon style="margin: 0 0 auto;
+  width: 128px;
+  height: 128px;"md-svg-icon="avatars:svg-1" ></md-icon>
+  </center>
       <md-list flex>
+      
         <md-subheader class="md-no-sticky">My Notebooks</md-subheader>
         <md-list-item class="md-2-line" ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showNotebook(notebooks.length-1-$index)">
           <div class="md-list-item-text" layout="column">

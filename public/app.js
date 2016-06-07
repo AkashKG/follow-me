@@ -2,7 +2,7 @@ angular
 		.module(
 				'todoApp',
 				[ 'ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'appRoutes',
-						'homeCtrl', 'loginCtrl', 'profileCtrl', 'todoCtrl', 'logoutCtrl' ])
+						'homeCtrl', 'loginCtrl', 'profileCtrl', 'todoCtrl', 'logoutCtrl','material.svgAssetsCache' ])
 
 		.run(
 				[

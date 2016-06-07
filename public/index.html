@@ -15,6 +15,9 @@
     		<div class="md-toolbar-tools">
       			<h3><span>{{temp}}</span></h3>
       			<span flex></span>
+      			<md-button class="md-icon-button" aria-label="More" ng-show="isLoggedIn" ng-href="/profile">
+          <md-icon >home</md-icon>
+        </md-button>
       			<div ng-controller="logoutController">
       			 <md-button class="md-icon-button" ng-click="logout()"aria-label="Favorite" ng-show="isLoggedIn">
           <md-icon>vpn_key</md-icon>
@@ -38,6 +41,7 @@
   	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
   	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
   	<!-- Angular Material Library -->
+  	
   	<script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc4-master-0efece2/angular-material.js"></script>
   	<script type="text/javascript" src="app.js"></script>
   	<script type="text/javascript" src="js/appRoutes.js"></script>
@@ -46,6 +50,7 @@
   	<script type="text/javascript" src="js/controllers/profileCtrl.js"></script>
   	<script type="text/javascript" src="js/controllers/todoController.js"></script>
   	<script type="text/javascript" src="js/controllers/logoutController.js"></script>
+  	<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
   	
 </html>
   
