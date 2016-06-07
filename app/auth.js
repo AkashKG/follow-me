@@ -1,6 +1,7 @@
 function setupAuth(User, app) {
 	var passport = require('passport');
 	var FacebookStrategy = require('passport-facebook').Strategy;
+	TwitterStrategy = require('passport-twitter').Strategy;
 	passport.serializeUser(function(user, done) {
 		done(null, user._id);
 	});
@@ -9,6 +10,39 @@ function setupAuth(User, app) {
 			_id : id
 		}).exec(done);
 	});
+
+	passport.use(new TwitterStrategy({
+
+        consumerKey     : 'hK6eaHbP16RnGEHgPAttdR0hm',
+        consumerSecret  : 'uULlyaXZEk0lzojRHf7MYFJZyVJJUYQzTsVyDw6SBNMWhGJMLK',
+        callbackURL     : 	"http://127.0.0.1:8181/auth/twitter/callback"
+
+    },
+    function(token, tokenSecret, profile, done) {
+        process.nextTick(function() {
+        	
+            User.findOne({ 'profile.data.id' : profile.id }, function(err, user) {
+                if (err)
+                    return done(err);
+                if (user) {
+                    return done(null, user); 
+                } else {
+                    var newUser                 = new User();
+                    newUser.profile.data.id          = profile.id;
+                    newUser.profile.data.token       = token;
+                    newUser.profile.data.username    = profile.username;
+                    newUser.profile.name = profile.displayName;
+                    newUser.save(function(err) {
+                        if (err)
+                            throw err;
+                        return done(null, newUser);
+                    });
+                }
+            });
+
+    });
+
+    }));
 
 	passport.use(new FacebookStrategy(
 			{
@@ -76,6 +110,14 @@ function setupAuth(User, app) {
 	}, function(req, res) {
 		res.redirect(req.query.redirect);
 	});
+    app.get('/auth/twitter', passport.authenticate('twitter'));
+    app.get('/auth/twitter/callback',
+        passport.authenticate('twitter', {
+            successRedirect : '/profile',
+            failureRedirect : '/'
+        }));
+
+
 	app.get('/auth/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');

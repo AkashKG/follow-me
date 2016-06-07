@@ -19,6 +19,9 @@ var userSchema={
 			email:{
 				type:String
 			},
+			id:{
+				type:String
+			},
 			username:{
 				type:String
 			}

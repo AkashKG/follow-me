@@ -1,54 +1,32 @@
 <div class="md-padding" ng-cloak="">
-	<md-content class="md-padding" layout-xs="column" layout="row" layout-align="center center">
-		<div flex-xs flex-gt-xs layout="row" layout-align="center center">
+	<md-content class="md-padding" layout-xs="column" layout="row"
+		layout-align="center center">
+	<div flex-xs flex-gt-xs layout="row" layout-align="center center">
 		<div flex-xs flex-gt-xs="70" flex-gt-sm="40">
-			<md-card> 
-			<md-grid-list md-cols="2" md-cols-sm="2" md-cols-md="2" md-cols-gt-md="2" md-row-height-gt-md="1:1">
-		<md-grid-tile md-rowspan="1" md-colspan="2" md-colspan-sm="1" md-colspan-xs="1" ng-class="">
-		<md-icon style="margin: 0 0 0;
+			<md-card> <md-grid-list md-cols="2" md-cols-sm="2"
+				md-cols-md="2" md-cols-gt-md="2" md-row-height-gt-md="1:1">
+			<md-grid-tile md-rowspan="1" md-colspan="2" md-colspan-sm="1"
+				md-colspan-xs="1" ng-class=""> <md-icon
+				style="margin: 0 0 0;
   width: 100%;
-  height: 100%;"md-svg-icon="avatars:svg-1" ></md-icon>
-  <md-icon style="margin: 0 0 0;
+  height: 100%;"
+				md-svg-icon="avatars:svg-1"></md-icon> <md-icon
+				style="margin: 0 0 0;
   width: 100%;
-  height: 100%;"md-svg-icon="avatars:svg-2" ></md-icon>
-  </md-grid-tile>
-  </md-grid-list>
-
-				<md-card-title>
-					<md-card-title-text layout-align="center center"> 
-						<span class="md-headline">Sign In</span> 
-					</md-card-title-text> 
-				</md-card-title> 
-				
-				<md-card-content>
-				<form name="loginForm" ng-submit="login()" action="">
-					<md-input-container layout="column" flex class="md-block">
-						<label>Username or Email</label> 
-						<input ng-maxlength="100" required name="username" ng-model="loginData.username">
-						<div ng-messages="loginForm.username.$error" ng-show='loginForm.username.$touched'>
-							<div ng-message="required">This is required.</div>
-						</div>
-					</md-input-container>
-					<md-input-container layout="column" flex class="md-block">
-						<label>Password</label> 
-						<input required name="password" type="password" ng-model="loginData.password">
-							<div ng-messages="loginForm.password.$error" ng-show='loginForm.password.$touched'>
-								<div ng-message="required">This is required.</div>
-							</div>
-					</md-input-container>
-					 <md-card-actions layout="row" layout-align="center center">
-          <md-button class="md-primary md-raised" ng-click="login()"
-				ng-disabled="loginForm.$invalid">Login</md-button>
-				<md-button class="md-primary md-raised" ng-click="facebookLogin()"target="_self">
-				facebook</md-button>	
-			</md-input-container>	
-        </md-card-actions>
-			</form>
-		</md-card-content>
-		</md-card-content> </md-card>
+  height: 100%;"
+				md-svg-icon="avatars:svg-2"></md-icon> </md-grid-tile> </md-grid-list> <md-card-title>
+			<md-card-title-text layout-align="center center">
+			<span class="md-headline">Sign In</span> </md-card-title-text> </md-card-title> <md-card-content>
+			<md-card-actions layout="row" layout-align="center center">
+			<md-button
+				class="md-accent md-raised" ng-click="twitterLogin()"
+				target="_self"> twitter</md-button>
+			<md-button
+				class="md-primary md-raised" ng-click="facebookLogin()"
+				target="_self"> facebook</md-button> </md-input-container> </md-card-actions> </md-card-content> </md-card-content> </md-card>
 		</div>
 	</div>
-	
+
 	</md-content>
 </div>
 
