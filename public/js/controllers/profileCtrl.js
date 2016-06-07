@@ -1,6 +1,6 @@
 angular.module('profileCtrl', []).controller(
 		'profileController',
-		function($scope, $mdBottomSheet, $mdDialog, $window, $http, noteService, $rootScope, dialogFactory, userService) {
+		function($scope, $mdBottomSheet, $mdDialog, $window, $http, noteService, $rootScope, dialogFactory, userService, $location) {
 			userService.getUser().then(function(data,err){
 				$rootScope.user = data.data.user;
 				console.log($rootScope.isLoggedIn);
@@ -10,11 +10,12 @@ angular.module('profileCtrl', []).controller(
 					$rootScope.notebooks = data.data.user.todoList;
 					console.log(data.data);
 				})
-			})
+			})  
+
 			$scope.gotoTodoList = function(id, $index){
 				console.log()
 				$scope.nIndex = $scope.notebookIndex;
-				$window.open('/profile/alltodos/' + $rootScope.user._id + '/' + $scope.nIndex + '/' + $index ,'_blank');
+				$location.path('/profile/alltodos/' + $rootScope.user._id + '/' + $scope.nIndex + '/' + $index);
 				console.log(id);
 			}
 			$scope.link={

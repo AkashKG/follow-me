@@ -1,6 +1,6 @@
 <div layout="row"  ng-cloak layout-xs="column">
   <div flex-gt-sm="25" flex-xs>
-   <md-content>
+   <md-content >
    <center>
    <md-icon style="margin: 0 0 auto;
   width: 128px;
@@ -44,13 +44,15 @@
 </md-card >
 <md-list ng-if="notebook">
 <md-subheader class="md-no-sticky">My todos</md-subheader>
-<md-divider></md-divider>
+
 <p layout-align="center center" class="md-subhead description" ng-hide="notebook.todos.length"><md-button  class="md-primary md-hue-1"ng-click="newTodoDialog()">Create your first todo</md-button> </p>
   		
   <md-list-item ng-repeat="t in notebook.todos" ng-click="gotoTodoList(t._id, $index)"  class="noright" ng-show="notebook.todos.length">
-    <md-checkbox class="md-secondary" ng-model="t.done"></md-checkbox>
+    
     <p>{{ t.title }} <code>{{t.updated | date: yyyy/MM/dd}}</code></p>
-    <md-icon class="md-secondary">done_all</md-icon>
+    <md-button class=" md-secondary md-icon-button md-accent" ng-disabled="!t.done">
+    	<md-icon >done_all</md-icon>
+    </md-button>
     <md-divider></md-divider>
   </md-list-item>
 </md-list>

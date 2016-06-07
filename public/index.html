@@ -8,16 +8,18 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" type='text/css'>
-		<link rel="stylesheet" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc4-master-0efece2/angular-material.css">
+		<link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
 		</head>
 	<div ng-app="todoApp" ng-cloak ng-controller="homeController">
 		 <md-toolbar class="md-whiteframe-2dp" md-scroll-shrink ng-if="true">
+		 
     		<div class="md-toolbar-tools">
-      			<h3><span>{{temp}}</span></h3>
-      			<span flex></span>
-      			<md-button class="md-icon-button" aria-label="More" ng-show="isLoggedIn" ng-href="/profile">
+    		<md-button class="md-icon-button" aria-label="More" ng-show="isLoggedIn" ng-href="/profile">
           <md-icon >home</md-icon>
         </md-button>
+      			<h3><span>{{temp}}</span></h3>
+      			<span flex></span>
+      			
       			<div ng-controller="logoutController">
       			 <md-button class="md-icon-button" ng-click="logout()"aria-label="Favorite" ng-show="isLoggedIn">
           <md-icon>vpn_key</md-icon>
@@ -35,14 +37,14 @@
   
 	</div>
 	
-  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
-  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-  	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
-  	<!-- Angular Material Library -->
+  	<script src="bower_components/angular/angular.min.js"></script>
+  	<script src="bower_components/angular-route/angular-route.min.js"></script>
+  	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  	<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+  	<script src="bower_components/angular-messages/angular-messages.min.js"></script>
+  	<script src="bower_components/angular-material/angular-material.js"></script>
   	
-  	<script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc4-master-0efece2/angular-material.js"></script>
+  	
   	<script type="text/javascript" src="app.js"></script>
   	<script type="text/javascript" src="js/appRoutes.js"></script>
   	<script type="text/javascript" src="js/controllers/homeCtrl.js"></script>

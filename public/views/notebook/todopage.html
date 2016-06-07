@@ -22,15 +22,16 @@
   <md-list-item ng-repeat="t in todo.tasks" md-ink-ripple="false">
     <md-checkbox ng-model="t.done" ng-disabled="t.done==true" ng-click="saveTaskToDB($index)"></md-checkbox>
     <p>{{t.task}} </p>
-    <md-button class="md-icon-button md-accent" ng-disabled="!t.done">
-    <md-icon >done</md-icon>
+    <md-button class=" md-icon-button md-accent" ng-disabled="!t.done">
+    <md-icon class="">done</md-icon>
     </md-button>
-    <md-button class="md-icon-button md-primary" ng-disabled="!t.link.length" ng-click="openLink(t.link)">
+    <md-button class=" md-icon-button md-primary" ng-disabled="!t.link.length" ng-click="openLink(t.link)">
     	<md-icon >link</md-icon>
     </md-button>
     <md-divider></md-divider>
     
   </md-list-item>
+  
 </md-list>
 <md-fab-speed-dial md-direction="left" style="position:fixed"
                        class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': true }"
