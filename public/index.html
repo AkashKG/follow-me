@@ -7,8 +7,8 @@
 		<title>Follow Me</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" type='text/css'>
 		<link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
 		</head>
 	<div ng-app="todoApp" ng-cloak ng-controller="homeController">
 		 <md-toolbar class="md-whiteframe-2dp" md-scroll-shrink ng-if="true">
@@ -19,14 +19,17 @@
         </md-button>
       			<h3><span>{{temp}}</span></h3>
       			<span flex></span>
-      			
+      			<h5 class="md-subhead"><span>{{$root.user.profile.name}}</span></h5>
       			<div ng-controller="logoutController">
       			 <md-button class="md-icon-button" ng-click="logout()"aria-label="Favorite" ng-show="isLoggedIn">
+      			 <md-tooltip md-direction="bottom">
+          logout
+        </md-tooltip>
           <md-icon>vpn_key</md-icon>
         </md-button></div>
-        <md-button class="md-icon-button" aria-label="More" ng-show="isLoggedIn">
+       <!--   <md-button class="md-icon-button" aria-label="More" ng-show="isLoggedIn">
           <md-icon >more_vert</md-icon>
-        </md-button>
+        </md-button>-->
     		</div>
     		
        

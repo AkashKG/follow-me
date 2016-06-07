@@ -3,3 +3,16 @@
 .DS_STORE
 /.idea/
 default-theme.css
+/.bower.json
+/CHANGELOG.md
+/LICENSE
+/README.md
+/angular-material-mocks.js
+/angular-material.css
+/angular-material.js
+/angular-material.min.css
+/angular-material.min.js
+/angular-material.scss
+/bower.json
+/index.js
+/package.json

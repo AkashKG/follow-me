@@ -109,6 +109,7 @@ angular
 															$routeParams.user)
 													.then(
 															function(data, err) {
+																$scope.taskData=null;
 																$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
 																$scope
 																		.calculatePercentage();

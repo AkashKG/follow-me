@@ -9,6 +9,7 @@
       <md-list flex>
       
         <md-subheader class="md-no-sticky">My Notebooks</md-subheader>
+        <md-divider></md-divider>
         <md-list-item class="md-2-line" ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showNotebook(notebooks.length-1-$index)">
           <div class="md-list-item-text" layout="column">
             <h3>{{ note.title }}</h3>
@@ -46,10 +47,10 @@
 <md-subheader class="md-no-sticky">My todos</md-subheader>
 
 <p layout-align="center center" class="md-subhead description" ng-hide="notebook.todos.length"><md-button  class="md-primary md-hue-1"ng-click="newTodoDialog()">Create your first todo</md-button> </p>
-  		
+  	<md-divider></md-divider>	
   <md-list-item ng-repeat="t in notebook.todos" ng-click="gotoTodoList(t._id, $index)"  class="noright" ng-show="notebook.todos.length">
     
-    <p>{{ t.title }} <code>{{t.updated | date: yyyy/MM/dd}}</code></p>
+    <p><code>{{$index+1}}.</code> {{ t.title }} <code>{{t.updated | date: yyyy/MM/dd}}</code></p>
     <md-button class=" md-secondary md-icon-button md-accent" ng-disabled="!t.done">
     	<md-icon >done_all</md-icon>
     </md-button>
