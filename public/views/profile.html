@@ -1,3 +1,4 @@
+
 <section hide-gt-xs >
   			<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
       		<md-toolbar class="md-theme-light md-tall">
@@ -44,9 +45,10 @@
   			<p layout-align="center center" class="md-subhead description" ng-show="!notebooks.length"><md-button  class="md-primary md-hue-1"ng-click="newBookDialog()">Create your first notebook</md-button> </p>
   		</div>
   	</div>
-  	<div layout="row" ng-hide="notebook" layout-align="center center" show-xs hide-gt-xs>
-  	<p layout-align="center center" class="md-subhead description" ng-show="!notebooks.length"><md-button  class="md-primary md-hue-1"ng-click="newBookDialog()">Create your first notebook</md-button> </p>
-  		
+  	<div layout="row" ng-hide="notebook" style="min-height:80vh" layout-align="center top" show-xs hide-gt-xs>
+  	<div ng-show="!notebooks.length"  layout-align="center center">
+  	<p layout-align="center center" class="md-subhead description" ><md-button  class="md-primary md-hue-1"ng-click="newBookDialog()">Create your first notebook</md-button></p>
+  		</div>
   		<md-list flex ng-show="notebooks.length">
       
         <md-subheader class="md-no-sticky">My Notebooks</md-subheader>
