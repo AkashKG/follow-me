@@ -38,11 +38,30 @@
         </md-content>      
   </div>
   <div flex-gt-sm="75" flex-xs>
-  	<div layout="row" ng-hide="notebook" layout-align="center center">
+  	<div layout="row" ng-hide="notebook" layout-align="center center" hide-xs>
   		<div layout="column" style="min-height:80vh" layout-align="center center">
   			<p layout-align="center center" class="md-subhead description" ng-show="notebooks.length">Click on any one of the notebooks!</p>
   			<p layout-align="center center" class="md-subhead description" ng-show="!notebooks.length"><md-button  class="md-primary md-hue-1"ng-click="newBookDialog()">Create your first notebook</md-button> </p>
   		</div>
+  	</div>
+  	<div layout="row" ng-hide="notebook" layout-align="center center" show-xs hide-gt-xs>
+  	<p layout-align="center center" class="md-subhead description" ng-show="!notebooks.length"><md-button  class="md-primary md-hue-1"ng-click="newBookDialog()">Create your first notebook</md-button> </p>
+  		
+  		<md-list flex ng-show="notebooks.length">
+      
+        <md-subheader class="md-no-sticky">My Notebooks</md-subheader>
+        <md-divider></md-divider>
+        <md-list-item class="md-2-line" ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showNotebook(notebooks.length-1-$index)">
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ note.title }}</h3>
+            <p>{{ note.date | date: yyyy/MM/dd}}</p>
+          </div>
+          <md-button class="md-secondary md-icon-button" md-ink-ripple="#FF0000" ng-click="deleteNote(note._id, $event)" aria-label="delete">
+            <md-icon>delete</md-icon>
+          </md-button>
+        <md-divider ></md-divider>
+        </md-list-item>
+        </md-list>
   	</div>
 	<md-card ng-if="notebook">
   		<md-card-title>

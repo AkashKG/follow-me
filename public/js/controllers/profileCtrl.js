@@ -41,8 +41,10 @@ angular.module('profileCtrl', []).controller(
 				console.log($scope.link.linkUrl);
 				if((todo && !$scope.todoData.tasks.length)||(todo && $scope.todoData.tasks[$scope.todoData.tasks.length-1].task!=todo))
 				$scope.todoData.tasks.push({task:todo,done:false,link:$scope.link.linkUrl});
-				else
-					dialogFactory.showToast("Invalid Input : Two todos cannot be same or cannot be empty");
+				else{
+					console.log("Error");
+				}
+					
 					
 			}
 			$scope.addNewtodo=function(){
