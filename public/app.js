@@ -2,9 +2,46 @@ angular
 		.module(
 				'todoApp',
 				[ 'ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'appRoutes',
-						'homeCtrl', 'loginCtrl', 'profileCtrl', 'todoCtrl', 'logoutCtrl','material.svgAssetsCache' ])
+						'homeCtrl', 'loginCtrl', 'profileCtrl', 'todoCtrl', 'logoutCtrl','material.svgAssetsCache','blockUI' ])
 
-		.run(
+.config(
+		[ '$routeProvider', '$locationProvider','blockUIConfig',
+				function($routeProvider, $locationProvider,blockUIConfig) {
+			blockUIConfig.blockBrowserNavigation = true;
+			blockUIConfig.requestFilter = function(config) {
+				  if(config.url.match(/^\/api\/v1\/notebooks\/todo\/update($|\/).*/)) {
+				    return false; // ... don't block it.
+				  }
+			}
+			blockUIConfig.templateUrl = 'views/templates/overlay.html';
+			$routeProvider
+					.when('/', {
+						templateUrl : 'views/home.html',
+						controller : 'homeController'
+					})
+					.when('/login',{
+						templateUrl:'views/login.html',
+						controller: 'loginController'
+					})
+					.when('/profile',{
+						/*resolve : {
+							"check" : function($location, $rootScope) {
+								if (!$rootScope.isLoggedIn) {
+									$location.path('/');
+								}
+							}
+						},*/
+						templateUrl:'views/profile.html',
+						controller: 'profileController'
+					})
+					.when('/profile/alltodos/:user/:nIndex/:index', {
+						templateUrl : 'views/notebook/todopage.html',
+						controller : 'todoController'
+					})
+					$locationProvider.html5Mode(true);
+
+				} ])
+						.run(
 				[
 						'$rootScope',
 						'$location',

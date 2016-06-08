@@ -11,7 +11,7 @@ angular.module('profileCtrl', []).controller(
 					console.log(data.data);
 				})
 			})  
-
+		
 			$scope.gotoTodoList = function(id, $index){
 				console.log()
 				$scope.nIndex = $scope.notebookIndex;
@@ -53,8 +53,10 @@ angular.module('profileCtrl', []).controller(
 				$scope.todoData.updated=$scope.todoDate;
 				console.log($scope.todoData.deadline);
 				console.log($scope.todoData);
+			
 				$http.post('/api/v1/notebooks/newTodo/' + $rootScope.user._id + '/' + $scope.notebook._id,
 						$scope.todoData).success(
+								
 						function(data) {
 							$scope.todoData.title = '',
 									$scope.todoData.description = ''
@@ -112,10 +114,11 @@ angular.module('profileCtrl', []).controller(
 					
 					$http.delete('/api/v1/notebook/delete/'+id + '/' + $rootScope.user._id).success(function(data){
 						noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
+							
+							$rootScope.notebooks = data.data.user.todoList;
 							if(id==$scope.notebook._id){
 								$scope.notebook=null;
 							}
-							$rootScope.notebooks = data.data.user.todoList;
 							// console.log(data.data);
 						})
 					});

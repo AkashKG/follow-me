@@ -1,7 +1,7 @@
 angular.module('appRoutes', []).config(
 		[ '$routeProvider', '$locationProvider',
 				function($routeProvider, $locationProvider) {
-					$routeProvider
+					/*$routeProvider
 					.when('/', {
 						templateUrl : 'views/home.html',
 						controller : 'homeController'
@@ -17,7 +17,7 @@ angular.module('appRoutes', []).config(
 									$location.path('/');
 								}
 							}
-						},*/
+						},
 						templateUrl:'views/profile.html',
 						controller: 'profileController'
 					})
@@ -25,6 +25,6 @@ angular.module('appRoutes', []).config(
 						templateUrl : 'views/notebook/todopage.html',
 						controller : 'todoController'
 					})
-					$locationProvider.html5Mode(true);
+					$locationProvider.html5Mode(true);*/
 
 				} ]);

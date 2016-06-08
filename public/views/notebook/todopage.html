@@ -1,12 +1,12 @@
 	
 	
-	
+	<div block-ui="main" >
 	<md-card>
   		<md-card-title>
     	<md-card-title-text layout-align="center center">
       <span class="md-headline">{{todo.title}}</span>
       <span class="md-subhead description">{{todo.description}} </span>
-      <code>Last Updated at {{todo.updated |date:yyyy/mm/ss}} {{todo.updated |date:"HH:mm:ss"}}</code>
+      <span class="md-caption"><span hide-xs>Last Updated at</span> {{todo.updated |date:yyyy/mm/ss}} {{todo.updated |date:"HH:mm:ss"}}</span>
     </md-card-title-text>
     <md-card-content>
      <md-icon class="material-icons"style="color:grey">timer</md-icon>{{todo.deadline|date:yyyy/mm/dd}}
@@ -16,7 +16,7 @@
 <md-progress-linear ng-disabled="percent>=100" md-mode="buffer" class="md-warn"value="{{percent}}"
                       md-buffer-value="{{percent}}"></md-progress-linear>
   <md-list>
-  <md-subheader class="md-no-sticky">Tasks <kbd ng-show="percent==100">({{percent}}% complete)</kbd></md-subheader>
+  <md-subheader class="md-no-sticky">Tasks <span class="md-caption" ng-show="percent==100">({{percent}}% complete)</span></md-subheader>
   
   <md-divider></md-divider>
   <md-list-item ng-repeat="t in todo.tasks" md-ink-ripple="false">
@@ -42,3 +42,4 @@
         </md-button>
       </md-fab-trigger>
     </md-fab-speed-dial>
+    </div>

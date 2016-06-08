@@ -33,6 +33,10 @@ angular
 							if ($scope.todo.tasks[i].done == true)
 								count++;
 						}
+						if(count==0){
+							$scope.percent=0;
+							return;
+						}
 						$scope.percent = (count / $scope.todo.tasks.length) * 100;
 						console.log($scope.percent);
 					}
@@ -112,8 +116,7 @@ angular
 																$scope.taskData=null;
 																
 																$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
-																$scope
-																		.calculatePercentage();
+																$scope.calculatePercentage();
 															})
 										}).error(function(data) {
 
