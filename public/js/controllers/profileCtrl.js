@@ -197,9 +197,17 @@ angular.module('profileCtrl', []).controller(
      * Supplies a function that will continue to operate until the
      * time is up.
      */
+    $scope.menu="menu"
     $scope.isOnProfile=function(){
-    	if($location.path()=='/profile' && $rootScope.isLoggedIn==true)
+    	if($location.path()=='/profile' && $rootScope.isLoggedIn==true){
+    		if($scope.isOpenRight()){
+    			$scope.menu = "close"
+    		}
+    		else{
+    			$scope.menu = "menu"
+    		}
     		return true;
+    	}
     	return false;
     }
     function debounce(func, wait, context) {

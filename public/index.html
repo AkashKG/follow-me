@@ -14,14 +14,15 @@
 	<div ng-app="todoApp" ng-cloak ng-controller="homeController" style="min-height:100vh">
 		 <md-toolbar class="md-whiteframe-2dp" md-scroll-shrink ng-if="true">
 		 
-    		<div class="md-toolbar-tools">
+    		<div class="md-toolbar-tools" style="padding:0 0px">
     		<div ng-controller="sidenavController" style="margin:0 0 0 0;padding:0 0 0 0;">
-        <md-button hide-gt-xs class="md-icon-button" aria-label="More" ng-show="isOnProfile()"  ng-click="toggleRight()">
-          <md-icon >menu</md-icon>
-        </md-button>
         <md-button hide-gt-xs class="md-icon-button" aria-label="More" ng-hide="isOnProfile() && isLoggedIn"  ng-href="/profile">
-          <md-icon >chevron_left</md-icon>
+          <md-icon style="font-size:28px">navigate_before</md-icon>
         </md-button>
+        <md-button hide-gt-xs class="md-icon-button" aria-label="More" ng-show="isOnProfile()"  ng-click="toggleRight()">
+          <md-icon >{{menu}}</md-icon>
+        </md-button>
+       
         </div>
         <md-button hide-xs class="md-icon-button" aria-label="More" ng-show="isLoggedIn" ng-href="/profile">
           <md-icon >home</md-icon>
