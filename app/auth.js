@@ -15,7 +15,7 @@ function setupAuth(User, app) {
 
         consumerKey     : 'hK6eaHbP16RnGEHgPAttdR0hm',
         consumerSecret  : 'uULlyaXZEk0lzojRHf7MYFJZyVJJUYQzTsVyDw6SBNMWhGJMLK',
-        callbackURL     : 	"http://127.0.0.1:8181/auth/twitter/callback"
+        callbackURL     : 	"https://followmetodo.herokuapp.com/auth/twitter/callback"
 
     },
     function(token, tokenSecret, profile, done) {

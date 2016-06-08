@@ -9,7 +9,7 @@
       </div>
     </md-toolbar>
     <md-dialog-content layout="row">
-    <div class="md-padding" flex="50">
+    <div class="md-padding" flex-gt-xs="50" flex-xs layout-xs="column" layout-gt-xs = "column">
       <form name="newTodoForm" ng-submit="newForm()" action="">
 			<md-input-container flex class="md-block">
 				<label>Title</label> 
@@ -47,7 +47,7 @@
 		
 	</div>
 	
-	<div flex="50" style="max-height:100%;overflow-y:scroll">
+	<div flex-gt-xs="50" hide-xs flex-xs layout-gt-xs = "column" layout-xs="column" style="max-height:100%;overflow-y:scroll">
 	
 	<md-list>
   <md-subheader class="md-no-sticky">Added Tasks</md-subheader>

@@ -58,7 +58,7 @@ angular
 								.success(
 										function(data) {
 											console.log(data);
-
+											
 											noteService
 													.getMyNotes(
 															$routeParams.user)
@@ -110,6 +110,7 @@ angular
 													.then(
 															function(data, err) {
 																$scope.taskData=null;
+																
 																$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
 																$scope
 																		.calculatePercentage();

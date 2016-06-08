@@ -1,12 +1,26 @@
+<section hide-gt-xs >
+  			<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+      		<md-toolbar class="md-theme-light md-tall">
+        		<h1 class="md-toolbar-tools">Follow Me</h1>
+      		</md-toolbar>
+     	 	<md-list>
+		 <md-subheader class="md-no-sticky">My Notebooks</md-subheader>
+  <md-list-item  ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showFromSidenav(notebooks.length-1-$index)">
+    <md-icon class="material-icons">book</md-icon>
+    <p> {{ note.title }} </p>
+  </md-list-item>
+  </md-list>
+    </md-sidenav>
+  		</section>
 <div layout="row"  ng-cloak layout-xs="column">
   <div flex-gt-sm="25" flex-xs>
    <md-content >
-   <center>
+   <center hide-xs>
    <md-icon style="margin: 0 0 auto;
   width: 128px;
   height: 128px;"md-svg-icon="avatars:svg-1" ></md-icon>
   </center>
-      <md-list flex>
+      <md-list flex hide-xs>
       
         <md-subheader class="md-no-sticky">My Notebooks</md-subheader>
         <md-divider></md-divider>
@@ -47,7 +61,7 @@
 <md-subheader class="md-no-sticky">My todos</md-subheader>
 
 <p layout-align="center center" class="md-subhead description" ng-hide="notebook.todos.length"><md-button  class="md-primary md-hue-1"ng-click="newTodoDialog()">Create your first todo</md-button> </p>
-  	<md-divider></md-divider>	
+  	
   <md-list-item ng-repeat="t in notebook.todos" ng-click="gotoTodoList(t._id, $index)"  class="noright" ng-show="notebook.todos.length">
     
     <p><code>{{$index+1}}.</code> {{ t.title }} <code>{{t.updated | date: yyyy/MM/dd}}</code></p>

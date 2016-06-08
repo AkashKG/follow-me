@@ -14,12 +14,20 @@
 		 <md-toolbar class="md-whiteframe-2dp" md-scroll-shrink ng-if="true">
 		 
     		<div class="md-toolbar-tools">
-    		<md-button class="md-icon-button" aria-label="More" ng-show="isLoggedIn" ng-href="/profile">
+    		<div ng-controller="sidenavController" style="margin:0 0 0 0;padding:0 0 0 0;">
+        <md-button hide-gt-xs class="md-icon-button" aria-label="More" ng-show="isOnProfile()"  ng-click="toggleRight()">
+          <md-icon >menu</md-icon>
+        </md-button>
+        <md-button hide-gt-xs class="md-icon-button" aria-label="More" ng-hide="isOnProfile() && isLoggedIn"  ng-href="/profile">
+          <md-icon >chevron_left</md-icon>
+        </md-button>
+        </div>
+        <md-button hide-xs class="md-icon-button" aria-label="More" ng-show="isLoggedIn" ng-href="/profile">
           <md-icon >home</md-icon>
         </md-button>
-      			<h3><span>{{temp}}</span></h3>
+      			<h5 class="md-subhead" ng-href="/profile"><span>{{$root.user.profile.name}}</span></h5>
       			<span flex></span>
-      			<h5 class="md-subhead"><span>{{$root.user.profile.name}}</span></h5>
+      			
       			<div ng-controller="logoutController">
       			 <md-button class="md-icon-button" ng-click="logout()"aria-label="Favorite" ng-show="isLoggedIn">
       			 <md-tooltip md-direction="bottom">
@@ -34,6 +42,7 @@
     		
        
   		</md-toolbar>
+  		
   		
     	<div  ng-view autoscroll="true"></div>
  		
