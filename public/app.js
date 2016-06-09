@@ -41,6 +41,7 @@ angular
 					.when('/logout',{
 						template:'<body>HELLO</body'
 					})
+					$locationProvider.hashPrefix('!');
 					$locationProvider.html5Mode(true);
 
 				} ])
