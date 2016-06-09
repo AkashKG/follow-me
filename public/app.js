@@ -38,6 +38,9 @@ angular
 						templateUrl : 'views/notebook/todopage.html',
 						controller : 'todoController'
 					})
+					.when('/logout',{
+						template:'<body>HELLO</body'
+					})
 					$locationProvider.html5Mode(true);
 
 				} ])

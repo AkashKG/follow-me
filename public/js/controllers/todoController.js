@@ -89,7 +89,8 @@ angular
 					$scope.taskData = {
 						task : null,
 						link : null,
-						done : false
+						done : false,
+						updated:null
 					}
 					$scope.addNewtask = function() {
 						console.log($scope.taskData);
@@ -106,14 +107,19 @@ angular
 								.success(
 										function(data) {
 											console.log(data);
-											$scope.todoData = null;
+											$scope.taskData = {
+													task : null,
+													link : null,
+													done : false,
+													updated:null
+												}
 											$scope.hide();
 											noteService
 													.getMyNotes(
 															$routeParams.user)
 													.then(
 															function(data, err) {
-																$scope.taskData=null;
+																
 																
 																$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
 																$scope.calculatePercentage();

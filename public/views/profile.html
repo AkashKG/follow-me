@@ -17,9 +17,19 @@
   <div flex-gt-sm="25" flex-xs flex-gt-xs="35">
    <md-content >
    <center hide-xs>
-   <md-icon style="margin: 0 0 auto;
+   <div layout="row"  ng-hide="$root.user.profile.picture" layout-align="center center">
+   <md-card style="margin-top: 10px;">
+   <md-icon  style="margin: 0 0 auto;
   width: 128px;
   height: 128px;"md-svg-icon="avatars:svg-1" ></md-icon>
+  </md-card>
+  </div>
+  <div layout="row" layout-align="center center" ng-show="$root.user.profile.picture">
+			<md-card style="margin-top: 10px;"> <img
+				ng-src="{{$root.user.profile.picture}}" alt="profile_pic"
+				style="position: relative; border-radius: 4px; padding: 5px 5px 5px 5px; height: 140px; width: 140px; border-color: '#fff'; border-width: 10px;"></img>
+			</md-card>
+		</div>
   </center>
       <md-list flex hide-xs>
       

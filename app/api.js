@@ -60,7 +60,9 @@ module.exports = function(wagner) {
 				console.log( done);
 			})
 			User.update({'todoList._id':req.params.pid},{$set:did}, function(err,done){
-				console.log( done);
+				if(err)	
+				res.send(err)
+				res.json({done:'done'});
 			})
 			
 			
