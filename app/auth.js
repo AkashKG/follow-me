@@ -46,9 +46,9 @@ function setupAuth(User, app) {
 
 	passport.use(new FacebookStrategy(
 			{
-				clientID : '273119373025709',
-				clientSecret : 'a8c74dc77aff9972ca2ad0d6e969a0e3',
-				callbackURL : "http://fodo.herokuapp.com/auth/facebook/callback",
+				clientID : '1023976460970849',
+				clientSecret : '281d125a8f4e30ccb4c480011a008b57',
+				callbackURL : "https://fodo.herokuapp.com/auth/facebook/callback",
 				"profileFields" : [ "id", "email", "displayName", "gender",
 						"location" ]
 			}, function(accessToken, refreshToken, profile, done) {
@@ -96,13 +96,13 @@ function setupAuth(User, app) {
 											scope : [ 'email', 'user_location',
 													'user_birthday',
 													'public_profile' ],
-											callbackURL : 'http://fodo.herokuapp.com/auth/facebook/callback?redirect='
+											callbackURL : 'https://fodo.herokuapp.com/auth/facebook/callback?redirect='
 													+ redirect
 										})(req, res, next);
 					});
 
 	app.get('/auth/facebook/callback', function(req, res, next) {
-		var url = 'http://fodo.herokuapp.com/auth/facebook/callback?redirect='
+		var url = 'https://fodo.herokuapp.com/auth/facebook/callback?redirect='
 				+ encodeURIComponent(req.query.redirect);
 		passport.authenticate('facebook', {
 			callbackURL : url
