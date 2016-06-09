@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" ng-app="todoApp" ng-controller="homeController" >
+<html lang="en" ng-app="todoApp" ng-controller="homeController" ng-cloak>
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,9 +14,9 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
 		</head>
 	<div  ng-cloak style="min-height:100vh">
-	
+
 		 <md-toolbar class="md-whiteframe-2dp" md-scroll-shrink ng-if="true">
-		 
+
     		<div class="md-toolbar-tools" style="padding:0 0px">
     		<div ng-controller="sidenavController" style="margin:0 0 0 0;padding:0 0 0 0;">
         <md-button hide-gt-xs class="md-icon-button" aria-label="More" ng-hide="checkOnProfileLogged()"  ng-href="/profile">
@@ -28,7 +28,7 @@
        <md-button class="md-icon-button" aria-label="More" ng-show="loggedOut()"  ng-click="toggleRight()">
           <md-icon >event</md-icon>
         </md-button>
-        
+
         </div>
         <md-button hide-xs class="md-icon-button" aria-label="More" ng-show="isLoggedIn" ng-href="/profile">
           <md-icon >home</md-icon>
@@ -37,7 +37,7 @@
         	<h5   ng-show="loggedOut()" class="md-subhead">Fodo</h5></div>
       			<h5 class="md-subhead" ng-href="/profile"><span>{{$root.user.profile.name}}</span></h5>
       			<span flex></span>
-      			
+
       			<div ng-controller="logoutController">
       			 <md-button class="md-icon-button" ng-click="logout()"aria-label="Favorite" ng-show="isLoggedIn">
       			 <md-tooltip md-direction="bottom">
@@ -49,16 +49,16 @@
           <md-icon >more_vert</md-icon>
         </md-button>-->
     		</div>
-    		
-       
+
+
   		</md-toolbar>
-  		
-  		
+
+
     	<div  ng-view autoscroll="true"></div>
- 		
-  
+
+
 	</div>
-	
+
   	<script src="bower_components/angular/angular.min.js"></script>
   	<script src="bower_components/angular-route/angular-route.min.js"></script>
   	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
@@ -66,8 +66,8 @@
   	<script src="bower_components/angular-messages/angular-messages.min.js"></script>
   	<script src="bower_components/angular-material/angular-material.js"></script>
   	<script src="bower_components/angular-block-ui/dist/angular-block-ui.min.js"></script>
-  	
-  	
+
+
   	<script type="text/javascript" src="app.js"></script>
   	<script type="text/javascript" src="js/appRoutes.js"></script>
   	<script type="text/javascript" src="js/controllers/homeCtrl.js"></script>
@@ -76,6 +76,5 @@
   	<script type="text/javascript" src="js/controllers/todoController.js"></script>
   	<script type="text/javascript" src="js/controllers/logoutController.js"></script>
   	<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
-  	
+
 </html>
-  
