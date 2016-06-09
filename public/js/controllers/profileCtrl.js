@@ -3,20 +3,20 @@ angular.module('profileCtrl', []).controller(
 		function($scope, $mdBottomSheet, $mdDialog, $mdSidenav, $window, $http, noteService, $rootScope, dialogFactory, userService, $location) {
 			userService.getUser().then(function(data,err){
 				$rootScope.user = data.data.user;
-				//console.log($rootScope.isLoggedIn);
+				// console.log($rootScope.isLoggedIn);
 				if($rootScope.user)
 			// //console.log(data.data.user);
 				noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
 					$rootScope.notebooks = data.data.user.todoList;
-					//console.log(data.data);
+					// console.log(data.data);
 				})
 			})  
 		
 			$scope.gotoTodoList = function(id, $index){
-				//console.log()
+				// console.log()
 				$scope.nIndex = $scope.notebookIndex;
 				$location.path('/profile/alltodos/' + $rootScope.user._id + '/' + $scope.nIndex + '/' + $index);
-				//console.log(id);
+				// console.log(id);
 			}
 			$scope.showFromSidenav=function($index){
 				$mdSidenav('right').toggle().then(function() {
@@ -38,11 +38,11 @@ angular.module('profileCtrl', []).controller(
 				done:false
 			}
 			$scope.addTodoToList = function(todo){
-				//console.log($scope.link.linkUrl);
+				// console.log($scope.link.linkUrl);
 				if((todo && !$scope.todoData.tasks.length)||(todo && $scope.todoData.tasks[$scope.todoData.tasks.length-1].task!=todo))
 				$scope.todoData.tasks.push({task:todo,done:false,link:$scope.link.linkUrl});
 				else{
-					//console.log("Error");
+					// console.log("Error");
 				}
 					
 					
@@ -51,8 +51,8 @@ angular.module('profileCtrl', []).controller(
 				$scope.todoDate = new Date();
 				$scope.todoData.created=$scope.todoDate;
 				$scope.todoData.updated=$scope.todoDate;
-				//console.log($scope.todoData.deadline);
-				//console.log($scope.todoData);
+				// console.log($scope.todoData.deadline);
+				// console.log($scope.todoData);
 			
 				$http.post('/api/v1/notebooks/newTodo/' + $rootScope.user._id + '/' + $scope.notebook._id,
 						$scope.todoData).success(
@@ -82,31 +82,40 @@ angular.module('profileCtrl', []).controller(
 			}
 			$scope.notebook = null;
 			$scope.notebookData = {
-					title : null,
-					description : null,
-					date:null
+					title : '',
+					description : '',
+					date:'',
+					authorId: ''
 				}
 			// $scope.notebook=$scope.notebooks[0];
 			$scope.showNotebook=function($index){
-				//console.log("Entered Here");
+				// console.log("Entered Here");
 				$scope.notebookIndex = $index;
 				$scope.notebook = $scope.notebooks[$index];
-				//console.log($scope.notebook);
+				// console.log($scope.notebook);
 			}
 			$scope.addNewnote = function() {
 				$scope.notebookData.date = new Date();
-				//console.log($scope.notebookData.date);
-				$http.post('/api/v1/notebooks/newnotebook/' + $rootScope.user._id,
+				$scope.notebookData.authorId=$rootScope.user._id;
+				$http.post('/api/v1/notebooks/newnotebook',
 						$scope.notebookData).success(
 						function(data) {
-							$scope.notebookData.title = '',
-									$scope.notebookData.description = ''
+							dialogFactory.showToast(data.done);
+							$scope.notebookData = {
+									title : '',
+									description : '',
+									date:'',
+									authorId:''
+							}
 							$scope.hide();
 							noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
 								$rootScope.notebooks = data.data.user.todoList;
 								// //console.log(data.data);
 							})
 						}).error(function(data) {
+							console.log(data.error);
+							$scope.hide();
+							dialogFactory.showToast(data.error);
 					// //console.log(data);
 				})
 			}
@@ -202,7 +211,7 @@ angular.module('profileCtrl', []).controller(
       return $mdSidenav('right').isOpen();
     };
     $rootScope.checkOnProfileLogged=function(){
-    	//console.log($rootScope.isLoggedIn);
+    	// console.log($rootScope.isLoggedIn);
     	if(!$scope.isOnProfile() && $rootScope.isLoggedIn)
     		return false
     	return true
@@ -214,9 +223,8 @@ angular.module('profileCtrl', []).controller(
     }
     
     /**
-     * Supplies a function that will continue to operate until the
-     * time is up.
-     */
+	 * Supplies a function that will continue to operate until the time is up.
+	 */
     $scope.menu="menu"
     $scope.isOnProfile=function(){
     	if($location.path()=='/profile' && $rootScope.isLoggedIn==true){

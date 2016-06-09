@@ -32,26 +32,19 @@ module.exports = function(wagner) {
 		}
 	}));
 	
-	api.post('/notebooks/newnotebook/:id', wagner.invoke(function(User) {
+	api.post('/notebooks/newnotebook', wagner.invoke(function(User) {
 		return function(req, res) {
-			if(req.user._id == req.params.id ){
-				var todo={
-					authorId:req.params.id,
-					title:req.body.title,
-					description:req.body.description,
-					date:req.body.date,
-					done:false
-				};	
-				User.update({ _id: req.params.id }, 
-						{ $addToSet: { todoList: todo } },function(err,done){
+			if(req.user._id == req.body.authorId ){
+				User.update({ _id: req.user._id }, 
+						{ $addToSet: { todoList: req.body } },function(err,done){
 							if(err)
 								res.send(err);
-							res.json({done:'done'});
+							res.json({done:'Notebook was added successfully!'});
 						}
 				);
 			}
 			else{
-				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access'});
+				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your website will be reported'});
 			}
 		}
 	}));

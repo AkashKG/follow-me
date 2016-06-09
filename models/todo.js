@@ -21,12 +21,6 @@ var todoSchema = {
 		title : {
 			type : String
 		},
-		description : {
-			type : String
-		},
-		done:{
-			type:Boolean
-		},
 		deadline:{
 			type:Date
 		},

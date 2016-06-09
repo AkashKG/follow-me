@@ -87,12 +87,10 @@ angular
 									var toast = $mdToast.simple().content(text)
 											.action('OK')
 											.highlightAction(false).hideDelay(
-													30000).position("top");
+													800).position("bottom");
 									$mdToast.show(toast).then(
 											function(response) {
-												if (response == 'ok') {
-													debugger;
-												}
+												
 											});
 								},
 								showAlert : function(title, content) {
