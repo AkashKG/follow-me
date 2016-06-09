@@ -35,6 +35,7 @@ angular
 						controller: 'profileController'
 					})
 					.when('/profile/alltodos/:user/:nIndex/:index', {
+						
 						templateUrl : 'views/notebook/todopage.html',
 						controller : 'todoController'
 					})

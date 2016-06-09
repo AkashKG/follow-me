@@ -25,27 +25,25 @@ angular.module('profileCtrl', []).controller(
 				$scope.showNotebook($index);
 				
 			}
-			$scope.link={
-					linkUrl:''
+			$scope.task={
+					link:'',
+					task:'',
+					done:false
 			}
 			$scope.todoData={
 				title:'',
-				description:'',
 				tasks:[],
 				created:'',
 				updated:'',
 				deadline:'',
-				done:false
 			}
-			$scope.addTodoToList = function(todo){
-				// console.log($scope.link.linkUrl);
-				if((todo && !$scope.todoData.tasks.length)||(todo && $scope.todoData.tasks[$scope.todoData.tasks.length-1].task!=todo))
-				$scope.todoData.tasks.push({task:todo,done:false,link:$scope.link.linkUrl});
-				else{
-					// console.log("Error");
+			$scope.addTodoToList = function(){
+				$scope.todoData.tasks.push($scope.task);
+				$scope.task={
+						link:'',
+						task:'',
+						done:false
 				}
-					
-					
 			}
 			$scope.addNewtodo=function(){
 				$scope.todoDate = new Date();
@@ -54,22 +52,22 @@ angular.module('profileCtrl', []).controller(
 				// console.log($scope.todoData.deadline);
 				// console.log($scope.todoData);
 			
-				$http.post('/api/v1/notebooks/newTodo/' + $rootScope.user._id + '/' + $scope.notebook._id,
+				$http.post('/api/v1/notebooks/newTodo/' + $rootScope.parentId + '/' + $scope.notebook._id,
 						$scope.todoData).success(
-								
 						function(data) {
-							$scope.todoData.title = '';
-									$scope.todoData.description = '';
+							dialogFactory.showToast(data.success);
 										$scope.todoData={
 												title:'',
-												description:'',
 												tasks:[],
 												created:'',
 												updated:'',
 												deadline:'',
-												done:false
 											};
-										$scope.link='';
+										$scope.task={
+												link:'',
+												task:'',
+												done:false
+										}
 							$scope.hide();		
 							noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
 								$rootScope.notebooks = data.data.user.todoList;
@@ -130,6 +128,7 @@ angular.module('profileCtrl', []).controller(
 				$mdDialog.show(confirm).then(function(ev) {
 					
 					$http.delete('/api/v1/notebook/delete/'+id + '/' + $rootScope.user._id).success(function(data){
+						dialogFactory.showToast(data.Deleted);
 						noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
 							
 							$rootScope.notebooks = data.data.user.todoList;
@@ -138,6 +137,8 @@ angular.module('profileCtrl', []).controller(
 							}
 							// //console.log(data.data);
 						})
+					}).error(function(err){
+						dialogFactory.showToast(err.error);
 					});
 				});
 			}

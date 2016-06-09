@@ -6,14 +6,17 @@ angular
 		.controller(
 				'todoController',
 				function($scope, $routeParams, $rootScope, noteService, $http,
-						$window, $mdDialog) {
+						$window, $mdDialog, dialogFactory, userService) {
 
-				
+					userService.getUser().then(function(data,err){
+						$rootScope.user = data.data.user;
+					})  
 					noteService
 							.getMyNotes($routeParams.user)
 							.then(
 									function(data, err) {
 										$scope.parentId = data.data.user.todoList[$routeParams.nIndex]._id;
+										$scope.author = data.data.user.todoList[$routeParams.nIndex]._id;
 										$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
 										$scope.calculatePercentage();
 									})
@@ -58,11 +61,10 @@ angular
 						$http
 								.put(
 										'/api/v1/notebooks/todo/update/'
-												+ $scope.parentId, $scope.send)
+												+ $scope.parentId + '/' + $scope.author, $scope.send)
 								.success(
 										function(data) {
-											console.log(data);
-											
+											dialogFactory.showToast(data.success);
 											noteService
 													.getMyNotes(
 															$routeParams.user)
@@ -73,7 +75,11 @@ angular
 																		.calculatePercentage();
 															})
 										}).error(function(data) {
-									console.log(data);
+									
+									dialogFactory.showToast(data.error);
+									$scope.calculatePercentage();
+									$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
+									
 								});
 						$scope.calculatePercentage();
 					}
@@ -102,30 +108,32 @@ angular
 								.post(
 										'/api/v1/newtodo/newtask/'
 												+ $scope.todo._id + '/'
-												+ $scope.todoIndex,
+												+ $scope.todoIndex +'/' + $rootScope.user._id,
 										$scope.taskData)
 								.success(
 										function(data) {
-											console.log(data);
+											dialogFactory.showToast(data.success);
 											$scope.taskData = {
 													task : null,
 													link : null,
 													done : false,
 													updated:null
 												}
-											$scope.hide();
+											$scope.cancel();
 											noteService
 													.getMyNotes(
 															$routeParams.user)
 													.then(
 															function(data, err) {
-																
+																$scope.cancel();
+																if(err)
+																dialogFactory.showToast(err);
 																
 																$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
 																$scope.calculatePercentage();
 															})
 										}).error(function(data) {
-
+											dialogFactory.showToast(data);
 								});
 
 					}

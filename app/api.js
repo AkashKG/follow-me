@@ -44,12 +44,13 @@ module.exports = function(wagner) {
 				);
 			}
 			else{
-				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your website will be reported'});
+				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});
 			}
 		}
 	}));
-	api.put('/notebooks/todo/update/:pid',wagner.invoke(function(Todo,User){
+	api.put('/notebooks/todo/update/:pid/:uid',wagner.invoke(function(Todo,User){
 		return function(req,res){
+			if(req.user._id == req.params.uid){
 			var taskIndex=req.body.taskIndex;
 			var todoIndex=req.body.todoIndex;
 			updated = 'todoList.$.todos.'+todoIndex+'.updated';
@@ -59,47 +60,65 @@ module.exports = function(wagner) {
 			var did ={};
 			did[done]=req.body.done;
 			User.update({'todoList._id':req.params.pid},{$set:update}, function(err,done){
-				console.log( done);
+				User.update({'todoList._id':req.params.pid},{$set:did}, function(err,done){
+					if(err)	
+						res.send(err)
+					res.json({success:'Updated'});
+				})
 			})
-			User.update({'todoList._id':req.params.pid},{$set:did}, function(err,done){
-				if(err)	
-				res.send(err)
-				res.json({done:'done'});
-			})
+			
+			}
+			else{
+				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});	
+			}
 			
 			
 	}}));
 	
-	api.post('/newtodo/newtask/:tid/:todoIndex',wagner.invoke(function(User){
+	api.post('/newtodo/newtask/:tid/:todoIndex/:uid',wagner.invoke(function(User){
 		return function(req,res){
-			var task = req.body;
-			var pos='todoList.$.todos.' + req.params.todoIndex+'.tasks';
-			var obj={}
-			obj[pos]=task;
-			User.update({'todoList.todos._id':req.params.tid},{
-				"$push":obj
-			},function(err,done){
+			if(req.user._id == req.params.uid){
+				var task = req.body;
+				var pos='todoList.$.todos.' + req.params.todoIndex+'.tasks';
+				var obj={}
+				obj[pos]=task;
+				User.update({'todoList.todos._id':req.params.tid},{
+					"$push":obj
+				},function(err,done){
+					if(err)
+						res.send(err);
+					var update={};
+					updated = 'todoList.$.todos.'+ req.params.todoIndex+'.updated';
+					update[updated]=req.body.updated;
+					User.update({'todoList.todos._id':req.params.tid},{$set:update}, function(err,done){
+						if(err)
+							res.send(err)
+						res.send({success:'The task was added!'})
+					})
+				});
 				
-			});
-			var update={};
-			updated = 'todoList.$.todos.'+ req.params.todoIndex+'.updated';
-			update[updated]=req.body.updated;
-			User.update({'todoList.todos._id':req.params.tid},{$set:update}, function(err,done){
-				res.json(done);
-			})
+			}
+			else{
+				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});	
+			}
 		}
 	}));
 	
 	api.post('/notebooks/newTodo/:uid/:noteId', wagner.invoke(function(User) {
 		return function(req, res) {
+			if(req.user._id == req.params.uid){
 			var todo = req.body;
 			User.update(
 				    { "todoList._id": req.params.noteId },
 				    { "$push": { "todoList.$.todos": todo } },
 				    function(err,data) {
-				       res.json(data);
+				       res.json({success:"Successfully added todo!"});
 				    }
 				);
+			}
+			else{
+				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});	
+			}
 		}
 	}));
 
@@ -126,11 +145,16 @@ module.exports = function(wagner) {
 	}));
 	api.delete('/notebook/delete/:id/:authorId', wagner.invoke(function(User){// done
 		return function(req, res){
-			User.update({_id:req.params.authorId},{$pull:{todoList:{_id:req.params.id}}}, function(err,data){
-				if(err)
-					res.send(err);
-				res.json({Deleted:'The notebook was deleted succesfully'})
-			});
+			if(req.user._id == req.params.authorId){
+				User.update({_id:req.params.authorId},{$pull:{todoList:{_id:req.params.id}}}, function(err,data){
+					if(err)
+						res.send(err);
+					res.json({Deleted:'The notebook was deleted succesfully'})
+				});
+			}
+			else{
+				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});
+			}
 		}
 	}));
 	return api;

@@ -19,30 +19,24 @@
 							<div ng-message="required">This is required.</div>
 						</div>
 			</md-input-container>
-			<md-input-container class="md-block">
-    	    	<label>Description</label>
-          		<input ng-model="todoData.description" md-maxlength="150" ></textarea>
-        	</md-input-container>
-        	<md-datepicker ng-model="todoData.deadline" md-placeholder="Deadline"></md-datepicker>
+			<md-datepicker ng-model="todoData.deadline" md-placeholder="Deadline"></md-datepicker>
         	</form>
-        	<form name="inputTodoForm" hide-xs>
+        	<form name="inputTodoForm" ng-submit="addTodoToList()">
         	<md-input-container flex class="md-block">
 				<label>Todos</label> 
-					<textarea ng-model="currentTodo" name="todo"md-maxlength="1500" rows="5" md-select-on-focus></textarea>
+					<textarea ng-model="task.task" name="todo"md-maxlength="500" rows="3" md-select-on-focus></textarea>
 						<div ng-messages="inputTodoForm.todo.$error" ng-show='inputTodoForm.todo.$touched'>
 							<div ng-message="required">This is required.</div>
 						</div>
 			</md-input-container>
 			<md-input-container flex class="md-block">
 				<label>Link</label> 
-					<input ng-maxlength="100"  name="link" ng-model="link.linkUrl">
+					<input ng-maxlength="100"  name="link" ng-model="task.link">
 						<div ng-messages="inputTodoForm.link.$error" ng-show='inputTodoForm.link.$touched'>
 						
 						</div>
 			</md-input-container>
-			<md-button ng-disabled="inputTodoForm.$invalid" type="reset" class="md-primary" ng-click="addTodoToList(inputTodoForm.todo.$modelValue)">
-       Add 
-      </md-button>
+			
       </form>
 			
 		
@@ -55,6 +49,7 @@
   <md-divider></md-divider>
   <md-list-item ng-repeat="t in todoData.tasks">
     <p>{{t.task}}</p>
+    <md-button class="md-icon-button" ng-show="t.link"><md-icon>link<md-icon></md-button>
     <md-divider></md-divider>
   </md-list-item>
 </md-list>
