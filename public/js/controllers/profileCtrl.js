@@ -3,20 +3,20 @@ angular.module('profileCtrl', []).controller(
 		function($scope, $mdBottomSheet, $mdDialog, $mdSidenav, $window, $http, noteService, $rootScope, dialogFactory, userService, $location) {
 			userService.getUser().then(function(data,err){
 				$rootScope.user = data.data.user;
-				console.log($rootScope.isLoggedIn);
+				//console.log($rootScope.isLoggedIn);
 				if($rootScope.user)
-			// console.log(data.data.user);
+			// //console.log(data.data.user);
 				noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
 					$rootScope.notebooks = data.data.user.todoList;
-					console.log(data.data);
+					//console.log(data.data);
 				})
 			})  
 		
 			$scope.gotoTodoList = function(id, $index){
-				console.log()
+				//console.log()
 				$scope.nIndex = $scope.notebookIndex;
 				$location.path('/profile/alltodos/' + $rootScope.user._id + '/' + $scope.nIndex + '/' + $index);
-				console.log(id);
+				//console.log(id);
 			}
 			$scope.showFromSidenav=function($index){
 				$mdSidenav('right').toggle().then(function() {
@@ -38,11 +38,11 @@ angular.module('profileCtrl', []).controller(
 				done:false
 			}
 			$scope.addTodoToList = function(todo){
-				console.log($scope.link.linkUrl);
+				//console.log($scope.link.linkUrl);
 				if((todo && !$scope.todoData.tasks.length)||(todo && $scope.todoData.tasks[$scope.todoData.tasks.length-1].task!=todo))
 				$scope.todoData.tasks.push({task:todo,done:false,link:$scope.link.linkUrl});
 				else{
-					console.log("Error");
+					//console.log("Error");
 				}
 					
 					
@@ -51,8 +51,8 @@ angular.module('profileCtrl', []).controller(
 				$scope.todoDate = new Date();
 				$scope.todoData.created=$scope.todoDate;
 				$scope.todoData.updated=$scope.todoDate;
-				console.log($scope.todoData.deadline);
-				console.log($scope.todoData);
+				//console.log($scope.todoData.deadline);
+				//console.log($scope.todoData);
 			
 				$http.post('/api/v1/notebooks/newTodo/' + $rootScope.user._id + '/' + $scope.notebook._id,
 						$scope.todoData).success(
@@ -74,7 +74,7 @@ angular.module('profileCtrl', []).controller(
 							noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
 								$rootScope.notebooks = data.data.user.todoList;
 								$scope.showNotebook($scope.notebookIndex)
-								// console.log(data.data);
+								// //console.log(data.data);
 							})
 						}).error(function(data) {
 				
@@ -88,14 +88,14 @@ angular.module('profileCtrl', []).controller(
 				}
 			// $scope.notebook=$scope.notebooks[0];
 			$scope.showNotebook=function($index){
-				console.log("Entered Here");
+				//console.log("Entered Here");
 				$scope.notebookIndex = $index;
 				$scope.notebook = $scope.notebooks[$index];
-				console.log($scope.notebook);
+				//console.log($scope.notebook);
 			}
 			$scope.addNewnote = function() {
 				$scope.notebookData.date = new Date();
-				console.log($scope.notebookData.date);
+				//console.log($scope.notebookData.date);
 				$http.post('/api/v1/notebooks/newnotebook/' + $rootScope.user._id,
 						$scope.notebookData).success(
 						function(data) {
@@ -104,10 +104,10 @@ angular.module('profileCtrl', []).controller(
 							$scope.hide();
 							noteService.getMyNotes($rootScope.user._id).then(function(data, err) {
 								$rootScope.notebooks = data.data.user.todoList;
-								// console.log(data.data);
+								// //console.log(data.data);
 							})
 						}).error(function(data) {
-					// console.log(data);
+					// //console.log(data);
 				})
 			}
 			$scope.deleteNote = function(id, ev){
@@ -127,7 +127,7 @@ angular.module('profileCtrl', []).controller(
 							if(id==$scope.notebook._id){
 								$scope.notebook=null;
 							}
-							// console.log(data.data);
+							// //console.log(data.data);
 						})
 					});
 				});
@@ -164,9 +164,9 @@ angular.module('profileCtrl', []).controller(
 					controller : 'GridBottomSheetCtrl',
 					clickOutsideToClose : true
 				}).then(function(clickedItem) {
-					// console.log(clickedItem);
+					// //console.log(clickedItem);
 					if (clickedItem.name == "Notebook") {
-						// console.log(clickedItem);
+						// //console.log(clickedItem);
 						$scope.newBookDialog();
 					}
 					else if(clickedItem.name=="Create Todo"){
@@ -191,7 +191,7 @@ angular.module('profileCtrl', []).controller(
 
 	$scope.listItemClick = function($index) {
 		var clickedItem = $scope.items[$index];
-		// console.log($index);
+		// //console.log($index);
 		$mdBottomSheet.hide(clickedItem);
 
 	};
@@ -201,6 +201,18 @@ angular.module('profileCtrl', []).controller(
     $scope.isOpenRight = function(){
       return $mdSidenav('right').isOpen();
     };
+    $rootScope.checkOnProfileLogged=function(){
+    	//console.log($rootScope.isLoggedIn);
+    	if(!$scope.isOnProfile() && $rootScope.isLoggedIn)
+    		return false
+    	return true
+    }
+    $scope.loggedOut=function(){
+    	if($rootScope.isLoggedIn)
+    		return false;
+    	return true;
+    }
+    
     /**
      * Supplies a function that will continue to operate until the
      * time is up.
@@ -233,7 +245,7 @@ angular.module('profileCtrl', []).controller(
     
     function buildToggler(navID) {
       return debounce(function() {
-          // Component lookup should always be available since we are not using `ng-if`
+          
           $mdSidenav(navID)
             .toggle()
             .then(function () {
@@ -243,7 +255,7 @@ angular.module('profileCtrl', []).controller(
   })
 .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
     $scope.close = function () {
-      // Component lookup should always be available since we are not using `ng-if`
+    
       $mdSidenav('right').close()
         .then(function () {
           $log.debug("close RIGHT is done");

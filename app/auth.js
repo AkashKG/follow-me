@@ -15,7 +15,7 @@ function setupAuth(User, app) {
 
         consumerKey     : 'hK6eaHbP16RnGEHgPAttdR0hm',
         consumerSecret  : 'uULlyaXZEk0lzojRHf7MYFJZyVJJUYQzTsVyDw6SBNMWhGJMLK',
-        callbackURL     : 	"https://followmetodo.herokuapp.com/auth/twitter/callback"
+        callbackURL     : 	"http://127.0.0.1:8181/auth/twitter/callback"
 
     },
     function(token, tokenSecret, profile, done) {
@@ -48,7 +48,7 @@ function setupAuth(User, app) {
 			{
 				clientID : '273119373025709',
 				clientSecret : 'a8c74dc77aff9972ca2ad0d6e969a0e3',
-				callbackURL : "http://localhost:8181/auth/facebook/callback",
+				callbackURL : "http://fodo.herokuapp.com/auth/facebook/callback",
 				"profileFields" : [ "id", "email", "displayName", "gender",
 						"location" ]
 			}, function(accessToken, refreshToken, profile, done) {
@@ -96,13 +96,13 @@ function setupAuth(User, app) {
 											scope : [ 'email', 'user_location',
 													'user_birthday',
 													'public_profile' ],
-											callbackURL : 'http://localhost:8181/auth/facebook/callback?redirect='
+											callbackURL : 'http://fodo.herokuapp.com/auth/facebook/callback?redirect='
 													+ redirect
 										})(req, res, next);
 					});
 
 	app.get('/auth/facebook/callback', function(req, res, next) {
-		var url = 'http://localhost:8181/auth/facebook/callback?redirect='
+		var url = 'http://fodo.herokuapp.com/auth/facebook/callback?redirect='
 				+ encodeURIComponent(req.query.redirect);
 		passport.authenticate('facebook', {
 			callbackURL : url

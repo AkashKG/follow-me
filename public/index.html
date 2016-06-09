@@ -16,17 +16,22 @@
 		 
     		<div class="md-toolbar-tools" style="padding:0 0px">
     		<div ng-controller="sidenavController" style="margin:0 0 0 0;padding:0 0 0 0;">
-        <md-button hide-gt-xs class="md-icon-button" aria-label="More" ng-hide="isOnProfile() && isLoggedIn"  ng-href="/profile">
+        <md-button hide-gt-xs class="md-icon-button" aria-label="More" ng-hide="checkOnProfileLogged()"  ng-href="/profile">
           <md-icon style="font-size:28px">navigate_before</md-icon>
         </md-button>
         <md-button hide-gt-xs class="md-icon-button" aria-label="More" ng-show="isOnProfile()"  ng-click="toggleRight()">
           <md-icon >{{menu}}</md-icon>
         </md-button>
-       
+       <md-button class="md-icon-button" aria-label="More" ng-show="loggedOut()"  ng-click="toggleRight()">
+          <md-icon >event</md-icon>
+        </md-button>
+        
         </div>
         <md-button hide-xs class="md-icon-button" aria-label="More" ng-show="isLoggedIn" ng-href="/profile">
           <md-icon >home</md-icon>
         </md-button>
+        <div ng-controller="sidenavController">
+        	<h5   ng-show="loggedOut()" class="md-subhead">Fodo</h5></div>
       			<h5 class="md-subhead" ng-href="/profile"><span>{{$root.user.profile.name}}</span></h5>
       			<span flex></span>
       			

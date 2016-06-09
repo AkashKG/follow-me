@@ -16,8 +16,8 @@ angular
 			blockUIConfig.templateUrl = 'views/templates/overlay.html';
 			$routeProvider
 					.when('/', {
-						templateUrl : 'views/home.html',
-						controller : 'homeController'
+						templateUrl : 'views/login.html',
+						controller : 'loginController'
 					})
 					.when('/login',{
 						templateUrl:'views/login.html',
