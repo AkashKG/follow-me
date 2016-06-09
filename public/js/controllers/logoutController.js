@@ -5,7 +5,6 @@ angular.module('logoutCtrl', []).controller(
 			$scope.logout = function() {
 				logoutFactory.logout().then(function() {
 					$rootScope.isLoggedIn = false;
-					console.log($rootScope.user);
 					$window.open('/login','_self');
 				});
 			};
