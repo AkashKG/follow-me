@@ -34,8 +34,7 @@ angular
 						templateUrl:'views/profile.html',
 						controller: 'profileController'
 					})
-					.when('/profile/alltodos/:user/:nIndex/:index', {
-						
+					.when('/profile/alltodos/:nIndex/:index', {
 						templateUrl : 'views/notebook/todopage.html',
 						controller : 'todoController'
 					})
@@ -55,11 +54,14 @@ angular
 						function($rootScope, $location, userService,
 								dialogFactory) {
 							userService.getUser().then(function(data) {
-								console.log(data);
-								if(data.data.user){
+								console.log(data.data);
+								if(data.data.profile){
 									$rootScope.isLoggedIn = true;
-									if ($location.path() === '/'||$location.path() === '/login')
+									$rootScope.user=data.data.profile;
+									if ($location.path() === '/'||$location.path() === '/login'){
+										
 										$location.path('/profile')
+									}
 								}	
 								else{
 									$rootScope.isLoggedin=false;
@@ -67,7 +69,7 @@ angular
 										
 									}
 									else if($location.path()!='/login'){
-									dialogFactory.showAlert("Please Login!", "Continue login to view your profile");
+										dialogFactory.showToast("Please Login!");
 									$location.path('/login');
 									}
 								}
@@ -112,26 +114,11 @@ angular
 						function($http, $rootScope, $location) {
 
 							return {
-								getAllNotes : function() {
+								getMyNotes : function() {
 									return $http
-											.get('/api/v1/notebooks/all')
+											.get('api/v1/notebooks/mybooks')
 											.success(function(data) {
-												return data;
-											})
-											.error(
-													function(data, status) {
-														if (status = status.UNAUTHORIZED) {
-															return null;
-														}
-													});
-								},
-
-								getMyNotes : function(id) {
-									return $http
-											.get(
-													'api/v1/notebooks/mybooks/'
-															+ id)
-											.success(function(data) {
+												console.log(data);
 												return data;
 											})
 											.error(
@@ -148,7 +135,7 @@ angular
 
 		.filter('reverse', function() {
 			return function(items) {
-				if (items)
+				if (items!=undefined)
 					return items.slice().reverse();
 			};
 		})
@@ -163,8 +150,20 @@ angular
 						function($q, $http, $rootScope, $location) {
 							return {
 								getUser : function() {
-									return $http.get('api/v1/me').success(
+									return $http.get('api/v1/user/me').success(
 											function(data) {
+													console.log(data);
+													return data;
+											}).error(function(data, status) {
+										if (status = status.UNAUTHORIZED) {
+											return null
+										}
+									});
+								},
+								getUserId : function() {
+									return $http.get('api/v1/user/me/id').success(
+											function(data) {
+													console.log(data);
 													return data;
 											}).error(function(data, status) {
 										if (status = status.UNAUTHORIZED) {

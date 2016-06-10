@@ -9,17 +9,18 @@ angular
 						$window, $mdDialog, dialogFactory, userService) {
 
 					userService.getUser().then(function(data,err){
-						$rootScope.user = data.data.user;
-					})  
-					noteService
-							.getMyNotes($routeParams.user)
-							.then(
-									function(data, err) {
-										$scope.parentId = data.data.user.todoList[$routeParams.nIndex]._id;
-										$scope.author = data.data.user.todoList[$routeParams.nIndex]._id;
-										$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
-										$scope.calculatePercentage();
-									})
+						if(data!=null){
+							$rootScope.user=data.data;
+							noteService.getMyNotes().then(function(data,err){
+								$scope.parentId=data.data.todoList[$routeParams.nIndex]._id;
+								$scope.todo=data.data.todoList[$routeParams.nIndex].todos[$routeParams.index];
+								console.log($scope.todo);
+								$scope.calculatePercentage();
+							})
+						}
+						
+					})
+					
 					$scope.openLink = function(link) {
 						console.log(link);
 						$window.open('//' + link, '_blank');
@@ -61,24 +62,23 @@ angular
 						$http
 								.put(
 										'/api/v1/notebooks/todo/update/'
-												+ $scope.parentId + '/' + $scope.author, $scope.send)
+												+ $scope.parentId, $scope.send)
 								.success(
 										function(data) {
 											dialogFactory.showToast(data.success);
 											noteService
-													.getMyNotes(
-															$routeParams.user)
+													.getMyNotes()
 													.then(
 															function(data, err) {
-																$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
-																$scope
-																		.calculatePercentage();
+																noteService.getMyNotes().then(function(data,err){
+																	$scope.todo=data.data.todoList[$routeParams.nIndex].todos[$routeParams.index];
+																	$scope.calculatePercentage();
+																})
 															})
 										}).error(function(data) {
 									
 									dialogFactory.showToast(data.error);
 									$scope.calculatePercentage();
-									$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
 									
 								});
 						$scope.calculatePercentage();
@@ -108,7 +108,7 @@ angular
 								.post(
 										'/api/v1/newtodo/newtask/'
 												+ $scope.todo._id + '/'
-												+ $scope.todoIndex +'/' + $rootScope.user._id,
+												+ $scope.todoIndex,
 										$scope.taskData)
 								.success(
 										function(data) {
@@ -120,6 +120,15 @@ angular
 													updated:null
 												}
 											$scope.cancel();
+											noteService.getMyNotes().then(function(data,err){
+												$scope.cancel();
+												if(err)
+												dialogFactory.showToast(err);
+												else{
+												$scope.todo=data.data.todoList[$routeParams.nIndex].todos[$routeParams.index];
+												$scope.calculatePercentage();
+												}
+												})
 											noteService
 													.getMyNotes(
 															$routeParams.user)
@@ -127,13 +136,13 @@ angular
 															function(data, err) {
 																$scope.cancel();
 																if(err)
-																dialogFactory.showToast(err);
+																dialogFactory.showToast("Cannot post");
 																
 																$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
 																$scope.calculatePercentage();
 															})
 										}).error(function(data) {
-											dialogFactory.showToast(data);
+											dialogFactory.showToast("Cannot post");
 								});
 
 					}
