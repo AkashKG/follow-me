@@ -14,7 +14,7 @@ angular
 							noteService.getMyNotes().then(function(data,err){
 								$scope.parentId=data.data.todoList[$routeParams.nIndex]._id;
 								$scope.todo=data.data.todoList[$routeParams.nIndex].todos[$routeParams.index];
-								console.log($scope.todo);
+								//console.log($scope.todo);
 								$scope.calculatePercentage();
 							})
 						}
@@ -22,12 +22,12 @@ angular
 					})
 					
 					$scope.openLink = function(link) {
-						console.log(link);
+						//console.log(link);
 						$window.open('//' + link, '_blank');
 					}
 
 					$scope.calculatePercentage = function() {
-						console.log("Entered");
+						//console.log("Entered");
 						var count = 0;
 						if ($scope.todo.tasks.length == 0) {
 							$scope.percent = 101;
@@ -42,7 +42,7 @@ angular
 							return;
 						}
 						$scope.percent = (count / $scope.todo.tasks.length) * 100;
-						console.log($scope.percent);
+						//console.log($scope.percent);
 					}
 
 					$scope.saveTaskToDB = function($index) {
@@ -57,8 +57,8 @@ angular
 							todoIndex : $routeParams.index.toString(),
 							taskIndex : $index.toString()
 						}
-						console.log($scope.send);
-						console.log($routeParams.index);
+						//console.log($scope.send);
+						//console.log($routeParams.index);
 						$http
 								.put(
 										'/api/v1/notebooks/todo/update/'
@@ -99,8 +99,8 @@ angular
 						updated:null
 					}
 					$scope.addNewtask = function() {
-						console.log($scope.taskData);
-						console.log($scope.todo._id);
+						//console.log($scope.taskData);
+						//console.log($scope.todo._id);
 						$scope.todoIndex = $routeParams.index.toString();
 						$scope.updated = new Date();
 						$scope.taskData.updated = $scope.updated;

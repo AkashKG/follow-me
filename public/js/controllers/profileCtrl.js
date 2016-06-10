@@ -15,10 +15,10 @@ angular.module('profileCtrl', []).controller(
 			})  
 		
 			$scope.gotoTodoList = function(id, $index){
-				// console.log()
+				// //console.log()
 				$scope.nIndex = $scope.notebookIndex;
 				$location.path('/profile/alltodos/' + $scope.nIndex + '/' + $index);
-				// console.log(id);
+				// //console.log(id);
 			}
 			$scope.showFromSidenav=function($index){
 				$mdSidenav('right').toggle().then(function() {
@@ -51,8 +51,8 @@ angular.module('profileCtrl', []).controller(
 				$scope.todoDate = new Date();
 				$scope.todoData.created=$scope.todoDate;
 				$scope.todoData.updated=$scope.todoDate;
-				// console.log($scope.todoData.deadline);
-				// console.log($scope.todoData);
+				// //console.log($scope.todoData.deadline);
+				// //console.log($scope.todoData);
 			
 				$http.post('/api/v1/notebooks/newTodo/' + $scope.notebook._id,
 						$scope.todoData).success(
@@ -88,10 +88,10 @@ angular.module('profileCtrl', []).controller(
 				}
 			// $scope.notebook=$scope.notebooks[0];
 			$scope.showNotebook=function($index){
-				// console.log("Entered Here");
+				// //console.log("Entered Here");
 				$scope.notebookIndex = $index;
 				$scope.notebook = $scope.notebooks[$index];
-				// console.log($scope.notebook);
+				// //console.log($scope.notebook);
 			}
 			$scope.addNewnote = function() {
 				$scope.notebookData.date = new Date();
@@ -111,10 +111,10 @@ angular.module('profileCtrl', []).controller(
 								$scope.notebooks=data.data.todoList;
 							})
 						}).error(function(data) {
-							console.log(data.error);
+							//console.log(data.error);
 							$scope.hide();
 							dialogFactory.showToast(data.error);
-					// //console.log(data);
+					// ////console.log(data);
 				})
 			}
 			$scope.deleteNote = function(id, ev){
@@ -172,9 +172,9 @@ angular.module('profileCtrl', []).controller(
 					controller : 'GridBottomSheetCtrl',
 					clickOutsideToClose : true
 				}).then(function(clickedItem) {
-					// //console.log(clickedItem);
+					// ////console.log(clickedItem);
 					if (clickedItem.name == "Notebook") {
-						// //console.log(clickedItem);
+						// ////console.log(clickedItem);
 						$scope.newBookDialog();
 					}
 					else if(clickedItem.name=="Create Todo"){
@@ -199,7 +199,7 @@ angular.module('profileCtrl', []).controller(
 
 	$scope.listItemClick = function($index) {
 		var clickedItem = $scope.items[$index];
-		// //console.log($index);
+		// ////console.log($index);
 		$mdBottomSheet.hide(clickedItem);
 
 	};
@@ -210,7 +210,7 @@ angular.module('profileCtrl', []).controller(
       return $mdSidenav('right').isOpen();
     };
     $rootScope.checkOnProfileLogged=function(){
-    	// console.log($rootScope.isLoggedIn);
+    	// //console.log($rootScope.isLoggedIn);
     	if(!$scope.isOnProfile() && $rootScope.isLoggedIn)
     		return false
     	return true

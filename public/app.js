@@ -54,7 +54,7 @@ angular
 						function($rootScope, $location, userService,
 								dialogFactory) {
 							userService.getUser().then(function(data) {
-								console.log(data.data);
+								//console.log(data.data);
 								if(data.data.profile){
 									$rootScope.isLoggedIn = true;
 									$rootScope.user=data.data.profile;
@@ -118,7 +118,7 @@ angular
 									return $http
 											.get('api/v1/notebooks/mybooks')
 											.success(function(data) {
-												console.log(data);
+												//console.log(data);
 												return data;
 											})
 											.error(
@@ -152,7 +152,7 @@ angular
 								getUser : function() {
 									return $http.get('api/v1/user/me').success(
 											function(data) {
-													console.log(data);
+													//console.log(data);
 													return data;
 											}).error(function(data, status) {
 										if (status = status.UNAUTHORIZED) {
@@ -163,7 +163,7 @@ angular
 								getUserId : function() {
 									return $http.get('api/v1/user/me/id').success(
 											function(data) {
-													console.log(data);
+													//console.log(data);
 													return data;
 											}).error(function(data, status) {
 										if (status = status.UNAUTHORIZED) {
