@@ -41,6 +41,10 @@ angular
 					.when('/logout',{
 						template:'<body>HELLO</body'
 					})
+					.when('/AkashGupta',{
+						templateUrl:'views/templates/aboutme.html',
+						controller:'homeController'
+					})
 					$locationProvider.hashPrefix('!');
 					$locationProvider.html5Mode(true);
 
@@ -65,7 +69,7 @@ angular
 								}	
 								else{
 									$rootScope.isLoggedin=false;
-									if($location.path()=='/'){
+									if($location.path()=='/'||$location.path()=='/AkashGupta'){
 										
 									}
 									else if($location.path()!='/login'){
@@ -78,6 +82,7 @@ angular
 							});
 							$rootScope.user = {};
 						} ])
+						
 
 		.factory(
 				'dialogFactory',

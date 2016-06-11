@@ -5,21 +5,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="fragment" content="!">
 		<base href="/">
-		<title>{{seo.title}}</title>
+		<title>Fodo</title>
 		<meta name="description" content="{{ seo.metaDescription }}">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
 		<link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.min.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+		
 		</head>
 	<div  ng-cloak style="min-height:100vh">
-
-		 <md-toolbar class="md-whiteframe-2dp" md-scroll-shrink ng-if="true">
-
+		<md-toolbar class="md-whiteframe-2dp" md-scroll-shrink ng-if="true">
     		<div class="md-toolbar-tools" style="padding:0 0px">
     		<div ng-controller="sidenavController" style="margin:0 0 0 0;padding:0 0 0 0;">
-        <md-button hide-gt-xs class="md-icon-button" aria-label="More" ng-hide="checkOnProfileLogged()"  ng-href="/profile">
+        	<md-button hide-gt-xs class="md-icon-button" aria-label="More" ng-hide="checkOnProfileLogged()"  ng-href="/profile">
           <md-icon style="font-size:28px">navigate_before</md-icon>
         </md-button>
         <md-button hide-gt-xs class="md-icon-button" aria-label="More" ng-show="isOnProfile()"  ng-click="toggleRight()">
@@ -28,6 +27,7 @@
        <md-button class="md-icon-button" aria-label="More" ng-show="loggedOut()"  ng-click="toggleRight()">
           <md-icon >event</md-icon>
         </md-button>
+       
 
         </div>
         <md-button hide-xs class="md-icon-button" aria-label="More" ng-show="isLoggedIn" ng-href="/profile">
@@ -44,17 +44,16 @@
           logout
         </md-tooltip>
           <md-icon>vpn_key</md-icon>
-        </md-button></div>
-       <!--   <md-button class="md-icon-button" aria-label="More" ng-show="isLoggedIn">
-          <md-icon >more_vert</md-icon>
-        </md-button>-->
-    		</div>
+        </md-button>
+        
+        </div>
+       	</div>
 
 
   		</md-toolbar>
 
 
-    	<div  ng-view autoscroll="true"></div>
+    	<div  ng-view autoscroll="true" ></div>
 
 
 	</div>
@@ -93,4 +92,5 @@
         }
     }
 	</script>
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 </html>
