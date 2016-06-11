@@ -1,4 +1,4 @@
-<md-dialog ng-cloak flex-xs flex-gt-xs flex-gt-sm="75">
+<md-dialog class="fullscreen-dialog" ng-cloak flex-xs flex-gt-xs flex-gt-sm="75">
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>Add Todo</h2>
@@ -32,8 +32,9 @@
 			<md-input-container flex class="md-block">
 				<label>Link</label> 
 					<input ng-maxlength="100"  name="link" ng-model="task.link">
+					
+						<div class="hint md-caption" ng-show="true">After adding the todo and link press 'enter'. You can add more after that. Link can be empty</div>
 						<div ng-messages="inputTodoForm.link.$error" ng-show='inputTodoForm.link.$touched'>
-						
 						</div>
 			</md-input-container>
 			
