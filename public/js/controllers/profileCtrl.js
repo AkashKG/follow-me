@@ -46,9 +46,10 @@ angular.module('profileCtrl', [])
 				}
 				$scope.comp = completed;
 				$scope.len = length;
-				
+				$scope.data = [$scope.comp,$scope.len-$scope.comp];
 		    }
-			
+			 $scope.labels = ["Done", "Left"];
+			  $scope.data = [$scope.comp,$scope.len-$scope.comp];
 			$scope.gotoTodoList = function(id, $index){
 				// //console.log()
 				$scope.nIndex = $scope.notebookIndex;

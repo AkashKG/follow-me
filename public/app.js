@@ -2,9 +2,12 @@ angular
 		.module(
 				'todoApp',
 				[ 'ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'appRoutes',
-						'homeCtrl', 'loginCtrl', 'profileCtrl', 'todoCtrl', 'logoutCtrl','material.svgAssetsCache','blockUI' ])
+						'homeCtrl', 'loginCtrl', 'profileCtrl','chart.js', 'todoCtrl', 'logoutCtrl','material.svgAssetsCache','blockUI' ])
 
-.config(
+.config(['ChartJsProvider', function (ChartJsProvider) {
+	
+  }])
+						.config(
 		[ '$routeProvider', '$locationProvider','blockUIConfig',
 				function($routeProvider, $locationProvider,blockUIConfig) {
 			blockUIConfig.blockBrowserNavigation = true;

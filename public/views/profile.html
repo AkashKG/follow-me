@@ -33,7 +33,7 @@
   </center>
       <md-list flex hide-xs>
       
-        <md-subheader class="md-no-sticky">My Notebooks | completed {{comp}} of {{len}} tasks</md-subheader>
+        <md-subheader class="md-no-sticky">My Notebooks</md-subheader>
         <md-divider></md-divider>
         <md-list-item class="md-2-line" ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showNotebook(notebooks.length-1-$index)">
           <div class="md-list-item-text" layout="column">
@@ -51,8 +51,15 @@
   <div flex-gt-sm="75" flex-xs flex-gt-xs="65">
   	<div layout="row" ng-hide="notebook" layout-align="center center" hide-xs>
   		<div layout="column" style="min-height:80vh" layout-align="center center">
-  			<p layout-align="center center" class="md-subhead description" ng-show="notebooks.length">Click on any one of the notebooks!</p>
-  			<p layout-align="center center" class="md-subhead description" ng-show="notebooks.length"><md-button  class="md-primary md-hue-1"ng-click="newBookDialog()">Create new notebook</md-button></p>
+  			
+  			<p layout-align="center center">Your status</p> 
+  			<div ng-show="notebooks.length">
+  			<canvas id="doughnut" class="chart chart-doughnut"
+  				chart-data="data" chart-labels="labels">
+			</canvas> 
+			
+    		</div>
+    		<p layout-align="center center" class="md-subhead description" ng-show="notebooks.length"><md-button  class="md-primary md-hue-1"ng-click="newBookDialog()">Create new notebook</md-button></p>
   			<p layout-align="center center" class="md-subhead description" ng-show="!notebooks.length"><md-button  class="md-primary md-hue-1"ng-click="newBookDialog()">Create your first notebook</md-button> </p>
   		</div>
   	</div>
