@@ -15,7 +15,7 @@ function setupAuth(User, app) {
 
         consumerKey     : 'hK6eaHbP16RnGEHgPAttdR0hm',
         consumerSecret  : 'uULlyaXZEk0lzojRHf7MYFJZyVJJUYQzTsVyDw6SBNMWhGJMLK',
-        callbackURL     : 	"http://127.0.0.1:8181/auth/twitter/callback"
+        callbackURL     : 	"https://fodo.herokuapp.com/auth/twitter/callback"
 
     },
     function(token, tokenSecret, profile, done) {
@@ -61,7 +61,7 @@ function setupAuth(User, app) {
 					$set : {
 						'profile.data.email' : profile.emails[0].value,
 						'profile.name' : profile.displayName,
-						'profile.picture' : 'http://graph.facebook.com/'
+						'profile.picture' : 'https://graph.facebook.com/'
 								+ profile.id.toString() + '/picture?type=large'
 					}
 				}, {
