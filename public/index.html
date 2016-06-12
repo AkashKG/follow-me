@@ -37,7 +37,12 @@
         	<h5   ng-show="loggedOut()" class="md-subhead">Fodo</h5></div>
       			<h5 class="md-subhead" ng-href="/profile"><span>{{$root.user.profile.name}}</span></h5>
       			<span flex></span>
-
+	<md-button class="md-icon-button" ng-click="showDashboard()"aria-label="Favorite" ng-show="isLoggedIn">
+      			 <md-tooltip md-direction="bottom">
+          Dashboard
+        </md-tooltip>
+          <md-icon>dashboard</md-icon>
+        </md-button>
       			<div ng-controller="logoutController">
       			 <md-button class="md-icon-button" ng-click="logout()"aria-label="Favorite" ng-show="isLoggedIn">
       			 <md-tooltip md-direction="bottom">

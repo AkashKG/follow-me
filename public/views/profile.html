@@ -1,11 +1,11 @@
 
 <section hide-gt-xs >
-  			<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right" id="right">
+  			<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right" id="right" md-is-locked-open="$mdMedia('gt-lg')">
       		<md-toolbar class="md-theme-light md-tall">
         		<h1 class="md-toolbar-tools">Follow Me</h1>
       		</md-toolbar>
      	 	<md-list>
-		 <md-subheader class="md-no-sticky">My Notebooks</md-subheader>
+		 <md-subheader class="md-no-sticky">My Notebooks </md-subheader>
   <md-list-item  ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showFromSidenav(notebooks.length-1-$index)">
     <md-icon class="material-icons">book</md-icon>
     <p> {{ note.title }} </p>
@@ -33,7 +33,12 @@
   </center>
       <md-list flex hide-xs>
       
-        <md-subheader class="md-no-sticky">My Notebooks</md-subheader>
+        <md-subheader class="md-no-sticky">My Notebooks | <md-button class="md-icon-button" ng-click="showDashboard()"aria-label="Favorite" ng-show="isLoggedIn">
+      			 <md-tooltip md-direction="bottom">
+          Dashboard
+        </md-tooltip>
+          <md-icon>dashboard</md-icon>
+        </md-button></md-subheader>
         <md-divider></md-divider>
         <md-list-item class="md-2-line" ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showNotebook(notebooks.length-1-$index)">
           <div class="md-list-item-text" layout="column">
@@ -49,7 +54,7 @@
         </md-content>      
   </div>
   <div flex-gt-sm="75" flex-xs flex-gt-xs="65">
-  	<div layout="row" ng-hide="notebook" layout-align="center center" hide-xs>
+  	<div layout="row" ng-hide="notebook.length" ng-show="dashboard" layout-align="center center" hide-xs>
   		<div layout="column" style="min-height:80vh" layout-align="center center">
   			
   			<p layout-align="center center">Your status</p> 
@@ -83,7 +88,7 @@
         </md-list-item>
         </md-list>
   	</div>
-	<md-card ng-if="notebook">
+	<md-card ng-if="notebook" ng-hide="dashboard">
   		<md-card-title>
     		<md-card-title-media>
       		<div class="md-media-sm card-media" layout layout-align="center center" >
@@ -96,7 +101,7 @@
     </md-card-title-text>
   </md-card-title>
 </md-card >
-<md-list ng-if="notebook">
+<md-list ng-show="notebook" ng-hide="dashboard">
 <md-subheader class="md-no-sticky">My todos | Click on anyone to view in detail.</md-subheader>
 
 <p layout-align="center center" class="md-subhead description" ng-hide="notebook.todos.length"><md-button  class="md-primary md-hue-1"ng-click="newTodoDialog()">Create your first todo</md-button> </p>
@@ -110,7 +115,7 @@
     <md-divider></md-divider>
   </md-list-item>
   <md-list-item > 
-  	<md-button class=" md-secondary md-accent" ng-click="newTodoDialog()">
+  	<md-button class=" md-secondary md-accent" ng-click="newTodoDialog()" ng-hide="!notebook.todos.length">
     	Add more todos
     </md-button>
   </md-list-item>

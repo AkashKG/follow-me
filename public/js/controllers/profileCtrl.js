@@ -48,6 +48,12 @@ angular.module('profileCtrl', [])
 				$scope.len = length;
 				$scope.data = [$scope.comp,$scope.len-$scope.comp];
 		    }
+			$scope.dashboard = true;
+			$scope.showDashboard=function(){
+				$scope.dashboard = true;
+				$scope.notebook = null;
+			}
+			
 			 $scope.labels = ["Done", "Left"];
 			  $scope.data = [$scope.comp,$scope.len-$scope.comp];
 			$scope.gotoTodoList = function(id, $index){
@@ -134,8 +140,11 @@ angular.module('profileCtrl', [])
 			// $scope.notebook=$scope.notebooks[0];
 			$scope.showNotebook=function($index){
 				// //console.log("Entered Here");
+				$scope.dashboard=false
 				$scope.notebookIndex = $index;
+				
 				$scope.notebook = $scope.notebooks[$index];
+				
 				// //console.log($scope.notebook);
 			}
 			$scope.addNewnote = function() {
