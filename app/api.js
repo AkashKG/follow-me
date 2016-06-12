@@ -17,6 +17,7 @@ module.exports = function(wagner) {
 		}, handleOne.bind(null, 'user', res));
 	});
 	
+	
 	api.get('/user/me',wagner.invoke(function(User){
 		return function(req,res){
 			if(req.user==undefined){
@@ -39,21 +40,14 @@ module.exports = function(wagner) {
 			}
 		}
 	}));
-	/*Not required*/
-	/*api.get('/notebooks/all', wagner.invoke(function(User) {// done
-		return function(req, res) {
-			if(req.user){
-				var sort = {
-					name : 1
-				};
-				User.find({
-				}, {profile:0}).sort(sort).exec(handleMany.bind(null, 'todos', res));
-			}
-			else{
-				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access'});
-			}
-		}
-	}));*/
+	/* Not required */
+	/*
+	 * api.get('/notebooks/all', wagner.invoke(function(User) {// done return
+	 * function(req, res) { if(req.user){ var sort = { name : 1 }; User.find({ },
+	 * {profile:0}).sort(sort).exec(handleMany.bind(null, 'todos', res)); }
+	 * else{ return res.status(status.UNAUTHORIZED).json({error:'Unauthorized
+	 * access'}); } } }));
+	 */
 	
 
 	api.post('/notebooks/newnotebook', wagner.invoke(function(User) {
@@ -75,6 +69,30 @@ module.exports = function(wagner) {
 				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});
 			}
 			}
+		}
+	}));
+	api.post('/notebooks/todo/addsolution/:tid',wagner.invoke(function(Todo,User){
+		return function(req,res){
+			/*if(req.user._id){
+				console.log(req.params.tid);
+				var solution = req.body;
+				updated = 'todoList.$.todos.$.tasks.'+req.params.tid+'.solution';
+				cosole.log(updated);
+				var solution={};
+				solution[updated]=req.body;
+				console.log(solution[updated]);
+				/*User.update({_id:req.user._id},{
+					"$set":solution
+				},function(err,done){
+					if(err){
+						res.json({error:'Error Occured while adding the solution'})
+					}
+					res.json({success:'Added Solution'});
+				})
+			}
+			else{
+				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});	
+			}*/
 		}
 	}));
 	api.put('/notebooks/todo/update/:pid',wagner.invoke(function(Todo,User){

@@ -20,7 +20,9 @@ angular
 						}
 						
 					})
-					
+					$scope.add={
+						solution:''
+					}
 					$scope.openLink = function(link) {
 						//console.log(link);
 						$window.open('//' + link, '_blank');
@@ -137,8 +139,9 @@ angular
 																$scope.cancel();
 																if(err)
 																dialogFactory.showToast("Cannot post");
-																
+																else{
 																$scope.todo = data.data.user.todoList[$routeParams.nIndex].todos[$routeParams.index];
+																}
 																$scope.calculatePercentage();
 															})
 										}).error(function(data) {
@@ -149,9 +152,32 @@ angular
 					$scope.cancel = function() {
 						$mdDialog.cancel();
 					};
-
+					$scope.solution=''
 					$scope.hide = function() {
 						$mdDialog.cancel();
 					};
+					
+					$scope.addSolution=function($index, ev){
+						$scope.taskPos = $index;
+						$mdDialog.show({
+							templateUrl : '/views/notebook/solution.view.html',
+							parent : angular.element(document.body),
+							targetEvent : ev,
+							scope : $scope.$new(),
+							clickOutsideToClose : true,
+						});
+					}
+					$scope.addSoln=function(){
+						$scope.sol = $scope.add.solution;
+						console.log($scope.taskPos + $scope.add.solution);
+						$http.post('/api/v1/notebooks/todo/addsolution/' + $scope.taskPos, $scope.sol)
+						.success(function(data){
+							dialogFactory.showToast(data.success);
+							
+						})
+						.error(function(err){
+							dialogFactory.showToast(data.error);
+						})
+					}
 
 				});

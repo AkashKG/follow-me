@@ -15,6 +15,8 @@
 			<md-input-container flex class="md-block">
 				<label>Title</label> 
 					<input ng-maxlength="100" required name="title" ng-model="todoData.title">
+						<div class="hint md-caption" ng-show="true">Sub-title, eg: Graph</div>
+          		
 						<div ng-messages="newTodoForm.title.$error" ng-show='newTodoForm.title.$touched'>
 							<div ng-message="required">This is required.</div>
 						</div>
@@ -25,6 +27,7 @@
         	<md-input-container flex class="md-block">
 				<label>Todos</label> 
 					<textarea ng-model="task.task" name="todo"md-maxlength="500" rows="3" md-select-on-focus></textarea>
+						<div class="hint md-caption" ng-show="true">The task in the todo. For eg: Breadth first search. Then press tab.</div>
 						<div ng-messages="inputTodoForm.todo.$error" ng-show='inputTodoForm.todo.$touched'>
 							<div ng-message="required">This is required.</div>
 						</div>
@@ -33,7 +36,7 @@
 				<label>Link</label> 
 					<input ng-maxlength="100"  name="link" ng-model="task.link">
 					
-						<div class="hint md-caption" ng-show="true">After adding the todo and link press 'enter'. You can add more after that. Link can be empty</div>
+						<div class="hint md-caption" ng-show="true">After adding the link press 'enter'. You can add more tasks here itself. The link can be blank.</div>
 						<div ng-messages="inputTodoForm.link.$error" ng-show='inputTodoForm.link.$touched'>
 						</div>
 			</md-input-container>

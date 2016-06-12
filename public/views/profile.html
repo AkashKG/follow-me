@@ -1,6 +1,6 @@
 
 <section hide-gt-xs >
-  			<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+  			<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right" id="right">
       		<md-toolbar class="md-theme-light md-tall">
         		<h1 class="md-toolbar-tools">Follow Me</h1>
       		</md-toolbar>
@@ -33,7 +33,7 @@
   </center>
       <md-list flex hide-xs>
       
-        <md-subheader class="md-no-sticky">My Notebooks</md-subheader>
+        <md-subheader class="md-no-sticky">My Notebooks | completed {{comp}} of {{len}} tasks</md-subheader>
         <md-divider></md-divider>
         <md-list-item class="md-2-line" ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showNotebook(notebooks.length-1-$index)">
           <div class="md-list-item-text" layout="column">
@@ -52,6 +52,7 @@
   	<div layout="row" ng-hide="notebook" layout-align="center center" hide-xs>
   		<div layout="column" style="min-height:80vh" layout-align="center center">
   			<p layout-align="center center" class="md-subhead description" ng-show="notebooks.length">Click on any one of the notebooks!</p>
+  			<p layout-align="center center" class="md-subhead description" ng-show="notebooks.length"><md-button  class="md-primary md-hue-1"ng-click="newBookDialog()">Create new notebook</md-button></p>
   			<p layout-align="center center" class="md-subhead description" ng-show="!notebooks.length"><md-button  class="md-primary md-hue-1"ng-click="newBookDialog()">Create your first notebook</md-button> </p>
   		</div>
   	</div>
@@ -61,7 +62,7 @@
   		</div>
   		<md-list flex ng-show="notebooks.length">
       
-        <md-subheader class="md-no-sticky">My Notebooks</md-subheader>
+        <md-subheader class="md-no-sticky">My Notebooks | completed {{comp}} of {{length}} tasks</span></md-subheader>
         <md-divider></md-divider>
         <md-list-item class="md-2-line" ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showNotebook(notebooks.length-1-$index)">
           <div class="md-list-item-text" layout="column">
@@ -89,7 +90,7 @@
   </md-card-title>
 </md-card >
 <md-list ng-if="notebook">
-<md-subheader class="md-no-sticky">My todos</md-subheader>
+<md-subheader class="md-no-sticky">My todos | Click on anyone to view in detail.</md-subheader>
 
 <p layout-align="center center" class="md-subhead description" ng-hide="notebook.todos.length"><md-button  class="md-primary md-hue-1"ng-click="newTodoDialog()">Create your first todo</md-button> </p>
   	
@@ -100,6 +101,11 @@
     	<md-icon >done_all</md-icon>
     </md-button>
     <md-divider></md-divider>
+  </md-list-item>
+  <md-list-item > 
+  	<md-button class=" md-secondary md-accent" ng-click="newTodoDialog()">
+    	Add more todos
+    </md-button>
   </md-list-item>
 </md-list>
   </div>

@@ -14,13 +14,16 @@
 			<md-input-container flex class="md-block">
 				<label>Title</label> 
 					<input ng-maxlength="100" required name="title" ng-model="notebookData.title">
+						<div class="hint md-caption" ng-show="true">Root Title, for eg: Data Structure.</div>
 						<div ng-messages="newNotebookForm.title.$error" ng-show='newNotebookForm.title.$touched'>
 							<div ng-message="required">This is required.</div>
 						</div>
 			</md-input-container>
 			<md-input-container class="md-block">
     	    	<label>Description</label>
-          		<textarea ng-model="notebookData.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+    	    	<textarea ng-model="notebookData.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+        		<div class="hint md-caption" ng-show="true">Brief description(Not To-Do's) on why you wish to do. eg: For placements...</div>
+          		
         	</md-input-container>
 		</form>
 	</div>

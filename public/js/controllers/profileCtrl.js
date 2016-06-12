@@ -1,4 +1,7 @@
-angular.module('profileCtrl', []).controller(
+angular.module('profileCtrl', [])
+
+
+.controller(
 		'profileController',
 		function($scope, $mdBottomSheet, $mdDialog, $mdSidenav, $window, $http, noteService, $rootScope, dialogFactory, userService, $location) {
 			userService.getUser().then(function(data,err){
@@ -6,6 +9,7 @@ angular.module('profileCtrl', []).controller(
 					$rootScope.user=data.data;
 					noteService.getMyNotes().then(function(data,err){
 						$scope.notebooks=data.data.todoList;
+						$scope.calculateCompleted();
 					})
 					userService.getUserId().then(function(data,err){
 						$scope.authorId=data.data.id;
@@ -13,7 +17,38 @@ angular.module('profileCtrl', []).controller(
 				}
 				
 			})  
-		
+					$scope.comp = 0;
+					$scope.len = 0;
+			$scope.calculateCompleted=function(){
+				var completed=0, length=0;
+				if(!$scope.notebooks){
+					$scope.comp = 0;
+					$scope.len = 0;
+					return 0;
+				}
+				for(var i=0;i<$scope.notebooks.length;i++){
+					for(var j=0;j<$scope.notebooks[i].todos.length;j++){
+						if(!$scope.notebooks[i].todos){
+							continue;
+						}
+						for(var k=0;k<$scope.notebooks[i].todos[j].tasks.length;k++){
+							if(!$scope.notebooks[i].todos[j].tasks){
+								continue;
+							}
+							if($scope.notebooks[i].todos[j].tasks[k].done==true){
+								completed = completed + 1;
+								length = length + 1;
+							}
+							else
+								length = length + 1;
+						}
+					}
+				}
+				$scope.comp = completed;
+				$scope.len = length;
+				
+		    }
+			
 			$scope.gotoTodoList = function(id, $index){
 				// //console.log()
 				$scope.nIndex = $scope.notebookIndex;
@@ -48,7 +83,14 @@ angular.module('profileCtrl', []).controller(
 				}
 			}
 			$scope.addNewtodo=function(){
+				if($scope.task.task!=''){
+					$scope.addTodoToList();
+				}
 				$scope.todoDate = new Date();
+				if(!$scope.todoData.tasks.length){
+					dialogFactory.showToast("Please add atleast one task.");
+					return;
+				}
 				$scope.todoData.created=$scope.todoDate;
 				$scope.todoData.updated=$scope.todoDate;
 				// //console.log($scope.todoData.deadline);
@@ -58,6 +100,7 @@ angular.module('profileCtrl', []).controller(
 						$scope.todoData).success(
 						function(data) {
 							dialogFactory.showToast(data.success);
+							
 										$scope.todoData={
 												title:'',
 												tasks:[],
@@ -73,6 +116,7 @@ angular.module('profileCtrl', []).controller(
 							$scope.hide();		
 							noteService.getMyNotes().then(function(data,err){
 						$scope.notebooks=data.data.todoList;
+						$scope.calculateCompleted();
 						$scope.showNotebook($scope.notebookIndex)
 					})
 						}).error(function(data) {
@@ -100,6 +144,7 @@ angular.module('profileCtrl', []).controller(
 						$scope.notebookData).success(
 						function(data) {
 							dialogFactory.showToast(data.done);
+							$scope.calculateCompleted();
 							$scope.notebookData = {
 									title : '',
 									description : '',
@@ -131,6 +176,7 @@ angular.module('profileCtrl', []).controller(
 						dialogFactory.showToast(data.Deleted);
 						noteService.getMyNotes().then(function(data,err){
 								$scope.notebooks=data.data.todoList;
+								$scope.calculateCompleted();
 								if(id==$scope.notebook._id){
 									$scope.notebook=null;
 								}
@@ -220,7 +266,7 @@ angular.module('profileCtrl', []).controller(
     		return false;
     	return true;
     }
-    
+   
     /**
 	 * Supplies a function that will continue to operate until the time is up.
 	 */

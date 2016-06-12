@@ -27,7 +27,8 @@ var todoSchema = {
 		tasks : [ {
 			done : Boolean,
 			task : String,
-			link : String
+			link : String,
+			solution:String
 		} ]
 	} ]
 }

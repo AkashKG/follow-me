@@ -9,6 +9,7 @@
     "angular-messages": "^1.4.8",
 	"angular-material": "^1.0.9",
 	"angular-route": "^1.4.8",
-	"angular-block-ui":"latest"
+	"angular-block-ui":"latest",
+	"angular-chart.js":"latest"
   }
 }
