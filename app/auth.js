@@ -61,7 +61,7 @@ function setupAuth(User, app) {
 					$set : {
 						'profile.data.email' : profile.emails[0].value,
 						'profile.name' : profile.displayName,
-						'profile.picture' : 'https://graph.facebook.com/'
+						'profile.picture' : 'http://graph.facebook.com/'
 								+ profile.id.toString() + '/picture?type=large'
 					}
 				}, {
