@@ -48,6 +48,10 @@ angular
 						templateUrl:'views/templates/aboutme.html',
 						controller:'homeController'
 					})
+					.when('/resume',{
+						templateUrl:'views/templates/resume.html',
+						controller:'resumeController'
+					})
 					$locationProvider.hashPrefix('!');
 					$locationProvider.html5Mode(true);
 
@@ -72,7 +76,7 @@ angular
 								}	
 								else{
 									$rootScope.isLoggedin=false;
-									if($location.path()=='/'||$location.path()=='/AkashGupta'){
+									if($location.path()=='/'||$location.path()=='/AkashGupta'||$location.path()=='/resume'){
 										
 									}
 									else if($location.path()!='/login'){

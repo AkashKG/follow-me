@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en" ng-app="resumeApp" ng-controller="resumeController" ng-cloak>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="fragment" content="!">
+		<base href="/">
+		<title>Resume</title>
+		<meta name="description" content="{{ seo.metaDescription }}">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+		<link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.min.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+		<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+		<link rel="stylesheet" href="css/style.css">
+		</head>
+	<div  ng-cloak style="min-height:100vh">
+		<div  ng-view autoscroll="true" ></div>
+	</div>
+
+  	<script src="bower_components/angular/angular.min.js"></script>
+  	<script src="bower_components/angular-route/angular-route.min.js"></script>
+  	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  	<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+  	<script src="bower_components/angular-messages/angular-messages.min.js"></script>
+  	<script src="bower_components/angular-material/angular-material.js"></script>
+  	<script src="index.js"></script>
+</html>

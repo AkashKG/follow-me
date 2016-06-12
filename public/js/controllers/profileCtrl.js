@@ -324,4 +324,7 @@ angular.module('profileCtrl', [])
           $log.debug("close RIGHT is done");
         });
     };
-  });
+  })
+.controller('resumeController', function($scope){
+	
+});

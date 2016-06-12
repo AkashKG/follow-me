@@ -27,7 +27,8 @@ var userSchema={
 			}
 		}
 	},
-	todoList:[Todo.todoSchema]
+	todoList:[Todo.todoSchema],
+	resumeid:mongoose.Schema.Types.ObjectId
 };
 
 module.exports = new mongoose.Schema(userSchema);

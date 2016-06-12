@@ -28,7 +28,7 @@ app.use(require('prerender-node').set('prerenderToken', 'xD8a5sEOPAx3fd1cGP0u'))
 app.use(express.static(__dirname + '/public')); // set the static files location
 												// /public/img will be /img for
 												// users
-
+app.use(express.static(__dirname + '/resume')); 
 // routes ==================================================
 require('./app/routes')(app); // pass our application into our routes
 

@@ -95,6 +95,33 @@ module.exports = function(wagner) {
 			}*/
 		}
 	}));
+	api.post('/addresume/resume',wagner.invoke(function(Resume,Username, User){
+		return function(req,res){
+			Resume.findOneAndUpdate({
+				username : req.body.username/*, req.user._id:req.body.author*/
+			}, {
+				$set : {
+					username:req.body.username,
+					basicInfo:req.body.basicInfo,
+					onlineExistence:req.body.online,
+					timeline:req.body.timeline,
+					education:req.body.education,
+					technologyAdvanced:req.body.technologyAdvanced,
+					technologyBasic:req.body.technologyBasic
+				}
+			}, {
+				'new' : true,
+				upsert : true,
+				runValidators : true
+			}, function(err,resume){
+				if(err){
+					res.json({error:'error'})
+				}
+				else
+					res.json({success:'success'});
+			});
+		}
+	}));
 	api.put('/notebooks/todo/update/:pid',wagner.invoke(function(Todo,User){
 		return function(req,res){
 			if(req.user._id){
