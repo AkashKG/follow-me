@@ -27,8 +27,8 @@ angular.module('homeCtrl', [])
     	link:'https://github.com/AkashKG/bookbars',
     	description:"Team Lead. Full stack developer. A platform where users can share their books in the near locality."
     },{
-    	title:"Edulimn",
-    	link:"http://test.edulimn.com",
+    	title:"Edulimn | Private repository",
+    	link:"_",
     	description:"Front End developer. MOOC as a SaaS based Concept."
     		
     },{
