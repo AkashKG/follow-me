@@ -46,6 +46,10 @@
     							<md-icon>place</md-icon>
     							<p> KIIT University, Bhubaneswar </p>
   							</md-list-item> 
+  							<md-list-item ng-click="">
+    							<md-icon>cake</md-icon>
+    							<p>March 10, 1995 </p>
+  							</md-list-item> 
 						</md-list> 
 				</md-card> 
 			</md-content>
@@ -68,8 +72,8 @@
 				<md-card> 
 					
 						<md-list flex>
-       						 <md-subheader class="md-no-sticky"><span><md-button class="md-icon-button md-accent" ng-click="toggleTimeline()"><md-icon>{{show.timeline_icon}}</md-icon></md-button></span>Timeline </md-subheader>
-       							 <md-list-item ng-show="show.timeline" class="md-2-line " ng-repeat="item in timeline" ng-class="{'selected':item.link===link}" ng-click="openLink(item.link)" >
+       						 <md-subheader class="md-no-sticky"><span><md-button class="md-icon-button md-accent" ng-click="toggleCert()"><md-icon>{{show.cert_icon}}</md-icon></md-button></span>Certifications and Minor projects</md-subheader>
+       							 <md-list-item ng-show="show.cert" class="md-2-line md-dense " ng-repeat="item in certifications" ng-class="{'selected':item.link===link}" ng-click="openLink(item.link)" >
           							<div class="md-list-item-text" layout="column">
             						<h3>{{ item.title }}</h3>
             						<p>{{ item.description }}</p>
@@ -82,6 +86,7 @@
 					
 				</md-card> 
 			</md-content>
+						
 		</div>
 		<div flex="" layout="column" >
 		<md-content>
@@ -89,7 +94,10 @@
 			<md-subheader class="md-no-sticky">About me</md-subheader>
 				<md-list class="md-dense">
 				<md-list-item ng-click="">
-    				<p> I love solving challenges. </p>
+    				<p class="md-body-1" style="text-align:justify"> Currently a 7th semester(B.Tech, Computer Science) student at KIIT University. I love coding, whether it's <a ng-href="https://github.com/AkashKG/data-structure" style="text-decoration:none"target="_blank">Data Structure</a> or a web-app.
+    				I like building things, shaping it to real existence.  <br>
+<span >When I'm not sitting behind my laptop, I enjoy nature, movies, listening music, and to some extent sketching.</span>
+    				</p>
   					</md-list-item> </md-list>
 			</md-card>
 			</md-content>
@@ -177,8 +185,60 @@
 				</md-list>
 				</div>
 			</md-card> 
+			<md-content layout="column">
+				<md-card> 
+					
+						<md-list flex>
+       						 <md-subheader class="md-no-sticky"><span><md-button class="md-icon-button md-accent" ng-click="toggleTimeline()"><md-icon>{{show.timeline_icon}}</md-icon></md-button></span>Timeline | Projects & Experience</md-subheader>
+       							 <md-list-item ng-show="show.timeline" class="md-2-line md-dense " ng-repeat="item in timeline" ng-class="{'selected':item.link===link}" ng-click="openLink(item.link)" >
+          							<div class="md-list-item-text" layout="column">
+            						<h3>{{ item.title }}</h3>
+            						<p>{{ item.description }}</p>
+          							</div>
+          							
+        <md-divider ng-if="!$last")></md-divider>
+        					</md-list-item>
+        					
+						</md-list>
+					
+				</md-card> 
+			</md-content>
+			<md-content flex>
+				<md-card> 
+					<md-card-title style="text-align:center">
+						<md-card-title-text>
+							Why should you hire me?
+						</md-card-title-text>
+						</md-card-title>
+							
+						
+							<md-list flex>
+								<md-divider></md-diider>
+								<md-list-item md-ink-ripple>
+									If you are looking for someone who DO. 
+								</md-list-item>
+								<md-divider></md-divider>
+								<md-list-item md-ink-ripple>
+									If you are looking for someone eager to learn new technologies. 
+								</md-list-item >
+								<md-divider></md-divider>
+								<md-list-item md-ink-ripple>
+									If you are looking for someone who likes to work as a team. 
+								</md-list-item>
+								<md-divider></md-divider>
+								<md-list-item md-ink-ripple>
+									If you are looking for someone who loves solving challenges. 
+								</md-list-item>
+							</md-list>
+							
+					</md-card-title> 
+				</md-card> 
+			</md-content>
 				
 		</div>
+		
+	</div>
+	<div flex layout="row" layout-xs="column" layout-sm="row">
 		
 	</div>
 </div>

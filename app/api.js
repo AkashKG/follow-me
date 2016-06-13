@@ -73,32 +73,25 @@ module.exports = function(wagner) {
 	}));
 	api.post('/notebooks/todo/addsolution/:tid',wagner.invoke(function(Todo,User){
 		return function(req,res){
-			/*if(req.user._id){
-				console.log(req.params.tid);
-				var solution = req.body;
-				updated = 'todoList.$.todos.$.tasks.'+req.params.tid+'.solution';
-				cosole.log(updated);
-				var solution={};
-				solution[updated]=req.body;
-				console.log(solution[updated]);
-				/*User.update({_id:req.user._id},{
-					"$set":solution
-				},function(err,done){
-					if(err){
-						res.json({error:'Error Occured while adding the solution'})
-					}
-					res.json({success:'Added Solution'});
-				})
-			}
-			else{
-				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});	
-			}*/
+			/*
+			 * if(req.user._id){ console.log(req.params.tid); var solution =
+			 * req.body; updated =
+			 * 'todoList.$.todos.$.tasks.'+req.params.tid+'.solution';
+			 * cosole.log(updated); var solution={}; solution[updated]=req.body;
+			 * console.log(solution[updated]);
+			 * /*User.update({_id:req.user._id},{ "$set":solution
+			 * },function(err,done){ if(err){ res.json({error:'Error Occured
+			 * while adding the solution'}) } res.json({success:'Added
+			 * Solution'}); }) } else{ return
+			 * res.status(status.UNAUTHORIZED).json({error:'Unauthorized access,
+			 * your account will be reported'}); }
+			 */
 		}
 	}));
 	api.post('/addresume/resume',wagner.invoke(function(Resume,Username, User){
 		return function(req,res){
 			Resume.findOneAndUpdate({
-				username : req.body.username/*, req.user._id:req.body.author*/
+				username : req.body.username/* , req.user._id:req.body.author */
 			}, {
 				$set : {
 					username:req.body.username,
@@ -121,6 +114,18 @@ module.exports = function(wagner) {
 					res.json({success:'success'});
 			});
 		}
+	}));
+	api.get('/getresume',wagner.invoke(function(Resume){
+		return function(req,res){
+		Resume.findOne({author:req.user._id}, function(err,resume){
+			if(err){
+				res.json({error:'No resume'});
+			}
+			else{
+				res.json(resume);
+			}
+		})
+	}
 	}));
 	api.put('/notebooks/todo/update/:pid',wagner.invoke(function(Todo,User){
 		return function(req,res){

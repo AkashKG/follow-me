@@ -182,6 +182,16 @@ angular
 											return null
 										}
 									});
+								},
+								getUserResume : function() {
+									return $http.get('api/v1/getresume').success(
+											function(data) {
+													console.log(data);
+													if(data.error){
+														return null;
+													}
+													return data;
+											})
 								}
 							};
 						} ])

@@ -325,6 +325,53 @@ angular.module('profileCtrl', [])
         });
     };
   })
-.controller('resumeController', function($scope){
+.controller('resumeController', function($scope, userService){
+	userService.getUserResume().then(function(data,err){
+		console.log(data);
+	})
 	
+	$scope.resume={
+			username:'',
+			author:'',
+			basicInfo:{
+				name:'',
+				email:'',
+				college:'',
+				currentLocation:'',
+				image:''
+			},
+			onlineExistence:[{
+				name:'',
+				url:''
+			}],
+			timeline:[{
+				name:'',
+				description:'',
+				url:''
+			}],
+			education:{
+				btech:{
+					name:'',
+					description:''
+				},
+				intermediate:{
+					name:'',
+					description:''
+				},
+				matric:{
+					name:'',
+					description:''
+				}
+			},
+			technologyAdvanced:[{
+				name:'',
+				icon:'',
+				description:''
+			}],
+			technologyBasic:[{
+				name:'',
+				icon:'',
+				description:''
+			}]
+	}
 });
