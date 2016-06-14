@@ -16,6 +16,10 @@ angular.module('homeCtrl', [])
         	title:"KIIT Portal",
         	link:"http://www.getjar.com/categories/education-apps/more/KIIT-Portal-875949",
         	description:"Android app for tracking GPA's and few other features"
+        },{
+        	title:"Angular Calculator",
+        	link:"http://s.codepen.io/AkashKG/debug/ZQELoB",
+        	description:"Angular Calculator focussing more on UI."
         }
     ]
     $scope.timeline=[{
