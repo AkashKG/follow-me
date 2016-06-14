@@ -83,7 +83,7 @@ angular.module('homeCtrl', [])
     	icon:'link'
     },{
     	title:'linkedIn',
-    	link:'https://linkedin.com/yesitsakash',
+    	link:'https://linkedin.com/in/AkashKG',
     	icon:'link'
     },{
     	title:'codepen.io/AkashKG',
