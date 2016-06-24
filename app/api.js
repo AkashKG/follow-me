@@ -150,9 +150,37 @@ module.exports = function(wagner) {
 			else{
 				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});	
 			}
-			
-			
 	}}));
+	
+	api.put('/notebooks/todo/task/update/:taskId/:pid/:parent/:date', wagner.invoke(function(User){
+		return function(req,res){
+			console.log(req.body);
+			console.log(req.params.taskId);
+			if(req.user._id){
+				updated = 'todoList.$.todos.'+req.params.pid+'.updated';
+				var up={};
+				up[updated]=req.params.date;
+				tasks = 'todoList.$.todos.'+ req.params.pid +'.tasks.' + req.params.taskId;
+				console.log(tasks);
+				var update={};
+				update[tasks]=req.body;
+				User.update({_id:req.user._id, 'todoList._id':req.params.parent},{$set:update}, function(err,done){
+					if(err)	
+						res.json({error:'Unauthorized Or not found'})
+					/**/
+					console.log("updated");
+				})
+				User.update({'todoList._id':req.params.parent, _id:req.user._id},{$set:up}, function(err,done){
+					if(err)	
+						res.json({error:'Unauthorized Or not found'})
+					res.json({success:'Updated'})
+				});
+			}
+			else{
+				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});	
+			}
+		}
+	}));
 	
 	api.post('/newtodo/newtask/:tid/:todoIndex',wagner.invoke(function(User){
 		return function(req,res){

@@ -28,6 +28,9 @@
     <md-button class=" md-icon-button md-primary" ng-disabled="!t.link.length" ng-click="openLink(t.link)">
     	<md-icon >link</md-icon>
     </md-button>
+    <md-button class=" md-icon-button md-primary" ng-disabled="t.done" ng-click="showUpdateTaskDialog($index, t)">
+    	<md-icon >update</md-icon>
+    </md-button>
     <!-- <md-button class=" md-icon-button md-primary" ng-click="openSolution($index)">
     	<md-icon >book</md-icon>
     </md-button>
