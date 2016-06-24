@@ -53,7 +53,7 @@ angular.module('profileCtrl', [])
 				$scope.dashboard = true;
 				$scope.notebook = null;
 			}
-			
+			$scope.query='';
 			 $scope.labels = ["Done", "Left"];
 			  $scope.data = [$scope.comp,$scope.len-$scope.comp];
 			$scope.gotoTodoList = function(id, $index){

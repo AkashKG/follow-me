@@ -30,15 +30,20 @@
 				style="position: relative; border-radius: 4px; padding: 5px 5px 5px 5px; height: 140px; width: 140px; border-color: '#fff'; border-width: 10px;"></img>
 			</md-card>
 		</div>
-  </center>
-      <md-list flex hide-xs>
+		<md-input-container md-theme="input" md-no-float flex md-no-padding md-dense style="margin:0 0 0 0;">
       
-        <md-subheader class="md-no-sticky">My Notebooks | <md-button class="md-icon-button" ng-click="showDashboard()"aria-label="Favorite" ng-show="isLoggedIn">
+      <input ng-model="query" placeholder="Search your notebook">
+    </md-input-container>
+    <md-button class="md-icon-button" ng-click="showDashboard()"aria-label="Favorite" ng-show="isLoggedIn">
       			 <md-tooltip md-direction="bottom">
           Dashboard
         </md-tooltip>
           <md-icon>dashboard</md-icon>
-        </md-button></md-subheader>
+        </md-button>
+        
+  </center>
+  
+      <md-list flex hide-xs>
         <md-divider></md-divider>
         <md-list-item class="md-2-line" ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showNotebook(notebooks.length-1-$index)">
           <div class="md-list-item-text" layout="column">
