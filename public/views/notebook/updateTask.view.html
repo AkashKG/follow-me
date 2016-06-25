@@ -22,11 +22,18 @@
 				<label>Link</label> 
 					<input ng-maxlength="100"  name="link" ng-model="updateTask.link">
 			</md-input-container>
+			<md-input-container class="md-block">
+    	    	<label>Solution</label>
+          		<textarea ng-model="updateTask.solution" name ="solution" style="overflow-y:visible"  md-maxlength="15000"  rows="7" md-select-on-focus></textarea>
+        	</md-input-container>
 		</form>
 	</div>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="end center">
       <span flex></span>
+      <md-button ng-disabled="!updateTask.solution.length" ng-click="viewSolution(updateTask)">
+        Solution
+      </md-button>
       <md-button  class="md-primary" ng-click="hide()">
        Cancel
       </md-button>

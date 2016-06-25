@@ -1,33 +1,20 @@
 <md-dialog class="fullscreen-dialog" ng-cloak flex-xs flex-gt-xs flex-gt-sm="50" >
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Solution</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
-        </md-button>
+   	<div layout="row">
+   		
+    	<md-subheader class="md-no-sticky">Task: {{solution.task}}</md-subheader>
+   		<div flex=" "></div>
+   		<div>
+   		<md-button class="md-icon-button md-primary" ng-click="hide()">
+        <md-icon class="material-icon">done</md-icon>
+      </md-button>
       </div>
-    </md-toolbar>
+     
+   	</div> 
     <md-dialog-content >
-    <div class="md-padding">
-      <form name="solutionForm" ng-submit="addSoln()" action="">
-			<md-input-container class="md-block">
-    	    	<label>Solution</label>
-          		<textarea ng-model="add.solution" required md-maxlength="768" name="solution" rows="15" md-select-on-focus></textarea>
-        		<div class="hint md-caption" ng-show="true">Add Solution to this task.</div>
-						
-        	</md-input-container>
-		</form>
-	</div>
+     <md-divider></md-divider>
+    	<md-content class="md-padding">
+    	<code style="color:#37474F"><pre>{{solution.solution}}</pre></code>
+    	</md-content>
     </md-dialog-content>
-    <md-dialog-actions layout="row" layout-align="end center">
-      <span flex></span>
-      <md-button  class="md-primary" ng-click="hide()">
-       Cancel
-      </md-button>
-      <md-button ng-disabled="solutionForm.$invalid" class="md-accent" ng-click="addSoln()">
-        Done
-      </md-button>
-    </md-dialog-actions>
  
 </md-dialog>

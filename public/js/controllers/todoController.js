@@ -58,12 +58,27 @@ angular
 						task : '',
 						link : '',
 						done: '',
+						solution:'',
 					}
+					
+					$scope.viewSolution=function(task){
+						$scope.solution = task;
+						$scope.hide();
+						$mdDialog
+						.show({
+							templateUrl : '/views/notebook/solution.view.html',
+							parent : angular.element(document.body),
+							scope : $scope.$new(),
+							clickOutsideToClose : true,
+						});
+					}
+					
 					$scope.updateIndex='';
 					$scope.showUpdateTaskDialog = function($index, t) {
 						$scope.updateTask.task = t.task;
 						$scope.updateTask.link = t.link;
 						$scope.updateTask.done = t.done;
+						$scope.updateTask.solution=t.solution
 						$scope.updateIndex = $index;
 						$mdDialog
 								.show({

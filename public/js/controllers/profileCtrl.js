@@ -59,7 +59,7 @@ angular.module('profileCtrl', [])
 			$scope.gotoTodoList = function(id, $index){
 				// //console.log()
 				$scope.nIndex = $scope.notebookIndex;
-				$location.path('/profile/alltodos/' + $scope.nIndex + '/' + $index);
+				$window.open('/profile/alltodos/' + $scope.nIndex + '/' + $index,'_blank');
 				// //console.log(id);
 			}
 			$scope.showFromSidenav=function($index){
