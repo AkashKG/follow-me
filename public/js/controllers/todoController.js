@@ -57,13 +57,11 @@ angular
 					$scope.updateTask = {
 						task : '',
 						link : '',
-						done: '',
 					}
 					$scope.updateIndex='';
 					$scope.showUpdateTaskDialog = function($index, t) {
 						$scope.updateTask.task = t.task;
 						$scope.updateTask.link = t.link;
-						$scope.updateTask.done = t.done;
 						$scope.updateIndex = $index;
 						$mdDialog
 								.show({
