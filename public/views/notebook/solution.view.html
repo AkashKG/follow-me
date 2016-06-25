@@ -1,20 +1,20 @@
-<md-dialog class="fullscreen-dialog" ng-cloak flex-xs flex-gt-xs flex-gt-sm="50" >
+<md-dialog class="solution-dialog fullscreen-dialog" ng-cloak flex-xs flex-gt-xs flex-gt-sm >
    	<div layout="row">
    		
-    	<md-subheader class="md-no-sticky">Task: {{solution.task}}</md-subheader>
-   		<div flex=" "></div>
-   		<div>
-   		<md-button class="md-icon-button md-primary" ng-click="hide()">
-        <md-icon class="material-icon">done</md-icon>
-      </md-button>
-      </div>
-     
+    	<md-subheader class="md-no-sticky">Task: {{solution.task}}
+    	</md-subheader>
+    
    	</div> 
     <md-dialog-content >
-     <md-divider></md-divider>
     	<md-content class="md-padding">
     	<code style="color:#37474F"><pre>{{solution.solution}}</pre></code>
     	</md-content>
     </md-dialog-content>
- 
+	<md-dialog-actions layout="row" layout-align="end center">
+		<span flex=""></span>
+   		<md-button class="md-icon-button md-primary" ng-click="hide()">
+        <md-icon class="material-icon">done</md-icon>
+      </md-button>
+      </md-dialog-actions>
+      
 </md-dialog>
