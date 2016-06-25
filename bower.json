@@ -10,6 +10,7 @@
 	"angular-material": "^1.0.9",
 	"angular-route": "^1.4.8",
 	"angular-block-ui":"latest",
-	"angular-chart.js":"latest"
+	"angular-chart.js":"latest",
+	"angular-ui-codemirror":"latest"
   }
 }

@@ -1,14 +1,7 @@
 .selected{
 	background-color:#DDD;
 }
-@media screen and (min-width: 761px){
-.solution-dialog{
-		height:90%;
-       width:95%;
-       max-height:93%;
-       max-width: 95%;
-	}
-}
+
 @media screen and (max-width: 760px){
 
        .fullscreen-dialog {

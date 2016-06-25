@@ -1,4 +1,4 @@
-<md-dialog class="solution-dialog fullscreen-dialog" ng-cloak flex-xs flex-gt-xs flex-gt-sm >
+<md-dialog class=" fullscreen-dialog" ng-cloak flex-xs flex-gt-xs flex-gt-sm onload="prettyPrint()">
    	<div layout="row">
    		
     	<md-subheader class="md-no-sticky">Task: {{solution.task}}
@@ -6,13 +6,12 @@
     
    	</div> 
     <md-dialog-content >
-    	<md-content class="md-padding">
-    	<code style="color:#37474F"><pre>{{solution.solution}}</pre></code>
-    	</md-content>
+          		<textarea ui-codemirror="cmOption"ng-model="updateTask.solution" style="overflow-x:hidden" name ="solution" ></textarea>
+ 
     </md-dialog-content>
 	<md-dialog-actions layout="row" layout-align="end center">
 		<span flex=""></span>
-   		<md-button class="md-icon-button md-primary" ng-click="hide()">
+   		<md-button class="md-icon-button md-primary" ng-click="updateExistTask()">
         <md-icon class="material-icon">done</md-icon>
       </md-button>
       </md-dialog-actions>

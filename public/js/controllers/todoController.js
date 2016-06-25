@@ -261,5 +261,21 @@ angular
 							dialogFactory.showToast(data.error);
 						})
 					}
+					
+					 
+					 
+					 
+					  $scope.cmOption = {
+					    lineNumbers: true,
+					    indentWithTabs: true,
+					    theme:'material',
+					    mode:'javascript',
+					    onLoad : function(_cm){
+					      $scope.editor = _cm;
+					        setTimeout(function(){
+					            $scope.editor.refresh();
+					        }, 100);
+					    }
+					  };
 
 				});

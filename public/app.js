@@ -2,7 +2,7 @@ angular
 		.module(
 				'todoApp',
 				[ 'ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'appRoutes',
-						'homeCtrl', 'loginCtrl', 'profileCtrl','chart.js', 'todoCtrl', 'logoutCtrl','material.svgAssetsCache','blockUI' ])
+						'homeCtrl', 'loginCtrl', 'profileCtrl','chart.js', 'todoCtrl', 'logoutCtrl','material.svgAssetsCache','blockUI', 'ui.codemirror' ])
 
 .config(['ChartJsProvider', function (ChartJsProvider) {
 	
