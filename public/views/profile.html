@@ -57,7 +57,8 @@
   	<div layout="row" ng-hide="notebook.length" ng-show="dashboard" layout-align="center center" hide-xs>
   		<div layout="column" style="min-height:80vh" layout-align="center center">
   			
-  			<p layout-align="center center">Your status</p> 
+  			<p layout-align="center center" ng-show="notebooks.length">Your status</p> 
+  			<p layout-align="center center" ng-hide="notebooks.length">Add at least one task to view the doughnut.</p> 
   			<div ng-show="notebooks.length">
   			<canvas id="doughnut" class="chart chart-doughnut"
   				chart-data="data" chart-labels="labels">

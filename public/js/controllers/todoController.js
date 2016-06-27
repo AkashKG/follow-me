@@ -33,7 +33,7 @@ angular
 					}
 					$scope.openLink = function(link) {
 						// console.log(link);
-						$window.open('//' + link, '_blank');
+						$window.open(link, '_blank');
 					}
 
 					$scope.calculatePercentage = function() {
