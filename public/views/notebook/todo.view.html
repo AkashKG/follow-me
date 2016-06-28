@@ -34,7 +34,7 @@
 			</md-input-container>
 			<md-input-container flex class="md-block">
 				<label>Link</label> 
-					<input ng-maxlength="100"  name="link" ng-model="task.link">
+					<input ng-maxlength="1000"  name="link" ng-model="task.link">
 					
 						<div class="hint md-caption" ng-show="true">After adding the link press 'enter'. You can add more tasks here itself. The link can be blank.</div>
 						<div ng-messages="inputTodoForm.link.$error" ng-show='inputTodoForm.link.$touched'>

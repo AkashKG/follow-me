@@ -20,12 +20,8 @@
         	</md-input-container>
         	<md-input-container flex class="md-block">
 				<label>Link</label> 
-					<input ng-maxlength="100"  name="link" ng-model="updateTask.link">
+					<input ng-maxlength="1000"  name="link" ng-model="updateTask.link">
 			</md-input-container>
-			<md-input-container class="md-block">
-    	    	<label>Solution</label>
-          		<textarea ui-codemirror="cmOption"ng-model="updateTask.solution" name ="solution" style="overflow-y:visible"   rows="7" md-select-on-focus></textarea>
-        	</md-input-container>
 		</form>
 	</div>
     </md-dialog-content>

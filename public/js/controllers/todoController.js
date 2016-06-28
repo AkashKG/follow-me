@@ -21,7 +21,7 @@ angular
 																$scope.parentId = data.data.todoList[$routeParams.nIndex]._id;
 																
 																$scope.todo = data.data.todoList[$routeParams.nIndex].todos[$routeParams.index];
-																// console.log($scope.todo);
+																// //console.log($scope.todo);
 																$scope
 																		.calculatePercentage();
 															})
@@ -32,12 +32,16 @@ angular
 						solution : ''
 					}
 					$scope.openLink = function(link) {
-						// console.log(link);
+						// //console.log(link);
+						var http = "http";
+						if(link.indexOf(http) == -1){
+							link = "http://" + link;
+						}
 						$window.open(link, '_blank');
 					}
 
 					$scope.calculatePercentage = function() {
-						// console.log("Entered");
+						// //console.log("Entered");
 						var count = 0;
 						if ($scope.todo.tasks.length == 0) {
 							$scope.percent = 101;
@@ -52,7 +56,7 @@ angular
 							return;
 						}
 						$scope.percent = (count / $scope.todo.tasks.length) * 100;
-						// console.log($scope.percent);
+						// //console.log($scope.percent);
 					}
 					$scope.updateTask = {
 						task : '',
@@ -113,10 +117,18 @@ angular
 							
 						});
 					}
-					$scope.saveTaskToDB = function($index) {
+					$scope.saveTaskToDB = function($index, t) {
 						if ($scope.todo.tasks[$index].done == true) {
-							return;
+							$scope.updateIndex=$index;
+							$scope.updateTask = {
+									task : t.task,
+									link : t.link,
+									done: t.done,
+									solution:t.solution,
+								}
+							$scope.viewSolution($scope.updateTask);
 						}
+						else{
 						$scope.todo.updated = new Date();
 						$scope.todo.tasks[$index].done = !($scope.todo.tasks[$index].done);
 						$scope.send = {
@@ -125,8 +137,8 @@ angular
 							todoIndex : $routeParams.index.toString(),
 							taskIndex : $index.toString()
 						}
-						// console.log($scope.send);
-						// console.log($routeParams.index);
+						// //console.log($scope.send);
+						// //console.log($routeParams.index);
 						$http
 								.put(
 										'/api/v1/notebooks/todo/update/'
@@ -157,6 +169,7 @@ angular
 
 								});
 						$scope.calculatePercentage();
+						}
 					}
 					$scope.newTaskDialog = function(ev) {
 						$mdDialog.show({
@@ -174,8 +187,8 @@ angular
 						updated : null
 					}
 					$scope.addNewtask = function() {
-						// console.log($scope.taskData);
-						// console.log($scope.todo._id);
+						// //console.log($scope.taskData);
+						// //console.log($scope.todo._id);
 						$scope.todoIndex = $routeParams.index.toString();
 						$scope.updated = new Date();
 						$scope.taskData.updated = $scope.updated;
@@ -250,7 +263,7 @@ angular
 					}
 					$scope.addSoln = function() {
 						$scope.sol = $scope.add.solution;
-						console.log($scope.taskPos + $scope.add.solution);
+						//console.log($scope.taskPos + $scope.add.solution);
 						$http.post(
 								'/api/v1/notebooks/todo/addsolution/'
 										+ $scope.taskPos, $scope.sol).success(

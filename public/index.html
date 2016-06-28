@@ -15,8 +15,13 @@
 		<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
 		<link rel="stylesheet" type="text/css" href="bower_components/codemirror/lib/codemirror.css">
 		<link rel="stylesheet" type="text/css" href="bower_components/codemirror/theme/material.css">
+		<style type="text/css">
+			[ng-cloak] {
+  				display: none !important;
+			}
+		</style>
 		</head>
-	<div  ng-cloak style="min-height:100vh">
+	<div  style="min-height:100vh" ng-cloak>
 		<md-toolbar class="md-whiteframe-2dp" md-scroll-shrink ng-if="true">
     		<div class="md-toolbar-tools" style="padding:0 0px">
     		<div ng-controller="sidenavController" style="margin:0 0 0 0;padding:0 0 0 0;">
@@ -35,7 +40,7 @@
         <md-button hide-xs class="md-icon-button" aria-label="More" ng-show="isLoggedIn" ng-href="/profile">
           <md-icon >home</md-icon>
         </md-button>
-        <div ng-controller="sidenavController">
+        <div ng-controller="sidenavController" ng-cloak>
         	<h5   ng-show="loggedOut()" class="md-subhead">Fodo</h5></div>
       			<h5 class="md-subhead" ng-href="/profile"><span>{{$root.user.profile.name}}</span></h5>
       			<span flex></span>
