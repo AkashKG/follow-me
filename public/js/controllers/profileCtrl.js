@@ -117,7 +117,7 @@ angular.module('profileCtrl', [])
 						deadline:new Date(t.deadline),
 						
 				}
-				//console.log($scope.updateBasicTodo);
+				// console.log($scope.updateBasicTodo);
 				$mdDialog
 				.show({
 					templateUrl : '/views/notebook/edittodo.view.html',
@@ -141,7 +141,7 @@ angular.module('profileCtrl', [])
 			}
 			
 			$scope.updateExistNotebook=function(){
-				//console.log($scope.updateNotebook)
+				// console.log($scope.updateNotebook)
 				$http.put('/api/v1/notebooks/updateone',$scope.updateNotebook)
 				.success(function(data){
 					$scope.hide();
@@ -230,7 +230,7 @@ angular.module('profileCtrl', [])
 								$scope.notebooks=data.data.todoList;
 							})
 						}).error(function(data) {
-							//console.log(data.error);
+							// console.log(data.error);
 							$scope.hide();
 							dialogFactory.showToast(data.error);
 					// ////console.log(data);
@@ -312,10 +312,9 @@ angular.module('profileCtrl', [])
 	},  {
 		name : 'Create Todo',
 		icon : 'book'
-	}, {
-		name : 'Settings',
-		icon : 'settings'
-	}];
+	}/*
+		 * , { name : 'Settings', icon : 'settings' }
+		 */];
 
 	$scope.listItemClick = function($index) {
 		var clickedItem = $scope.items[$index];
