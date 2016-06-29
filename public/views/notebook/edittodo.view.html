@@ -1,0 +1,34 @@
+<md-dialog class="fullscreen-dialog" ng-cloak flex-xs flex-gt-xs flex-gt-sm="50">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Update To-Do</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content >
+    <div class="md-padding">
+      <form name="updateTodoForm" ng-submit="updateExistTodo()" action="">
+			<md-input-container flex class="md-block">
+				<label>Title</label> 
+					<input ng-maxlength="100" required name="title" ng-model="updateBasicTodo.title">
+			</md-input-container>
+			<md-datepicker ng-model="updateBasicTodo.deadline" md-placeholder="Deadline">		
+			</md-datepicker>
+			<div class="hint md-caption" ng-show="true">Deadline</div>
+		</form>
+	</div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" layout-align="end center">
+      <span flex></span>
+      <md-button  class="md-primary" ng-click="hide()">
+       Cancel
+      </md-button>
+      <md-button ng-disabled="updateTodoForm.$invalid" class="md-accent" ng-click="updateTodoBasic()">
+        Update
+      </md-button>
+    </md-dialog-actions>
+ 
+</md-dialog>

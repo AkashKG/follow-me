@@ -31,8 +31,7 @@
 			</md-card>
 		</div>
   </center>
-      <md-list flex hide-xs>
-      
+   <md-list flex hide-xs class="md-dense"> 
         <md-subheader class="md-no-sticky">My Notebooks | <md-button class="md-icon-button" ng-click="showDashboard()"aria-label="Favorite" ng-show="isLoggedIn">
       			 <md-tooltip md-direction="bottom">
           Dashboard
@@ -42,7 +41,8 @@
         <md-divider></md-divider>
         <md-list-item class="md-2-line" ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showNotebook(notebooks.length-1-$index)">
           <div class="md-list-item-text" layout="column">
-            <h3>{{ note.title }}</h3>
+            <h3>{{ note.title | limitTo: 20
+					}}{{note.title.length > 20 ? '...' : ''}}</h3>
             <p>{{ note.date | date: yyyy/MM/dd}}</p>
           </div>
           <md-button class="md-secondary md-icon-button" md-ink-ripple="#FF0000" ng-click="deleteNote(note._id, $event)" aria-label="delete">
@@ -90,37 +90,51 @@
         </md-list>
   	</div>
 	<md-card ng-if="notebook" ng-hide="dashboard">
-  		<md-card-title>
-    		<md-card-title-media>
-      		<div class="md-media-sm card-media" layout layout-align="center center" >
-        		<md-icon class="material-icons"style="color:grey">book</md-icon>
-      		</div>
-    		</md-card-title-media>
-    	<md-card-title-text>
-      <span class="md-headline">{{notebook.title}}</span>
-      <span class="md-subhead description">{{notebook.description}}</span>
-    </md-card-title-text>
-  </md-card-title>
+	
+ <md-card-content layout="row"  layout-align="start center">
+ 			<md-card-header >
+          <md-card-avatar>
+            <md-icon class="material-icons">book</md-icon>
+          </md-card-avatar> 
+          <md-card-header-text>
+            <span class="md-title">{{notebook.title}}</span>
+            <span class="md-subhead">{{notebook.description}}</span>
+          </md-card-header-text>
+        </md-card-header>
+        <div flex=""></div>
+    <md-card-icon-actions layout-align="end center">
+          <md-button class="md-icon-button md-primary" aria-label="add" ng-click="newTodoDialog()">
+            <md-icon class="material-icons ">playlist_add</md-icon>
+          </md-button>
+          <md-button class="md-icon-button" aria-label="Settings" ng-click="editNotebook(notebook)">
+            <md-icon class="material-icons ">edit</md-icon>
+          </md-button>
+     </md-card-icon-actions>
+   
+  </md-card-content>
 </md-card >
 <md-list ng-show="notebook" ng-hide="dashboard">
-<md-subheader class="md-no-sticky">My todos | Click on anyone to view in detail.</md-subheader>
+<md-subheader class="md-no-sticky">{{notebook.todos.length}} {{notebook.todos.length>1?'todos':'todo'}} | Click on anyone to view in detail.</md-subheader>
 
 <p layout-align="center center" class="md-subhead description" ng-hide="notebook.todos.length"><md-button  class="md-primary md-hue-1"ng-click="newTodoDialog()">Create your first todo</md-button> </p>
-  	
-  <md-list-item ng-repeat="t in notebook.todos" ng-click="gotoTodoList(t._id, $index)"  class="noright" ng-show="notebook.todos.length">
-    
-    <p><code>{{$index+1}}.</code> {{ t.title }} <code>{{t.updated | date: yyyy/MM/dd}}</code></p>
-    <md-button class=" md-secondary md-icon-button md-accent" ng-disabled="!t.done">
-    	<md-icon >done_all</md-icon>
-    </md-button>
+  	 <md-divider ng-show="notebook.todos.length"></md-divider>  
+  <md-list-item ng-repeat="t in notebook.todos"  class="list-settings" ng-show="notebook.todos.length">
+    <md-checkbox md-indeterminate class="settings-hidden" ng-click="gotoTodoList(t._id, $index)" ></md-checkbox>
+    <p ><span class="md-caption">{{$index + 1}}. </span>{{ t.title }} <code> {{t.updated | date: yyyy/MM/dd}} </code></p>
+  	<md-button class="md-icon-button settings"  ng-click="editTodo(t,$index)">
+  		<md-icon>create</md-icon>
+  	</md-button> 
+  
     <md-divider></md-divider>
   </md-list-item>
-  <md-list-item > 
+ <!-- <md-list-item > 
   	<md-button class=" md-secondary md-accent" ng-click="newTodoDialog()" ng-hide="!notebook.todos.length">
     	Add more todos
     </md-button>
   </md-list-item>
+   --> 
 </md-list>
+
   </div>
 
  <md-fab-speed-dial md-direction="left" style="position:fixed"

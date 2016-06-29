@@ -35,7 +35,7 @@ module.exports = function(wagner) {
 				return res.json({error:'Not logged in.'});			
 			}
 			else{
-				console.log(req.user.profile);
+				//console.log(req.user.profile);
 				res.json({id:req.user._id});
 			}
 		}
@@ -69,23 +69,6 @@ module.exports = function(wagner) {
 				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});
 			}
 			}
-		}
-	}));
-	api.post('/notebooks/todo/addsolution/:tid',wagner.invoke(function(Todo,User){
-		return function(req,res){
-			/*
-			 * if(req.user._id){ console.log(req.params.tid); var solution =
-			 * req.body; updated =
-			 * 'todoList.$.todos.$.tasks.'+req.params.tid+'.solution';
-			 * cosole.log(updated); var solution={}; solution[updated]=req.body;
-			 * console.log(solution[updated]);
-			 * /*User.update({_id:req.user._id},{ "$set":solution
-			 * },function(err,done){ if(err){ res.json({error:'Error Occured
-			 * while adding the solution'}) } res.json({success:'Added
-			 * Solution'}); }) } else{ return
-			 * res.status(status.UNAUTHORIZED).json({error:'Unauthorized access,
-			 * your account will be reported'}); }
-			 */
 		}
 	}));
 	api.post('/addresume/resume',wagner.invoke(function(Resume,Username, User){
@@ -151,7 +134,43 @@ module.exports = function(wagner) {
 				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});	
 			}
 	}}));
-	
+	api.put('/notebooks/updateone', wagner.invoke(function(User){
+		return function(req, res){
+			if(req.user._id){
+				User.update({'todoList._id':req.body._id, _id:req.user._id},{$set:{'todoList.$.title':req.body.title, 'todoList.$.description':req.body.description}}, function(err,done){
+					//console.log(err);
+					if(err){
+						res.json({error:'Something went wrong'})
+					}
+					//console.log(done);
+					res.json({success:'Success'})
+				})
+			}
+			else{
+				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});	
+			}
+		}
+	}))
+	api.put('/notebooks/todos/updateone', wagner.invoke(function(User){
+		return function(req, res){
+			if(req.user._id){
+				todos = 'todoList.$.todos.' + req.body.index;
+				var up={};
+				up[todos]=req.body;
+				User.update({'todoList.todos._id':req.body._id, _id:req.user._id},{$set:up}, function(err,done){
+					//console.log(err);
+					if(err){
+						res.json({error:'Something went wrong'})
+					}
+					//console.log(done);
+					res.json({success:'Success'})
+				})
+			}
+			else{
+				return res.status(status.UNAUTHORIZED).json({error:'Unauthorized access, your account will be reported'});	
+			}
+		}
+	}))
 	api.put('/notebooks/todo/task/update/:taskId/:pid/:parent/:date', wagner.invoke(function(User){
 		return function(req,res){
 			console.log(req.body);

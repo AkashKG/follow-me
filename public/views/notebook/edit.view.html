@@ -1,0 +1,35 @@
+<md-dialog class="fullscreen-dialog" ng-cloak flex-xs flex-gt-xs flex-gt-sm="50">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Update Notebook</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon class="material-icons" aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content >
+    <div class="md-padding">
+      <form name="updateNotebookForm" ng-submit="updateExistNotebook()" action="">
+			<md-input-container flex class="md-block">
+				<label>Name</label> 
+					<input ng-maxlength="1000"  name="link" ng-model="updateNotebook.title">
+			</md-input-container>
+        	<md-input-container flex class="md-block">
+				<label>Description</label> 
+					<input ng-maxlength="150"  name="link" ng-model="updateNotebook.description">
+			</md-input-container>
+		</form>
+	</div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" layout-align="end center">
+      <span flex></span>
+      <md-button  class="md-primary" ng-click="hide()">
+       Cancel
+      </md-button>
+      <md-button ng-disabled="updateNotebookForm.$invalid" class="md-accent" ng-click="updateExistNotebook()">
+        Update
+      </md-button>
+    </md-dialog-actions>
+ 
+</md-dialog>

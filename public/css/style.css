@@ -16,3 +16,15 @@
    }
 }
 
+@media screen and (min-width: 761px){
+	.list-settings .settings{
+		display:none;
+	}
+	
+    .list-settings:hover .settings{
+    	display:block;
+    }
+}
+.list-settings .settings-hidden{
+		display:none;
+}

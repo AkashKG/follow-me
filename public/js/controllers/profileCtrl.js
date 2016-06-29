@@ -89,6 +89,69 @@ angular.module('profileCtrl', [])
 						done:false
 				}
 			}
+			
+			$scope.editNotebook=function(book){
+			
+				$scope.updateNotebook = {
+						_id:book._id,
+						title:book.title,
+						description:book.description
+				}
+			
+				$mdDialog
+				.show({
+					templateUrl : '/views/notebook/edit.view.html',
+					parent : angular.element(document.body),
+					scope : $scope.$new(),
+					clickOutsideToClose : true,
+				});
+			}
+			
+			$scope.editTodo = function(t, $index){
+				console.log(t);
+				$scope.updateBasicTodo = {
+						_id:t._id,
+						index:$index,
+						title:t.title,
+						updated:new Date(),
+						deadline:new Date(t.deadline)
+				}
+				//console.log($scope.updateBasicTodo);
+				$mdDialog
+				.show({
+					templateUrl : '/views/notebook/edittodo.view.html',
+					parent : angular.element(document.body),
+					scope : $scope.$new(),
+					clickOutsideToClose : true,
+				});
+			}
+			$scope.updateTodoBasic = function(){
+				$http.put('/api/v1/notebooks/todos/updateone/',$scope.updateBasicTodo)
+				.success(function(data){
+					$scope.hide();
+					noteService.getMyNotes().then(function(data,err){
+						$scope.notebooks=data.data.todoList;
+						$scope.showNotebook($scope.notebookIndex)
+					});
+				})
+				.error(function(data){
+					console.log(data);
+				})
+			}
+			
+			$scope.updateExistNotebook=function(){
+				//console.log($scope.updateNotebook)
+				$http.put('/api/v1/notebooks/updateone',$scope.updateNotebook)
+				.success(function(data){
+					$scope.hide();
+					noteService.getMyNotes().then(function(data,err){
+						$scope.notebooks=data.data.todoList;
+						$scope.showNotebook($scope.notebookIndex)
+						
+					});
+				})
+			}
+			
 			$scope.addNewtodo=function(){
 				if($scope.task.task!=''){
 					$scope.addTodoToList();
