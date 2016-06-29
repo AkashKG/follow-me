@@ -114,7 +114,8 @@ angular.module('profileCtrl', [])
 						index:$index,
 						title:t.title,
 						updated:new Date(),
-						deadline:new Date(t.deadline)
+						deadline:new Date(t.deadline),
+						
 				}
 				//console.log($scope.updateBasicTodo);
 				$mdDialog

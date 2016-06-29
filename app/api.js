@@ -154,16 +154,38 @@ module.exports = function(wagner) {
 	api.put('/notebooks/todos/updateone', wagner.invoke(function(User){
 		return function(req, res){
 			if(req.user._id){
-				todos = 'todoList.$.todos.' + req.body.index;
+				title = 'todoList.$.todos.' + req.body.index + '.title';
 				var up={};
-				up[todos]=req.body;
+				up[title]=req.body.title;
 				User.update({'todoList.todos._id':req.body._id, _id:req.user._id},{$set:up}, function(err,done){
 					//console.log(err);
 					if(err){
 						res.json({error:'Something went wrong'})
 					}
 					//console.log(done);
-					res.json({success:'Success'})
+					
+				})
+				updated = 'todoList.$.todos.' + req.body.index + '.updated';
+				var up_={};
+				up[updated]=req.body.updated;
+				User.update({'todoList.todos._id':req.body._id, _id:req.user._id},{$set:up_}, function(err,done){
+					//console.log(err);
+					if(err){
+						res.json({error:'Something went wrong'})
+					}
+					//console.log(done);
+					
+				})
+				deadline = 'todoList.$.todos.' + req.body.index + '.deadline';
+				var up__={};
+				up__[deadline]=req.body.deadline;
+				User.update({'todoList.todos._id':req.body._id, _id:req.user._id},{$set:up__}, function(err,done){
+					//console.log(err);
+					if(err){
+						res.json({error:'Something went wrong'})
+					}
+					//console.log(done);
+					res.json({success:'true'})
 				})
 			}
 			else{
