@@ -15,8 +15,8 @@ function setupAuth(User, app) {
 
         consumerKey     : 'hK6eaHbP16RnGEHgPAttdR0hm',
         consumerSecret  : 'uULlyaXZEk0lzojRHf7MYFJZyVJJUYQzTsVyDw6SBNMWhGJMLK',
-      callbackURL     : 	"https://fodo.herokuapp.com/auth/twitter/callback"
-        //callbackURL     : 	"http://127.0.0.1:8181/auth/twitter/callback"
+      //callbackURL     : 	"https://fodo.herokuapp.com/auth/twitter/callback"
+        callbackURL     : 	"http://127.0.0.1:8181/auth/twitter/callback"
 
     },
     function(token, tokenSecret, profile, done) {

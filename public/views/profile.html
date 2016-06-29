@@ -39,13 +39,13 @@
           <md-icon>dashboard</md-icon>
         </md-button></md-subheader>
         <md-divider></md-divider>
-        <md-list-item class="md-2-line" ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showNotebook(notebooks.length-1-$index)">
+        <md-list-item class="md-2-line list-settings" ng-repeat="note in notebooks|reverse" ng-class="{'selected':note===notebook}"  ng-click="showNotebook(notebooks.length-1-$index)">
           <div class="md-list-item-text" layout="column">
             <h3>{{ note.title | limitTo: 20
 					}}{{note.title.length > 20 ? '...' : ''}}</h3>
             <p>{{ note.date | date: yyyy/MM/dd}}</p>
           </div>
-          <md-button class="md-secondary md-icon-button" md-ink-ripple="#FF0000" ng-click="deleteNote(note._id, $event)" aria-label="delete">
+          <md-button class="md-secondary md-icon-button settings" md-ink-ripple="#FF0000" ng-click="deleteNote(note._id, $event)" aria-label="delete">
             <md-icon>delete</md-icon>
           </md-button>
         <md-divider ></md-divider>
