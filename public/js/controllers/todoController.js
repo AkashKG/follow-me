@@ -194,6 +194,7 @@ angular
 					$scope.taskData = {
 						task : null,
 						link : null,
+						video: null,
 						done : false,
 						updated : null
 					}
@@ -217,6 +218,7 @@ angular
 												task : null,
 												link : null,
 												done : false,
+												video:null,
 												updated : null
 											}
 											$scope.cancel();
