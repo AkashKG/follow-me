@@ -28,6 +28,7 @@ var todoSchema = {
 			done : Boolean,
 			task : String,
 			link : String,
+			video: String,
 			solution:String
 		} ]
 	} ]

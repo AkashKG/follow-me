@@ -76,13 +76,23 @@ angular
 							clickOutsideToClose : true,
 						});
 					}
-					
+					$scope.openVideo = function(video){
+						$scope.video = video;
+						
+						console.log($scope.video);
+						$mdDialog
+						.show({
+							templateUrl : '/views/notebook/video.view.html',
+							parent : angular.element(document.body),
+							scope : $scope.$new(),
+							clickOutsideToClose : true,
+						});
+					}
+				
 					$scope.updateIndex='';
 					$scope.showUpdateTaskDialog = function($index, t) {
-						$scope.updateTask.task = t.task;
-						$scope.updateTask.link = t.link;
-						$scope.updateTask.done = t.done;
-						$scope.updateTask.solution=t.solution
+						$scope.updateTask = t;
+					
 						$scope.updateIndex = $index;
 						$mdDialog
 								.show({
@@ -109,6 +119,7 @@ angular
 											data,
 											err) {
 										$scope.todo = data.data.todoList[$routeParams.nIndex].todos[$routeParams.index];
+										console.log($scope.todo)
 										$scope
 												.calculatePercentage();
 									})

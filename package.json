@@ -1,28 +1,29 @@
 {
-	"name": "follow-me",
-	"author": "Akash Gupta",
-	"repository": "https://github.com/AkashKG/follow-me",
-	"main": "server.js",
-	"dependencies":{
-		"express":"~4.5.1",
-		"http-status": "0.1.8",
-	    "express-session":"latest",
-	    "connect-mongo":"latest",
-	    "mongoose": "4.1.12",
-	    "wagner-core": "0.1.0",
-		"body-parser" : "~1.4.2",
-		"method-override" : "~2.0.2",
-	    "passport": "latest",
-	    "passport-facebook":"latest",
-	    "passport-local":"latest",
-	    "passport-twitter":"latest",
-		"underscore":"1.8.3",
-		"mongoose-auto-increment":"latest",
-		"bower":"latest",
-		"prerender-node": "latest"
-	},
-	"scripts": {
-	  "start": "node server.js",
-	  "postinstall": "bower install --force"
-	}
+  "name": "follow-me",
+  "author": "Akash Gupta",
+  "repository": "https://github.com/AkashKG/follow-me",
+  "main": "server.js",
+  "dependencies": {
+    "angular-youtube-embed": "^1.2.0",
+    "body-parser": "~1.4.2",
+    "bower": "latest",
+    "connect-mongo": "latest",
+    "express": "~4.5.1",
+    "express-session": "latest",
+    "http-status": "0.1.8",
+    "method-override": "~2.0.2",
+    "mongoose": "4.1.12",
+    "mongoose-auto-increment": "latest",
+    "passport": "latest",
+    "passport-facebook": "latest",
+    "passport-local": "latest",
+    "passport-twitter": "latest",
+    "prerender-node": "latest",
+    "underscore": "1.8.3",
+    "wagner-core": "0.1.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "postinstall": "bower install --force"
+  }
 }

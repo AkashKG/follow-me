@@ -22,6 +22,9 @@
   <md-list-item ng-repeat="t in todo.tasks" md-ink-ripple="false">
     <md-checkbox ng-model="t.done" ng-disabled="t.done==true" ng-click="saveTaskToDB($index, t)"></md-checkbox>
     <p>{{t.task}} </p>
+    <md-button class=" md-icon-button md-primary" ng-disabled="!t.video.length" ng-click="openVideo(t.video)">
+    	<md-icon >airplay</md-icon>
+    </md-button>
     <md-button class=" md-icon-button md-primary" ng-disabled="!t.link.length" ng-click="openLink(t.link)">
     	<md-icon >link</md-icon>
     </md-button>

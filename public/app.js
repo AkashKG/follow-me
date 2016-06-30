@@ -2,7 +2,7 @@ angular
 		.module(
 				'todoApp',
 				[ 'ngRoute', 'ngMaterial', 'ngAria', 'ngMessages', 'appRoutes',
-						'homeCtrl', 'loginCtrl', 'profileCtrl','chart.js', 'todoCtrl', 'logoutCtrl','material.svgAssetsCache','blockUI', 'ui.codemirror' ])
+						'homeCtrl', 'loginCtrl', 'profileCtrl','chart.js', 'todoCtrl', 'logoutCtrl','material.svgAssetsCache','blockUI', 'ui.codemirror' ,'youtube-embed'])
 
 .config(['ChartJsProvider', function (ChartJsProvider) {
 	

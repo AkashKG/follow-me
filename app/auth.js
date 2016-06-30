@@ -81,10 +81,10 @@ function setupAuth(User, app) {
 		    url: 'mongodb://akash:testakash@ds037467.mlab.com:37467/followme'
 		  }),
 		  secret: 'testakash123',
-		  cookie:{maxAge:7800000},
+		  cookie:{maxAge:60000*60*1},
 		  rolling: true,
 		  resave: true,
-		   saveUninitialized: true
+		  saveUninitialized: true
 		}));
 	app.use(passport.initialize());
 	app.use(passport.session());
