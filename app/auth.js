@@ -1,5 +1,7 @@
 function setupAuth(User, app) {
 	var passport = require('passport');
+	var session = require('express-session');
+	var mongoSessionStore = require('connect-mongo')(session);
 	var FacebookStrategy = require('passport-facebook').Strategy;
 	TwitterStrategy = require('passport-twitter').Strategy;
 	passport.serializeUser(function(user, done) {
@@ -16,7 +18,7 @@ function setupAuth(User, app) {
         consumerKey     : 'hK6eaHbP16RnGEHgPAttdR0hm',
         consumerSecret  : 'uULlyaXZEk0lzojRHf7MYFJZyVJJUYQzTsVyDw6SBNMWhGJMLK',
       callbackURL     : 	"https://fodo.herokuapp.com/auth/twitter/callback"
-       // callbackURL     : 	"http://127.0.0.1:8181/auth/twitter/callback"
+       //callbackURL     : 	"http://127.0.0.1:8181/auth/twitter/callback"
 
     },
     function(token, tokenSecret, profile, done) {
@@ -74,11 +76,16 @@ function setupAuth(User, app) {
 				});
 			}));
 	// Express middlewares
-	app.use(require('express-session')({
-		secret : 'this is a secret',
-		resave : true,
-		saveUninitialized : true
-	}));
+	app.use(session({
+		  store: new mongoSessionStore({
+		    url: 'mongodb://akash:testakash@ds037467.mlab.com:37467/followme'
+		  }),
+		  secret: 'testakash123',
+		  cookie:{maxAge:7800000},
+		  rolling: true,
+		  resave: true,
+		   saveUninitialized: true
+		}));
 	app.use(passport.initialize());
 	app.use(passport.session());
 

@@ -6,6 +6,7 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var wagner = require('wagner-core');
 
+
 require('./models/models.js')(wagner);
 wagner.invoke(require('./app/auth.js'),{app:app});
 app.use('/api/v1', require('./app/api.js')(wagner));
@@ -18,7 +19,9 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse
 																// as json
 app.use(bodyParser.urlencoded({ extended: true })); // parse
 													// application/x-www-form-urlencoded
-
+app.get('/__check__',function(req,res){
+	res.status(200).end();
+});
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the
 													// X-HTTP-Method-Override
 													// header in the request.
@@ -29,8 +32,14 @@ app.use(express.static(__dirname + '/public')); // set the static files location
 												// /public/img will be /img for
 												// users
 app.use(express.static(__dirname + '/resume')); 
+
+
+
+
 // routes ==================================================
 require('./app/routes')(app); // pass our application into our routes
+
+
 
 // start app ===============================================
 app.listen(port);	

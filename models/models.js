@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var _ = require('underscore');
 var autoIncrement = require('mongoose-auto-increment');
 module.exports = function(wagner){
-	var connection = mongoose.connect('mongodb://AkashKG:Akash95!@ds037467.mlab.com:37467/followme');
+	var connection = mongoose.connect('mongodb://akash:testakash@ds037467.mlab.com:37467/followme');
 	autoIncrement.initialize(connection);
 	var Todo = mongoose.model('Todo', require('./todo'), 'todos');
 	var User = mongoose.model('User', require('./user'), 'users');
