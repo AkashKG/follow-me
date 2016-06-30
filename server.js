@@ -28,7 +28,7 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the
 													// simulate DELETE/PUT
 
 app.use(require('prerender-node').set('prerenderToken', 'xD8a5sEOPAx3fd1cGP0u'));
-app.use(express.static(__dirname + '/public')); // set the static files location
+app.use(express.static(__dirname + '/public', {maxAge:7800000})); // set the static files location
 												// /public/img will be /img for
 												// users
 app.use(express.static(__dirname + '/resume')); 
