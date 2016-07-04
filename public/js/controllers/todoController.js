@@ -63,10 +63,10 @@ angular
 						link : '',
 						done: '',
 						solution:'',
+						video:'',
 					}
 					
-					$scope.viewSolution=function(task){
-						$scope.solution = task;
+					$scope.viewSolution=function(){
 						$scope.hide();
 						$mdDialog
 						.show({
@@ -129,15 +129,11 @@ angular
 						});
 					}
 					$scope.saveTaskToDB = function($index, t) {
+					//	console.log(t);
 						if ($scope.todo.tasks[$index].done == true) {
 							$scope.updateIndex=$index;
-							$scope.updateTask = {
-									task : t.task,
-									link : t.link,
-									done: t.done,
-									solution:t.solution,
-								}
-							$scope.viewSolution($scope.updateTask);
+							$scope.updateTask = t;
+							$scope.viewSolution();
 						}
 						else{
 						$scope.todo.updated = new Date();
