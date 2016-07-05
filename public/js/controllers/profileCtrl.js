@@ -3,7 +3,7 @@ angular.module('profileCtrl', [])
 
 .controller(
 		'profileController',
-		function($scope, $mdBottomSheet, $mdDialog, $mdSidenav, $window, $http, noteService, $rootScope, dialogFactory, userService, $location) {
+		function($scope, $mdBottomSheet, $mdDialog, $mdSidenav, $timeout, $window, $http, noteService, $rootScope, dialogFactory, userService, $location) {
 			userService.getUser().then(function(data,err){
 				if(data!=null){
 					$rootScope.user=data.data;
@@ -17,6 +17,18 @@ angular.module('profileCtrl', [])
 				}
 				
 			})  
+			$scope.reload = function(){
+						noteService.getMyNotes().then(function(data,err){
+							$scope.notebooks=data.data.todoList;
+							$scope.calculateCompleted();
+						})
+						 $timeout(function(){
+							 $scope.reload();
+						 },30000)
+				
+			}
+			
+			$scope.reload();
 					$scope.comp = 0;
 					$scope.len = 0;
 			$scope.calculateCompleted=function(){

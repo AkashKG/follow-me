@@ -6,7 +6,7 @@ angular
 		.controller(
 				'todoController',
 				function($scope, $routeParams, $rootScope, noteService, $http,
-						$window, $mdDialog, dialogFactory, userService) {
+						$window, $mdDialog, dialogFactory, userService, $timeout) {
 
 					userService
 							.getUser()
@@ -28,6 +28,29 @@ angular
 										}
 
 									})
+					
+									
+									
+					$scope.reload = function(){
+						noteService
+						.getMyNotes()
+						.then(
+								function(data, err) {
+									$scope.parentId = data.data.todoList[$routeParams.nIndex]._id;
+									
+									$scope.todo = data.data.todoList[$routeParams.nIndex].todos[$routeParams.index];
+									// //console.log($scope.todo);
+									$scope
+											.calculatePercentage();
+								})
+								 $timeout(function(){
+									 $scope.reload();
+								 },30000)
+						
+					}
+					
+					$scope.reload();
+					
 					$scope.add = {
 						solution : ''
 					}
@@ -102,6 +125,8 @@ angular
 									clickOutsideToClose : true,
 								});
 					}
+				
+					
 					$scope.updateExistTask = function() {
 						$scope.send = $scope.updateIndex;
 						$scope.todoIndex = $routeParams.index.toString();
@@ -128,6 +153,34 @@ angular
 							
 						});
 					}
+					$scope.savingSolution = "";
+					var cacheSolution = function() {
+						$scope.send = $scope.updateIndex;
+						$scope.todoIndex = $routeParams.index.toString();
+						$scope.updated = new Date();
+						$scope.savingSolution = "Saving . . ."
+						$http.put(
+								'/api/v1/notebooks/todo/task/update/'
+										+ $scope.send + '/' + $scope.todoIndex + '/' + $scope.parentId + '/' +$scope.updated,
+								$scope.updateTask).success(function(data) {
+									$scope.savingSolution = "Saved few moment back."
+						}).error(function(data) {
+							$scope.savingSolution = "Error while saving"
+						});
+					}
+					
+					
+					var timeout = null;
+					  var debounceSaveUpdates = function(newVal, oldVal) {
+						    if (newVal != oldVal) {
+						      if (timeout) {
+						        $timeout.cancel(timeout)
+						      }
+						      timeout = $timeout(cacheSolution, 15000);  // 1000 = 1 second
+						    }
+					};
+					$scope.$watch('updateTask.solution', debounceSaveUpdates)
+					
 					$scope.saveTaskToDB = function($index, t) {
 					//	console.log(t);
 						if ($scope.todo.tasks[$index].done == true) {
