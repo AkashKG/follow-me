@@ -3,6 +3,10 @@
   "author": "Akash Gupta",
   "repository": "https://github.com/AkashKG/follow-me",
   "main": "server.js",
+  "engines": {
+      "node": "4.4.5",
+      "npm" : "2.15.5'"
+  },
   "dependencies": {
     "angular-youtube-embed": "^1.2.0",
     "body-parser": "~1.4.2",
