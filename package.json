@@ -28,6 +28,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "postinstall": "bower install --force"
+    "postinstall": "bower install"
   }
 }
