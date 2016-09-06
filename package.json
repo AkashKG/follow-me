@@ -27,6 +27,6 @@
     "wagner-core": "0.1.0"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.js"
   }
 }
