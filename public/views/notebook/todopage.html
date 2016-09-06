@@ -1,60 +1,45 @@
-	
-	
-	<div block-ui="main" ng-cloak layout-xs="column">
+<div block-ui="main" ng-cloak layout-xs="column">
 	<md-card>
-  		<md-card-title>
-    	<md-card-title-text layout-align="center center">
-      <span class="md-headline">{{todo.title}}</span>
-      <span class="md-subhead description">{{todo.description}} </span>
-      <span class="md-caption"><span hide-xs>Last Updated at</span> {{todo.updated |date:yyyy/mm/ss}} {{todo.updated |date:"HH:mm:ss"}}</span>
-    </md-card-title-text>
-    <md-card-content>
-     <md-icon class="material-icons"style="color:grey">timer</md-icon>{{todo.deadline|date:yyyy/mm/dd}}
-    </md-card-content>
-  </md-card-title>
-</md-card >
-<md-progress-linear ng-disabled="percent>=100" md-mode="buffer" class="md-warn"value="{{percent}}"
-                      md-buffer-value="{{percent}}"></md-progress-linear>
-  <md-list>
-  <md-subheader class="md-no-sticky">Tasks | Submit only if done, don't cheat yourself. Once submitted you cannot cancel.<span class="md-caption" ng-show="percent==100">({{percent}}% complete)</span></md-subheader>
-  
-  <md-divider></md-divider>
-  <md-list-item ng-repeat="t in todo.tasks" md-ink-ripple="false">
-    <md-checkbox ng-model="t.done" ng-disabled="t.done==true" ng-click="saveTaskToDB($index, t)"></md-checkbox>
-    <p>{{t.task}} </p>
-    <md-button class=" md-icon-button md-primary" ng-disabled="!t.video.length" ng-click="openVideo(t.video)">
-    	<md-icon >airplay</md-icon>
-    </md-button>
-    <md-button class=" md-icon-button md-primary" ng-disabled="!t.link.length" ng-click="openLink(t.link)">
-    	<md-icon >link</md-icon>
-    </md-button>
-    <md-button class=" md-icon-button md-primary"  ng-click="showUpdateTaskDialog($index, t)">
-    	<md-icon >update</md-icon>
-    </md-button>
-    <!-- <md-button class=" md-icon-button md-primary" ng-click="openSolution($index)">
-    	<md-icon >book</md-icon>
-    </md-button>
-    <md-button class=" md-icon-button md-primary"  ng-click="addSolution($index, $event)">
-    	<md-icon >add</md-icon>
-    </md-button>
-    -->
-    <md-divider></md-divider>
-    
-  </md-list-item>
-  <md-list-item>
-  	<md-button class="md-accent" ng-click="newTaskDialog($event)">
-    	Add new task
-    </md-button>
-  </md-list-item>
-  
-</md-list>
-<md-fab-speed-dial md-direction="left" style="position:fixed"
-                       class="md-scale md-fab-bottom-right" ng-class="{ 'md-hover-full': true }"
-                       ng-mouseenter="true" ng-mouseleave="false" ng-click="showGridBottomSheet()">
-      <md-fab-trigger>
-       <md-button aria-label="menu" class="md-fab md-accent" ng-click="newTaskDialog($event)">
-          <md-icon class="material-icons" aria-label="menu"  >book</md-icon>
-        </md-button>
-      </md-fab-trigger>
-    </md-fab-speed-dial>
-    </div>
+	  	<md-progress-linear ng-disabled="percent>=100" md-mode="buffer" class="md-warn"value="{{percent}}" md-buffer-value="{{percent}}">
+	  	</md-progress-linear>
+	 		<md-card-content layout="row"  layout-align="start center">
+ 				<md-card-header>
+          			<md-card-avatar>
+            			<md-icon class="material-icons">assignment</md-icon>
+          			</md-card-avatar> 
+          			<md-card-header-text>
+            			<span class="md-title">{{todo.title}}</span>
+            			<span class="md-caption"><span hide-xs>Last Updated at</span> {{todo.updated |date:yyyy/mm/ss}} {{todo.updated |date:"HH:mm:ss"}}</span>
+          			</md-card-header-text>
+        		</md-card-header>
+        		<div flex=""></div>
+        		<md-icon class="material-icons"style="color:grey">timer</md-icon><span class="md-caption">{{todo.deadline|date:yyyy/mm/dd}}</span>
+    			<md-card-icon-actions layout-align="end center">
+       				<md-button aria-label="menu" class="md-icon-button md-accent" ng-click="newTaskDialog($event)">
+       					 	<md-tooltip md-direction="bottom">
+          						Add Tasks
+        					</md-tooltip>
+          				<md-icon class="material-icons" aria-label="menu"  >book</md-icon>
+        			</md-button>
+     			</md-card-icon-actions>
+  			</md-card-content>
+  	</md-card>
+  	<md-list>
+  		<md-subheader class="md-no-sticky">Tasks | Submit only if done<span class="md-caption" ng-show="percent==100">({{percent}}% complete)</span></md-subheader> 
+  		<md-divider></md-divider>
+  		<md-list-item ng-repeat="t in todo.tasks" md-ink-ripple="false">
+    		<md-checkbox ng-model="t.done" ng-disabled="t.done==true" ng-click="saveTaskToDB($index, t)"></md-checkbox>
+    		<p>{{t.task}} </p>
+    		<md-button class=" md-icon-button md-primary" ng-disabled="!t.video.length" ng-click="openVideo(t.video)">
+    			<md-icon >airplay</md-icon>
+    		</md-button>
+    		<md-button class=" md-icon-button md-primary" ng-disabled="!t.link.length" ng-click="openLink(t.link)">
+    			<md-icon >link</md-icon>
+    		</md-button>
+    		<md-button class=" md-icon-button md-primary"  ng-click="showUpdateTaskDialog($index, t)">
+    			<md-icon >update</md-icon>
+    		</md-button>
+    		<md-divider></md-divider>
+  		</md-list-item>
+	</md-list>
+</div>
